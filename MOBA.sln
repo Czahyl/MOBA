@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MOBA", "MOBA\MOBA\MOBA.csproj", "{345B333F-837A-410A-80A1-15F61861304D}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "MOBAContent", "MOBA\MOBAContent\MOBAContent.contentproj", "{2B0A06BB-463C-4897-8883-FED0B6360B93}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{345B333F-837A-410A-80A1-15F61861304D}.Debug|x86.ActiveCfg = Debug|x86
+		{345B333F-837A-410A-80A1-15F61861304D}.Debug|x86.Build.0 = Debug|x86
+		{345B333F-837A-410A-80A1-15F61861304D}.Release|x86.ActiveCfg = Release|x86
+		{345B333F-837A-410A-80A1-15F61861304D}.Release|x86.Build.0 = Release|x86
+		{2B0A06BB-463C-4897-8883-FED0B6360B93}.Debug|x86.ActiveCfg = Debug|x86
+		{2B0A06BB-463C-4897-8883-FED0B6360B93}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
