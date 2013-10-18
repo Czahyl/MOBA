@@ -47,8 +47,9 @@ namespace MOBA
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            assets.storeTexture(Content.Load<Texture2D>("Enviroment/Grass"), new Rectangle(0, 0, 64, 64)); // ID 0
-            assets.storeTexture(Content.Load<Texture2D>("Enviroment/Tree"), new Rectangle(0, 0, 96, 192)); // ID 1
+            assets.storeTexture(Content.Load<Texture2D>("Enviroment/Rect"), new Rectangle(0, 0, 1, 1));    // ID 0
+            assets.storeTexture(Content.Load<Texture2D>("Enviroment/Grass"), new Rectangle(0, 0, 64, 64)); // ID 1
+            assets.storeTexture(Content.Load<Texture2D>("Enviroment/Tree"), new Rectangle(0, 0, 96, 192)); // ID 2
         }
 
         protected override void UnloadContent()

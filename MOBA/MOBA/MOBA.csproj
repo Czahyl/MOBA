@@ -110,6 +110,9 @@
     <Compile Include="Assets\Animation.cs" />
     <Compile Include="Assets\AssetManager.cs" />
     <Compile Include="Assets\Image.cs" />
+    <Compile Include="Characters\Wizard.cs" />
+    <Compile Include="Math\Angle.cs" />
+    <Compile Include="Math\Trig.cs" />
     <Compile Include="World\Map.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
