@@ -59,6 +59,12 @@ namespace MOBA.Characters.Prototype
             Bounds.Offset(x, y);
         }
 
+        public virtual void setPosition(int x, int y)
+        {
+            if (locked) return;
+            Bounds = new Rectangle(x, y, Bounds.Width, Bounds.Height);
+        }
+
         public virtual void Damage(int amount)
         {
             Health -= amount;

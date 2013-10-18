@@ -27,6 +27,7 @@ namespace MOBA.Characters.Prototype
             Name = name;
             Level = 1;
             Exp = 0;
+            Bounds = new Rectangle(0, 0, 32, 64);
         }
 
         public virtual void Load(AssetManager assMan)
@@ -46,7 +47,6 @@ namespace MOBA.Characters.Prototype
 
         public override void Update()
         {
-            Texture = ani.Frame();
             base.Update();
         }
     }

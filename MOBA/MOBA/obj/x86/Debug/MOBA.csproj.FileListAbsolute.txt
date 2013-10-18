@@ -15,3 +15,4 @@ C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\obj\x86\Debug\MOBA.csprojResolveAssem
 C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\obj\x86\Debug\MOBA.exe
 C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\obj\x86\Debug\MOBA.pdb
+C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Font\Arial.xnb

@@ -28,6 +28,15 @@
       <Output>C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Misc\rect.xnb</Output>
       <Time>2013-10-17T21:40:12.4678906-04:00</Time>
     </Item>
+    <Item>
+      <Source>Font\Arial.spritefont</Source>
+      <Name>Font\Arial</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Font\Arial.xnb</Output>
+      <Time>2013-10-18T18:21:21.682275-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

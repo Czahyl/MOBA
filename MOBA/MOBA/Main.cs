@@ -26,6 +26,8 @@ namespace MOBA
 
         public int WIDTH, HEIGHT;
 
+        SpriteFont font;
+
         public Main()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -43,6 +45,7 @@ namespace MOBA
             assets = new AssetManager();
             map = new Map(this);
             controller = new PlayerController(this);
+            controller.plugEntity(new Characters.Prototype.Player(""));
 
             base.Initialize();
         }
@@ -54,6 +57,7 @@ namespace MOBA
             assets.storeTexture(Content.Load<Texture2D>("Misc/Rect"), new Rectangle(0, 0, 1, 1));    // ID 0
             assets.storeTexture(Content.Load<Texture2D>("Enviroment/Grass"), new Rectangle(0, 0, 64, 64)); // ID 1
             assets.storeTexture(Content.Load<Texture2D>("Enviroment/Tree"), new Rectangle(0, 0, 96, 192)); // ID 2
+            font = Content.Load<SpriteFont>("Font/Arial");
         }
 
         protected override void UnloadContent()
@@ -66,14 +70,9 @@ namespace MOBA
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
-                map.cam.Translate(0, 5);
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-                map.cam.Translate(0, -5);
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-                map.cam.Translate(5, 0);
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
-                map.cam.Translate(-5, 0);
+            map.Update();
+
+            controller.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -84,7 +83,8 @@ namespace MOBA
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             map.Draw();
-
+            spriteBatch.Draw(assets.getTexture(0).texture, controller.getPlayer().Bounds, Color.White);
+            spriteBatch.DrawString(font, controller.info(), new Vector2(0, 0), Color.White);
             spriteBatch.End();
             base.Draw(gameTime);
         }

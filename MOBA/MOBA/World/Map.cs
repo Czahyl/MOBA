@@ -35,6 +35,18 @@ namespace MOBA
             }
         }
 
+        public void Update()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.W))
+                Translate(0, 5);
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+                Translate(0, -5);
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+                Translate(5, 0);
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+                Translate(-5, 0);
+        }
+
         public void Pause()
         {
             paused = true;
@@ -45,6 +57,7 @@ namespace MOBA
             paused = false;
         }
     }
+
     public class Map
     {
         const int width = 2048;
@@ -59,6 +72,11 @@ namespace MOBA
             m = main;
 
             cam = new Camera();
+        }
+
+        public void Update()
+        {
+            cam.Update();
         }
 
         public void Draw()
