@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MOBA.Assets;
+using MOBA.Characters.Controller;
 
 namespace MOBA
 {
@@ -18,6 +19,8 @@ namespace MOBA
         public SpriteBatch spriteBatch;
 
         public AssetManager assets;
+
+        public PlayerController controller;
 
         Map map;
 
@@ -39,6 +42,7 @@ namespace MOBA
         {
             assets = new AssetManager();
             map = new Map(this);
+            controller = new PlayerController(this);
 
             base.Initialize();
         }
@@ -46,8 +50,8 @@ namespace MOBA
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            assets.storeTexture(Content.Load<Texture2D>("Enviroment/Rect"), new Rectangle(0, 0, 1, 1));    // ID 0
+            
+            assets.storeTexture(Content.Load<Texture2D>("Misc/Rect"), new Rectangle(0, 0, 1, 1));    // ID 0
             assets.storeTexture(Content.Load<Texture2D>("Enviroment/Grass"), new Rectangle(0, 0, 64, 64)); // ID 1
             assets.storeTexture(Content.Load<Texture2D>("Enviroment/Tree"), new Rectangle(0, 0, 96, 192)); // ID 2
         }

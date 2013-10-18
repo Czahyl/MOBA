@@ -67,7 +67,7 @@ namespace MOBA
             {
                 for (int y = 0; y < height; y += 64)
                 {
-                    m.spriteBatch.Draw(m.assets.getTexture(0).texture, new Rectangle(x + cam.X, y + cam.Y, 64, 64), Color.White);
+                    m.spriteBatch.Draw(m.assets.getTexture(1).texture, new Rectangle(x + cam.X, y + cam.Y, 64, 64), Color.White);
                 }
             }
         }

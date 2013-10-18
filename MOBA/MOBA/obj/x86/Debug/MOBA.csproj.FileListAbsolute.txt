@@ -6,3 +6,12 @@ C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\MOBA.exe
 C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\MOBA.pdb
 C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\obj\x86\Debug\MOBA.exe
 C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\obj\x86\Debug\MOBA.pdb
+C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Enviroment\Tree.xnb
+C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Enviroment\Grass.xnb
+C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Misc\rect.xnb
+C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\MOBA.exe
+C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\MOBA.pdb
+C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\obj\x86\Debug\MOBA.csprojResolveAssemblyReference.cache
+C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\obj\x86\Debug\MOBA.exe
+C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\obj\x86\Debug\MOBA.pdb

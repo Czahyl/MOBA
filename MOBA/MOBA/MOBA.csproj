@@ -13,7 +13,7 @@
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
     <XnaPlatform>Windows</XnaPlatform>
-    <XnaProfile>HiDef</XnaProfile>
+    <XnaProfile>Reach</XnaProfile>
     <XnaCrossPlatformGroupID>b2b29ea8-454e-4197-94cd-7b10100921b5</XnaCrossPlatformGroupID>
     <XnaOutputType>Game</XnaOutputType>
     <ApplicationIcon>Game.ico</ApplicationIcon>
@@ -93,6 +93,7 @@
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
@@ -110,6 +111,10 @@
     <Compile Include="Assets\Animation.cs" />
     <Compile Include="Assets\AssetManager.cs" />
     <Compile Include="Assets\Image.cs" />
+    <Compile Include="Characters\Controller\Controller.cs" />
+    <Compile Include="Characters\Controller\PlayerController.cs" />
+    <Compile Include="Characters\Prototype\BaseEntity.cs" />
+    <Compile Include="Characters\Prototype\Player.cs" />
     <Compile Include="Characters\Wizard.cs" />
     <Compile Include="Math\Angle.cs" />
     <Compile Include="Math\Trig.cs" />
