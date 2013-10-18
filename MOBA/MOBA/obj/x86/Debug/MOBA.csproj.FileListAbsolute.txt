@@ -1,0 +1,8 @@
+C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\obj\x86\Debug\MOBA.csprojResolveAssemblyReference.cache
+C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Enviroment\Grass.xnb
+C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Enviroment\Tree.xnb
+C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\MOBA.exe
+C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\MOBA.pdb
+C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\obj\x86\Debug\MOBA.exe
+C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\obj\x86\Debug\MOBA.pdb

@@ -110,6 +110,7 @@
     <Compile Include="Assets\Animation.cs" />
     <Compile Include="Assets\AssetManager.cs" />
     <Compile Include="Assets\Image.cs" />
+    <Compile Include="World\Map.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Main.cs" />
