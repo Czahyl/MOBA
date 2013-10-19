@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MOBA.Assets;
 using MOBA.Characters.Controller;
+using MOBA.Characters.Prototype;
 
 namespace MOBA
 {
@@ -45,7 +46,7 @@ namespace MOBA
             assets = new AssetManager();
             map = new Map(this);
             controller = new PlayerController(this);
-            controller.plugEntity(new Characters.Prototype.Player(""));
+            controller.plugEntity(new Player("Player"));
 
             base.Initialize();
         }
