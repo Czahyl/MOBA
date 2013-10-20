@@ -16,21 +16,7 @@ namespace MOBA.Characters.Controller
 
         public PlayerController(Main main) : base(main)
         {
-            //Kinds of messy, but gets the job done
-            input.handleKeypress += delegate(Keys key)
-            {
-                
-            };
 
-            input.handleKeyup += delegate(Keys k)
-            {
-
-            };
-
-            input.handleClick += delegate(MouseButton button, int x, int y)
-            {
-
-            };
         }
 
         public Player getPlayer()
@@ -52,7 +38,9 @@ namespace MOBA.Characters.Controller
 
         public override void Update(GameTime time)
         {
+            input.Listen();
             player.Update();
+            input.Flush();
             base.Update(time);
         }
 

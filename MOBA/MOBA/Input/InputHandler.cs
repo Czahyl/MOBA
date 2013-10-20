@@ -7,66 +7,69 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MOBA.Input
 {
-    public delegate void keyPressHandle(Keys k);
-    public delegate void keyUpHandle(Keys k);
-    public delegate void clickHandle(MouseButton button, int x, int y);
-
     public class InputHandler
     {
         private KeyboardState oldstate = Keyboard.GetState();
         private MouseState oldmouse = Mouse.GetState();
+        private KeyboardState keystate;
+        private MouseState mouse;
 
-        public event keyPressHandle handleKeypress;
-        public event keyUpHandle handleKeyup;
-        public event clickHandle handleClick;
+        public MouseButton? EventButton
+        { get; protected set; }
+
+        public Keys? EventKey
+        { get; protected set; }
+
+        public int? EventX
+        { get; protected set; }
+
+        public int? EventY
+        { get; protected set; }
 
         public void Listen()
         {
-            KeyboardState keystate = Keyboard.GetState();
-            MouseState mouse = Mouse.GetState();
+            keystate = Keyboard.GetState();
+            mouse = Mouse.GetState();
+
+            EventButton = MouseButton.None;
+            EventKey = null;
+            EventX = null;
+            EventY = null;
 
             foreach (Keys key in Enum.GetValues(typeof(Keys)))
             {
                 if (keystate.IsKeyDown(key) && oldstate.IsKeyUp(key))
                 {
-                    onKeypress(key);
-                }
-
-                if (keystate.IsKeyUp(key) && oldstate.IsKeyDown(key))
-                {
-                    onKeyup(key);
+                    EventKey = key;
                 }
             }
 
             if (mouse.LeftButton == ButtonState.Pressed && oldmouse.LeftButton == ButtonState.Released)
             {
-                onClick(MouseButton.Left, mouse.X, mouse.Y);
+                EventButton = MouseButton.Left;
+                EventX = mouse.X;
+                EventY = mouse.Y;
             }
 
             if (mouse.RightButton == ButtonState.Pressed && oldmouse.RightButton == ButtonState.Released)
             {
-                onClick(MouseButton.Right, mouse.X, mouse.Y);
+                EventButton = MouseButton.Right;
+                EventX = mouse.X;
+                EventY = mouse.Y;
             }
+        }
 
+        public bool keyPressed(Keys key)
+        {
+            return keystate.IsKeyDown(key) && oldstate.IsKeyUp(key);
+        }
+
+        public void Flush()
+        {
             oldstate = keystate;
             oldmouse = mouse;
         }
-
-        protected virtual void onKeyup(Keys key)
-        {
-
-        }
-
-        protected virtual void onKeypress(Keys key)
-        {
-
-        }
-
-        protected virtual void onClick(MouseButton button, int x, int y)
-        {
-            
-        }
     }
 
-    public enum MouseButton { Left, Right }
+    public enum MouseButton { None, Middle, Left, Right }
 }
