@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using MOBA.Characters.Prototype;
 using MOBA.Input;
+using MOBA.World;
 
 namespace MOBA.Characters.Controller
 {
@@ -32,7 +33,8 @@ namespace MOBA.Characters.Controller
         public override void plugEntity(Player entity)
         {
             entity.setPosition((Main.WIDTH / 2) - (Player.WIDTH / 2), (Main.HEIGHT / 2) - (Player.HEIGHT / 2));
-            entity.light = new World.LightEmitter(((Main.WIDTH / 2) - (Player.WIDTH / 2)) + Player.WIDTH / 2, ((Main.HEIGHT / 2) - (Player.HEIGHT / 2)) + Player.HEIGHT / 2, 100);
+            entity.light = new LightEmitter(game.lightEngine, ((Main.WIDTH / 2) - (Player.WIDTH / 2)) + Player.WIDTH / 2 - 10, ((Main.HEIGHT / 2) - (Player.HEIGHT / 2)) + Player.HEIGHT / 2 - 10, 100, true, 0);
+            game.lightEngine.plugEmitter(entity.light);
             entity.Lock();
             base.plugEntity(entity);
         }

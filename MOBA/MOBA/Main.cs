@@ -20,11 +20,13 @@ namespace MOBA
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
 
-        public AssetManager assets;
+        public static AssetManager assets;
 
         public PlayerController controller;
+        public MinionController testMinion;
 
-        Map map;
+        public Map map;
+        public LightEngine lightEngine;
 
         public static  int WIDTH, HEIGHT;
 
@@ -47,8 +49,13 @@ namespace MOBA
         {
             assets = new AssetManager();
             map = new Map(this);
+            lightEngine = new LightEngine(this);
             controller = new PlayerController(this);
+            testMinion = new MinionController(this);
             controller.plugEntity(new Player("Player"));
+            testMinion.plugEntity(new Minion());
+
+            //lightEngine.plugEmitter(new LightEmitter(lightEngine, WIDTH / 2, HEIGHT / 2, 100, true, 0));
 
             base.Initialize();
         }
@@ -61,7 +68,6 @@ namespace MOBA
             assets.storeTexture(Content.Load<Texture2D>("Enviroment/Grass"), new Rectangle(0, 0, 64, 64)); // ID 1
             assets.storeTexture(Content.Load<Texture2D>("Enviroment/Tree"), new Rectangle(0, 0, 96, 192)); // ID 2
             font = Content.Load<SpriteFont>("Font/Arial");
-            LightEngine.Init(this);
         }
 
         protected override void UnloadContent()
@@ -77,7 +83,9 @@ namespace MOBA
             map.Update();
 
             controller.Update(gameTime);
+            testMinion.Update();
 
+            lightEngine.Update();
             base.Update(gameTime);
         }
 
@@ -87,10 +95,15 @@ namespace MOBA
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             map.Draw();
-            spriteBatch.Draw(assets.getTexture(0).texture, controller.getPlayer().Bounds, Color.White);
+
+            if (lightEngine.checkAllEmitters(controller.getPlayer().Bounds, controller.getPlayer().invisibilityLayer))
+                spriteBatch.Draw(assets.getTexture(0).texture, controller.getPlayer().Bounds, Color.White);
+
             spriteBatch.DrawString(font, controller.info(), new Vector2(0, 0), Color.White);
 
-            LightEngine.Draw();
+            spriteBatch.Draw(assets.getTexture(0).texture, testMinion.getEntity().Bounds, Color.White);
+
+            lightEngine.Draw();
             spriteBatch.End();
             base.Draw(gameTime);
         }

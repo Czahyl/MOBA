@@ -17,6 +17,10 @@ namespace MOBA.Characters.Prototype
         public LightEmitter light { get; set; }
         protected int maxHealth;
         public int Health { get; protected set; }
+        public Rectangle hpRect;
+        public int invisibilityLayer { get; protected set; }
+
+        public Animation ani;
 
         protected bool locked = false;
 
@@ -25,7 +29,7 @@ namespace MOBA.Characters.Prototype
             Bounds = Rectangle.Empty;
             Center = Vector2.Zero;
 
-            light = new LightEmitter((int)Center.X, (int)Center.Y, 50);
+            light = new LightEmitter();
         }
 
         public void Lock()
@@ -40,7 +44,6 @@ namespace MOBA.Characters.Prototype
 
         public virtual void Update()
         {
-            Center = new Vector2(Bounds.Center.X, Bounds.Center.Y);
             if (Health > maxHealth)
             {
                 Health = maxHealth;
@@ -49,9 +52,8 @@ namespace MOBA.Characters.Prototype
             if (Health < 0)
             {
                 Health = 0;
+                light.Destroy();
             }
-
-            light.Update();
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)

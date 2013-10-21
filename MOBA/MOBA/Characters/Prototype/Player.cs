@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MOBA.Assets;
+using MOBA.World;
 
 namespace MOBA.Characters.Prototype
 {
@@ -20,14 +21,14 @@ namespace MOBA.Characters.Prototype
         public string Name
         { get; protected set; }
 
-        public Animation ani;
-
         public Player(string name)
         {
             Name = name;
             Level = 1;
             Exp = 0;
+            invisibilityLayer = 0;
             Bounds = new Rectangle(0, 0, 32, 64);
+            light = new LightEmitter();
         }
 
         public virtual void Load(AssetManager assMan)

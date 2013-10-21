@@ -14,22 +14,37 @@ namespace MOBA.World
 {
     public class LightEmitter
     {
+        private LightEngine e;
         int x, y;
         float r;
+        bool locked = false;
+        public int layer { get; private set; } 
 
-        public LightEmitter(int X, int Y, float radius)
+        public LightEmitter(LightEngine engine, int X, int Y, float radius, bool isLocked, int lightLayer)
         {
+            e = engine;
+
             x = X;
             y = Y;
             r = radius;
+            locked = isLocked;
+            layer = lightLayer;
         }
 
-        public void Update()
+        public LightEmitter()
         {
-            for (int i = 0; i < LightEngine.shades.Count; i++)
-            {
-                LightEngine.shades[i].Light(Math.Trig.inRadius(x, y, (int)r, LightEngine.shades[i].rect().X, LightEngine.shades[i].rect().Y));
-            }
+
+        }
+
+        public void Destroy()
+        {
+            e.destroyEmitter(this);
+        }
+
+        public bool inCircle(Rectangle rect)
+        {
+            if (!locked) return Math.Trig.inRadius(x + Camera.X, y + Camera.Y, (int)r, rect.X, rect.Y);
+            else return Math.Trig.inRadius(x, y, (int)r, rect.X, rect.Y);
         }
     }
 }

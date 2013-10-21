@@ -18,6 +18,8 @@ namespace MOBA.Characters.Prototype
         {
             //Add preset animation to ani buffer
             //Maxhealth = Base amount * Towers dead
+            Health = 100;
+            invisibilityLayer = 0; // The minion can be seen by all light emissions
             Center = new Vector2(150, 150);
             Bounds = new Rectangle((int)Center.X, (int)Center.Y, WIDTH, HEIGHT);
             light = new LightEmitter();
@@ -25,12 +27,14 @@ namespace MOBA.Characters.Prototype
 
         public override void Update()
         {
-            Center = new Vector2(150 + Camera.X, 150 + Camera.Y);
+            setPosition((int)Center.X + Camera.X, (int)Center.Y + Camera.Y);
+            hpRect = new Rectangle(((int)Center.X + Camera.X) + 10, (int)Center.Y + Camera.Y, Health / 10, 5);
             base.Update();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(Main.assets.getTexture(0).texture, hpRect, Color.Red);
             base.Draw(spriteBatch);
         }
     }

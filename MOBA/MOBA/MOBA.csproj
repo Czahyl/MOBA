@@ -112,8 +112,10 @@
     <Compile Include="Assets\AssetManager.cs" />
     <Compile Include="Assets\Image.cs" />
     <Compile Include="Characters\Controller\Controller.cs" />
+    <Compile Include="Characters\Controller\MinionController.cs" />
     <Compile Include="Characters\Controller\PlayerController.cs" />
     <Compile Include="Characters\Prototype\BaseEntity.cs" />
+    <Compile Include="Characters\Prototype\Minion.cs" />
     <Compile Include="Characters\Prototype\Player.cs" />
     <Compile Include="Characters\Wizard.cs" />
     <Compile Include="Input\InputHandler.cs" />

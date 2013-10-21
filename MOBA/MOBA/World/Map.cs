@@ -15,8 +15,8 @@ namespace MOBA
 {
     public class Camera
     {
-        public int X { get; private set; }
-        public int Y { get; private set; }
+        public static int X { get; private set; }
+        public static int Y { get; private set; }
 
         bool paused = false;
 
@@ -38,13 +38,13 @@ namespace MOBA
         public void Update()
         {
             if (Keyboard.GetState().IsKeyDown(Keys.W))
-                Translate(0, 5);
+                Translate(0, 2);
             if (Keyboard.GetState().IsKeyDown(Keys.S))
-                Translate(0, -5);
+                Translate(0, -2);
             if (Keyboard.GetState().IsKeyDown(Keys.A))
-                Translate(5, 0);
+                Translate(2, 0);
             if (Keyboard.GetState().IsKeyDown(Keys.D))
-                Translate(-5, 0);
+                Translate(-2, 0);
         }
 
         public void Pause()
@@ -85,7 +85,7 @@ namespace MOBA
             {
                 for (int y = 0; y < height; y += 64)
                 {
-                    m.spriteBatch.Draw(m.assets.getTexture(1).texture, new Rectangle(x + cam.X, y + cam.Y, 64, 64), Color.White);
+                    m.spriteBatch.Draw(Main.assets.getTexture(1).texture, new Rectangle(x + Camera.X, y + Camera.Y, 64, 64), Color.White);
                 }
             }
         }

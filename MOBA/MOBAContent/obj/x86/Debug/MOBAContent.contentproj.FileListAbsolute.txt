@@ -1,2 +1,3 @@
 C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBAContent\obj\x86\Debug\MOBAContent.contentprojResolveAssemblyReference.cache
 C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBAContent\obj\x86\Debug\MOBAContent.contentprojResolveAssemblyReference.cache
+C:\Users\Trevor\Repos\MOBA\MOBA\MOBAContent\obj\x86\Debug\MOBAContent.contentprojResolveAssemblyReference.cache
