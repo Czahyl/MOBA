@@ -119,6 +119,8 @@
     <Compile Include="Input\InputHandler.cs" />
     <Compile Include="Math\Angle.cs" />
     <Compile Include="Math\Trig.cs" />
+    <Compile Include="Net\ClientSocket.cs" />
+    <Compile Include="Net\Packet.cs" />
     <Compile Include="World\LightEmitter.cs" />
     <Compile Include="World\LightEngine.cs" />
     <Compile Include="World\Map.cs" />
