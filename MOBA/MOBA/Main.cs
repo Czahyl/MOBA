@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using MOBA.Assets;
 using MOBA.Characters.Controller;
 using MOBA.Characters.Prototype;
+using MOBA.World;
 
 namespace MOBA
 {
@@ -25,7 +26,7 @@ namespace MOBA
 
         Map map;
 
-        public int WIDTH, HEIGHT;
+        public static  int WIDTH, HEIGHT;
 
         SpriteFont font;
 
@@ -60,6 +61,7 @@ namespace MOBA
             assets.storeTexture(Content.Load<Texture2D>("Enviroment/Grass"), new Rectangle(0, 0, 64, 64)); // ID 1
             assets.storeTexture(Content.Load<Texture2D>("Enviroment/Tree"), new Rectangle(0, 0, 96, 192)); // ID 2
             font = Content.Load<SpriteFont>("Font/Arial");
+            LightEngine.Init(this);
         }
 
         protected override void UnloadContent()
@@ -87,6 +89,8 @@ namespace MOBA
             map.Draw();
             spriteBatch.Draw(assets.getTexture(0).texture, controller.getPlayer().Bounds, Color.White);
             spriteBatch.DrawString(font, controller.info(), new Vector2(0, 0), Color.White);
+
+            LightEngine.Draw();
             spriteBatch.End();
             base.Draw(gameTime);
         }

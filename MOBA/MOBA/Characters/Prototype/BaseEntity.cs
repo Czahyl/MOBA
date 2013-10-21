@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MOBA.Assets;
+using MOBA.World;
 
 namespace MOBA.Characters.Prototype
 {
@@ -13,6 +14,7 @@ namespace MOBA.Characters.Prototype
         public Rectangle Bounds { get; set; }
         public Vector2 Center { get; set; }
         public Texture2D Texture {get; protected set;}
+        public LightEmitter light { get; set; }
         protected int maxHealth;
         public int Health { get; protected set; }
 
@@ -22,6 +24,8 @@ namespace MOBA.Characters.Prototype
         {
             Bounds = Rectangle.Empty;
             Center = Vector2.Zero;
+
+            light = new LightEmitter((int)Center.X, (int)Center.Y, 50);
         }
 
         public void Lock()
@@ -46,6 +50,8 @@ namespace MOBA.Characters.Prototype
             {
                 Health = 0;
             }
+
+            light.Update();
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)

@@ -11,19 +11,14 @@ namespace MOBA.Math
 
     public static class Trig
     {
-        public static bool pointInCircle(int x, int y, int centerX, int centerY, int radius)
+        public static double Hypotenuse(double side1, double side2)
         {
-            return (((x - centerX) ^ 2) + ((y - centerY) ^ 2)) < (radius ^ 2);
+            return System.Math.Sqrt(side1 * side1 + side2 * side2);
         }
 
-        public static bool pointInCricle(Vector2 point, Vector2 center, int radius)
+        public static bool inRadius(int centerX, int centerY, int r, int rectX, int rectY)
         {
-            return (((int)(point.X - center.X) ^ 2) + ((int)(point.X - center.Y) ^ 2)) < (radius ^ 2);
-        }
-
-        public static bool pointInCircle(Point point, Point center, int radius)
-        {
-            return (((point.X - center.X) ^ 2) + ((point.X - center.Y) ^ 2)) < (radius ^ 2);
+            return Hypotenuse(centerX - rectX, centerY - rectY) <= r;
         }
 
         public static float degreesToRadians(float deg)

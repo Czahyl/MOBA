@@ -16,3 +16,5 @@ C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\obj\x86\Debug\Microsoft.Xna.Framework
 C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\obj\x86\Debug\MOBA.exe
 C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\obj\x86\Debug\MOBA.pdb
 C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Font\Arial.xnb
+C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Misc\rect.xnb
+C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Font\Arial.xnb

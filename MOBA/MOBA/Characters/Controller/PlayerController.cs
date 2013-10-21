@@ -31,7 +31,8 @@ namespace MOBA.Characters.Controller
 
         public override void plugEntity(Player entity)
         {
-            entity.setPosition((game.WIDTH / 2) - (Player.WIDTH / 2), (game.HEIGHT / 2) - (Player.HEIGHT / 2));
+            entity.setPosition((Main.WIDTH / 2) - (Player.WIDTH / 2), (Main.HEIGHT / 2) - (Player.HEIGHT / 2));
+            entity.light = new World.LightEmitter(((Main.WIDTH / 2) - (Player.WIDTH / 2)) + Player.WIDTH / 2, ((Main.HEIGHT / 2) - (Player.HEIGHT / 2)) + Player.HEIGHT / 2, 100);
             entity.Lock();
             base.plugEntity(entity);
         }
