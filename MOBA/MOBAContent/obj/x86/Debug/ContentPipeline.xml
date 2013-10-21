@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Enviroment\Tree.xnb</Output>
-      <Time>2013-10-21T12:46:45.2646182-04:00</Time>
+      <Output>C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Enviroment\Tree.xnb</Output>
+      <Time>2013-10-17T21:01:41.066686-04:00</Time>
     </Item>
     <Item>
       <Source>Enviroment\Grass.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Enviroment\Grass.xnb</Output>
-      <Time>2013-10-21T12:46:45.2636181-04:00</Time>
+      <Output>C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Enviroment\Grass.xnb</Output>
+      <Time>2013-10-17T21:01:41.0646859-04:00</Time>
     </Item>
     <Item>
       <Source>Misc\rect.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Misc\rect.xnb</Output>
-      <Time>2013-10-21T12:46:45.2716186-04:00</Time>
+      <Output>C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Misc\rect.xnb</Output>
+      <Time>2013-10-17T21:40:12.4678906-04:00</Time>
     </Item>
     <Item>
       <Source>Font\Arial.spritefont</Source>
@@ -34,8 +34,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Font\Arial.xnb</Output>
-      <Time>2013-10-21T12:46:45.2666183-04:00</Time>
+      <Output>C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Font\Arial.xnb</Output>
+      <Time>2013-10-18T18:21:21.682275-04:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -43,39 +43,39 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Trevor\Repos\MOBA\MOBA\MOBAContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Trevor\Repos\MOBA\MOBA\MOBAContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBAContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBAContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
-        <Value>2010-08-23T13:41:18-04:00</Value>
+        <Value>2010-08-23T16:41:18-04:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
-        <Value>2010-08-23T13:41:18-04:00</Value>
+        <Value>2010-08-23T16:41:18-04:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
-        <Value>2010-08-23T13:41:18-04:00</Value>
+        <Value>2010-08-23T16:41:18-04:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
-        <Value>2010-08-23T13:41:18-04:00</Value>
+        <Value>2010-08-23T16:41:18-04:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
-        <Value>2010-08-23T13:41:18-04:00</Value>
+        <Value>2010-08-23T16:41:18-04:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
-        <Value>2010-08-23T13:41:18-04:00</Value>
+        <Value>2010-08-23T16:41:18-04:00</Value>
       </Assembly>
       <Assembly>
-        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2012-01-30T13:21:29.2558323-05:00</Value>
+        <Key>C:\windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2012-01-30T16:49:32.3972553-05:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>
