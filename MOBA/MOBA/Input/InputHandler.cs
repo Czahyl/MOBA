@@ -7,26 +7,26 @@ using Microsoft.Xna.Framework.Input;
 
 namespace MOBA.Input
 {
-    public class InputHandler
+    public static class InputHandler
     {
-        private KeyboardState oldstate = Keyboard.GetState();
-        private MouseState oldmouse = Mouse.GetState();
-        private KeyboardState keystate;
-        private MouseState mouse;
+        private static KeyboardState oldstate = Keyboard.GetState();
+        private static MouseState oldmouse = Mouse.GetState();
+        private static KeyboardState keystate;
+        private static MouseState mouse;
 
-        public MouseButton? EventButton
-        { get; protected set; }
+        public static  MouseButton? EventButton
+        { get; set; }
 
-        public Keys? EventKey
-        { get; protected set; }
+        public static Keys? EventKey
+        { get; set; }
 
-        public int? EventX
-        { get; protected set; }
+        public static int? EventX
+        { get; set; }
 
-        public int? EventY
-        { get; protected set; }
+        public static int? EventY
+        { get; set; }
 
-        public void Listen()
+        public static void Listen()
         {
             keystate = Keyboard.GetState();
             mouse = Mouse.GetState();
@@ -59,12 +59,32 @@ namespace MOBA.Input
             }
         }
 
-        public bool keyPressed(Keys key)
+        public static bool keyPressed(Keys key)
         {
             return keystate.IsKeyDown(key) && oldstate.IsKeyUp(key);
         }
 
-        public void Flush()
+        public static bool mouseHeld(MouseButton button)
+        {
+            if (button == MouseButton.Left)
+            {
+                EventX = mouse.X;
+                EventY = mouse.Y;
+
+                return mouse.LeftButton == ButtonState.Pressed && oldmouse.LeftButton == ButtonState.Pressed;
+            }
+            else if (button == MouseButton.Right)
+            {
+                EventX = mouse.X;
+                EventY = mouse.Y;
+
+                return mouse.LeftButton == ButtonState.Pressed && oldmouse.LeftButton == ButtonState.Pressed;
+            }
+
+            return false;
+        }
+
+        public static void Flush()
         {
             oldstate = keystate;
             oldmouse = mouse;

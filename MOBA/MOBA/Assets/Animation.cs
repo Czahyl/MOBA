@@ -44,7 +44,7 @@ namespace MOBA.Assets
             if (i >= DELAY)
             {
                 if (index < buffer.Count())
-                    index++; // TEST FAGGOTS
+                    index++;
                 else
                     index = 0;
 
@@ -54,7 +54,7 @@ namespace MOBA.Assets
 
         public Texture2D Frame()
         {
-            return buffer[index].texture;
+            return buffer[index].Texture;
         }
 
         public Rectangle srcRect()

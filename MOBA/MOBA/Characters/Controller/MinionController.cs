@@ -33,9 +33,9 @@ namespace MOBA.Characters.Controller
             m.lightEngine.plugEmitter(minion.light);
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
-            minion.Update();
+            minion.Update(gameTime);
         }
 
         public void Draw()

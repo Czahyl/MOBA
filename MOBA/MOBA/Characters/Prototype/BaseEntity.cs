@@ -13,7 +13,7 @@ namespace MOBA.Characters.Prototype
     {
         public Rectangle Bounds { get; set; }
         public Vector2 Center { get; set; }
-        public Texture2D Texture {get; protected set;}
+        public Image Image {get; protected set;}
         public LightEmitter light { get; set; }
         protected int maxHealth;
         public int Health { get; protected set; }
@@ -42,7 +42,7 @@ namespace MOBA.Characters.Prototype
             locked = false;
         }
 
-        public virtual void Update()
+        public virtual void Update(GameTime gameTime)
         {
             if (Health > maxHealth)
             {
@@ -58,7 +58,7 @@ namespace MOBA.Characters.Prototype
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Bounds, Color.White);
+            //spriteBatch.Draw(Image.Texture, Bounds, Color.White);
         }
 
         public virtual void Move(int x, int y)

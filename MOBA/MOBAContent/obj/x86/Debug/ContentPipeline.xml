@@ -37,6 +37,15 @@
       <Output>C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Font\Arial.xnb</Output>
       <Time>2013-10-21T12:46:45.2666183-04:00</Time>
     </Item>
+    <Item>
+      <Source>Misc\WizAuto.png</Source>
+      <Name>Misc\WizAuto</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Misc\WizAuto.xnb</Output>
+      <Time>2013-10-22T13:44:34.7026596-04:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

@@ -24,9 +24,9 @@ namespace MOBA.World
         {
             m = main;
 
-            for (int x = 0; x < Main.WIDTH; x += 16)
+            for (int x = 0; x < Main.WIDTH; x += 8)
             {
-                for (int y = 0; y < Main.HEIGHT; y += 16)
+                for (int y = 0; y < Main.HEIGHT; y += 8)
                 {
                     shades.Add(new Shade(x, y));
                 }
@@ -77,7 +77,7 @@ namespace MOBA.World
         {
             for(int i = 0; i < shades.Count; i++)
             {
-                m.spriteBatch.Draw(Main.assets.getTexture(0).texture, shades[i].rect(), new Color(50, 50, 50, shades[i].alpha));
+                m.spriteBatch.Draw(Main.assets.getTexture(0).Texture, shades[i].rect(), new Color(50, 50, 50, shades[i].alpha));
             }
         }
     }
@@ -104,7 +104,7 @@ namespace MOBA.World
 
         public Rectangle rect()
         {
-            return new Rectangle(x, y, 16, 16);
+            return new Rectangle(x, y, 8, 8);
         }
     }
 }

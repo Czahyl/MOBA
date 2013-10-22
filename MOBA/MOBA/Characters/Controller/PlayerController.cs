@@ -13,8 +13,6 @@ namespace MOBA.Characters.Controller
     /*Handles input and 'controls' the local player*/
     public class PlayerController : Controller
     {
-        private InputHandler input = new InputHandler();
-
         public PlayerController(Main main) : base(main)
         {
 
@@ -39,12 +37,15 @@ namespace MOBA.Characters.Controller
             base.plugEntity(entity);
         }
 
-        public override void Update(GameTime time)
+        public override void Update(GameTime gameTime)
         {
-            input.Listen();
-            player.Update();
-            input.Flush();
-            base.Update(time);
+            player.Update(gameTime);
+            base.Update(gameTime);
+        }
+
+        public void Draw()
+        {
+            player.Draw(game.spriteBatch);
         }
 
     }

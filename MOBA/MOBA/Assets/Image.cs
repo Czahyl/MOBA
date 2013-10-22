@@ -15,12 +15,12 @@ namespace MOBA.Assets
 {
     public class Image
     {
-        public Texture2D texture;
+        public Texture2D Texture;
         public Rectangle sRect;
 
         public Image(Texture2D boundImage, Rectangle source)
         {
-            texture = boundImage;
+            Texture = boundImage;
 
             if (source != null)
                 sRect = source;

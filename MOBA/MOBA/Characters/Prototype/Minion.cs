@@ -25,16 +25,16 @@ namespace MOBA.Characters.Prototype
             light = new LightEmitter();
         }
 
-        public override void Update()
+        public override void Update(GameTime gameTime)
         {
             setPosition((int)Center.X + Camera.X, (int)Center.Y + Camera.Y);
             hpRect = new Rectangle(((int)Center.X + Camera.X) + 10, (int)Center.Y + Camera.Y, Health / 10, 5);
-            base.Update();
+            base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Main.assets.getTexture(0).texture, hpRect, Color.Red);
+            spriteBatch.Draw(Main.assets.getTexture(0).Texture, hpRect, Color.Red);
             base.Draw(spriteBatch);
         }
     }
