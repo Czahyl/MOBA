@@ -28,7 +28,7 @@ namespace MOBA.Characters.Controller
         {
             minion = entity;
 
-            minion.light = new LightEmitter(m.lightEngine, (int)minion.Center.X, (int)minion.Center.Y, 75, false, 0);
+            minion.light = new LightEmitter(m.lightEngine, entity.Position, 75, 0);
 
             m.lightEngine.plugEmitter(minion.light);
         }

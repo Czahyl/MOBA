@@ -18,12 +18,18 @@ namespace MOBA
         public static int X { get; private set; }
         public static int Y { get; private set; }
 
+        public Matrix Transform;
+        public Viewport viewport;
+
         bool paused = false;
 
-        public Camera()
+        public Camera(Viewport viewport)
         {
             X = 0;
             Y = 0;
+
+            Transform = Matrix.Identity;
+            this.viewport = viewport;
         }
 
         public void Translate(int x, int y)
@@ -45,6 +51,8 @@ namespace MOBA
                 Translate(2, 0);
             if (Keyboard.GetState().IsKeyDown(Keys.D))
                 Translate(-2, 0);
+
+            Transform = Matrix.CreateTranslation(X, Y, 0);
         }
 
         public void Pause()
@@ -71,7 +79,7 @@ namespace MOBA
         {
             m = main;
 
-            cam = new Camera();
+            cam = new Camera(new Viewport(0, 0, Main.WIDTH, Main.HEIGHT));
         }
 
         public void Update()
@@ -85,7 +93,7 @@ namespace MOBA
             {
                 for (int y = 0; y < height; y += 64)
                 {
-                    m.spriteBatch.Draw(Main.assets.getTexture(1).Texture, new Rectangle(x + Camera.X, y + Camera.Y, 64, 64), Color.White);
+                    m.spriteBatch.Draw(Main.assets.getTexture(1).Texture, new Rectangle(x, y, 64, 64), Color.White);
                 }
             }
         }

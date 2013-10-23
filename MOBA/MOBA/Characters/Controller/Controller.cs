@@ -10,11 +10,11 @@ namespace MOBA.Characters.Controller
     public class Controller
     {
         protected Player player;
-        protected Main game;
+        protected Main main;
 
         public Controller(Main main)
         {
-            game = main;
+            this.main = main;
         }
 
         public virtual void plugEntity(Player entity)

@@ -19,7 +19,7 @@ namespace MOBA.Characters.Classes.Spells
         public Rectangle Rect { get; private set; }
         public int dmg = 10;
         Vector2 Start, End, Direction;
-        private float speed = 5f;
+        private float speed = 10f;
 
         private Image image;
         private Timer timer;

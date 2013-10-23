@@ -24,9 +24,9 @@ namespace MOBA.World
         {
             m = main;
 
-            for (int x = 0; x < Main.WIDTH; x += 8)
+            for (int x = 0; x < Main.graphics.GraphicsDevice.Viewport.Width; x += 8)
             {
-                for (int y = 0; y < Main.HEIGHT; y += 8)
+                for (int y = 0; y < Main.graphics.GraphicsDevice.Viewport.Height; y += 8)
                 {
                     shades.Add(new Shade(x, y));
                 }
@@ -43,7 +43,7 @@ namespace MOBA.World
             emitters.Remove(e);
         }
 
-        public bool checkAllEmitters(Rectangle rect, int lightLayer)
+        public bool inLight(Rectangle rect, int lightLayer)
         {
             for (int i = 0; i < emitters.Count; i++)
             {
@@ -66,7 +66,7 @@ namespace MOBA.World
                         if (emitters[j].inCircle(shades[i].rect()))
                             shades[i].Light(true);
                         else
-                            shades[i].Light(checkAllEmitters(shades[i].rect(), emitters[j].layer));
+                            shades[i].Light(inLight(shades[i].rect(), emitters[j].layer));
                     }
                 }
                 timer = 0;
@@ -91,7 +91,7 @@ namespace MOBA.World
         {
             x = X;
             y = Y;
-            alpha = 225;
+            alpha = 175;
         }
 
         public void Light(bool isLight)
@@ -99,7 +99,7 @@ namespace MOBA.World
             if (isLight)
                 alpha = 0;
             else
-                alpha = 225;
+                alpha = 175;
         }
 
         public Rectangle rect()

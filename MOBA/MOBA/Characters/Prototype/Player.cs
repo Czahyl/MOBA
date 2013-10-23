@@ -35,6 +35,8 @@ namespace MOBA.Characters.Prototype
             Bounds = new Rectangle(0, 0, 32, 64);
             light = new LightEmitter();
 
+            moveSpeed = 1;
+
             attackDelay = new Timer(1);
         }
 
@@ -56,12 +58,14 @@ namespace MOBA.Characters.Prototype
 
         public override void Update(GameTime gameTime)
         {
+            setPosition((int)Position.X, (int)Position.Y);
+
             if (InputHandler.mouseHeld(MouseButton.Left))
             {
                 attackDelay.Run();
 
                 if(attackDelay.Tick)
-                    autoAttack.Add(new Projectile(new Vector2(Main.WIDTH / 2, Main.HEIGHT / 2)));
+                    autoAttack.Add(new Projectile(new Vector2(Position.X, Position.Y)));
             }
 
             for (int i = 0; i < autoAttack.Count; i++)
@@ -76,6 +80,48 @@ namespace MOBA.Characters.Prototype
                 autoAttack[i].Draw(spriteBatch);
 
             base.Draw(spriteBatch);
+        }
+
+        public void Pathfind(int x, int y)
+        {
+            int xSpeed, ySpeed;
+            int difX = (int)Position.X - x;
+            int difY = (int)Position.Y - y;
+            bool isPositiveX = difX > 0;
+            bool isPositiveY = difY > 0;
+
+            xSpeed = 0;
+            ySpeed = 0;
+
+            if(difX != 0) // TODO: Move the isPositive's to their own if statement
+            {
+                if(difY != 0)
+                {
+                    if (isPositiveX && isPositiveY)
+                    {
+                        xSpeed = -1;
+                        ySpeed = -1;
+                    }
+                    else if (isPositiveX && !isPositiveY)
+                    {
+                        xSpeed = -1;
+                        ySpeed = 1;
+                    }
+                    else if (!isPositiveX && isPositiveY)
+                    {
+                        xSpeed = 1;
+                        ySpeed = -1;
+                    }
+                    else if (!isPositiveX && !isPositiveY)
+                    {
+                        xSpeed = 1;
+                        ySpeed = 1;
+                    }
+                }
+            }
+
+            Position.X += moveSpeed * xSpeed;
+            Position.Y += moveSpeed * ySpeed;
         }
     }
 }

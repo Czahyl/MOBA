@@ -11,13 +11,13 @@ namespace MOBA.Characters.Prototype
 {
     public class BaseEntity
     {
-        public Rectangle Bounds { get; set; }
-        public Vector2 Center { get; set; }
+        public Rectangle Bounds { get; protected set; }
+        public Vector2 Position;
         public Image Image {get; protected set;}
         public LightEmitter light { get; set; }
         protected int maxHealth;
         public int Health { get; protected set; }
-        public Rectangle hpRect;
+        public int moveSpeed { get; protected set; }
         public int invisibilityLayer { get; protected set; }
 
         public Animation ani;
@@ -27,7 +27,10 @@ namespace MOBA.Characters.Prototype
         public BaseEntity()
         {
             Bounds = Rectangle.Empty;
-            Center = Vector2.Zero;
+            Position = Vector2.Zero;
+
+            //Position.X = Position.X + Image.Texture.Width / 2;
+            //Position.Y = Position.Y - Image.Texture.Height / 2;
 
             light = new LightEmitter();
         }
@@ -70,7 +73,12 @@ namespace MOBA.Characters.Prototype
         public virtual void setPosition(int x, int y)
         {
             if (locked) return;
-            Bounds = new Rectangle(x, y, Bounds.Width, Bounds.Height);
+            Position = new Vector2(x, y);
+        }
+
+        public Rectangle Rect()
+        {
+            return new Rectangle((int)Position.X, (int)Position.Y, 32, 64);
         }
 
         public virtual void Damage(int amount)

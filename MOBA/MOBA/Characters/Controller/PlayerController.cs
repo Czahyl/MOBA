@@ -13,6 +13,8 @@ namespace MOBA.Characters.Controller
     /*Handles input and 'controls' the local player*/
     public class PlayerController : Controller
     {
+        protected Vector2 targetPos;
+
         public PlayerController(Main main) : base(main)
         {
 
@@ -30,22 +32,34 @@ namespace MOBA.Characters.Controller
 
         public override void plugEntity(Player entity)
         {
-            entity.setPosition((Main.WIDTH / 2) - (Player.WIDTH / 2), (Main.HEIGHT / 2) - (Player.HEIGHT / 2));
-            entity.light = new LightEmitter(game.lightEngine, ((Main.WIDTH / 2) - (Player.WIDTH / 2)) + Player.WIDTH / 2 - 10, ((Main.HEIGHT / 2) - (Player.HEIGHT / 2)) + Player.HEIGHT / 2 - 10, 100, true, 0);
-            game.lightEngine.plugEmitter(entity.light);
-            entity.Lock();
+            player = entity;
+
+            entity.setPosition(200, 200);
+            entity.light = new LightEmitter(main.lightEngine, entity.Position, 100, 0);
+            main.lightEngine.plugEmitter(entity.light);
+            targetPos = player.Position;
+
             base.plugEntity(entity);
         }
 
         public override void Update(GameTime gameTime)
         {
+            if (InputHandler.EventButton == MouseButton.Right)
+            {
+                targetPos.X = (int)InputHandler.EventX;
+                targetPos.Y = (int)InputHandler.EventY;
+            }
+
+            player.Pathfind((int)targetPos.X, (int)targetPos.Y);
+
             player.Update(gameTime);
+            player.light.Update(player.Position);
             base.Update(gameTime);
         }
 
         public void Draw()
         {
-            player.Draw(game.spriteBatch);
+            player.Draw(main.spriteBatch);
         }
 
     }

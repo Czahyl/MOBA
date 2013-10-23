@@ -19,7 +19,7 @@ namespace MOBA
 {
     public class Main : Microsoft.Xna.Framework.Game
     {
-        public GraphicsDeviceManager graphics;
+        public static GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
 
         public static AssetManager assets;
@@ -98,21 +98,26 @@ namespace MOBA
 
         protected override void Draw(GameTime gameTime)
         {
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, null, map.cam.Transform);
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Viewport = map.cam.viewport;
 
             map.Draw();
 
-            if (lightEngine.checkAllEmitters(controller.getPlayer().Bounds, controller.getPlayer().invisibilityLayer))
-                spriteBatch.Draw(assets.getTexture(0).Texture, controller.getPlayer().Bounds, Color.White);
+            //if (lightEngine.inLight(controller.getPlayer().Rect(), controller.getPlayer().invisibilityLayer))
+            spriteBatch.Draw(assets.getTexture(0).Texture, controller.getPlayer().Rect(), Color.White);
 
-            spriteBatch.DrawString(font, "MainW - "+Main.WIDTH+"\nMainH - "+Main.HEIGHT+"\nCamX - "+Camera.X+"\nCamY - "+Camera.Y, new Vector2(0, 0), Color.White);
+            spriteBatch.DrawString(font, "VX - "+graphics.GraphicsDevice.Viewport.X+"\nVY - "+graphics.GraphicsDevice.Viewport.Y+"\nCamX - "+Camera.X+"\nCamY - "+Camera.Y, new Vector2(0, 0), Color.White);
 
-            spriteBatch.Draw(assets.getTexture(0).Texture, testMinion.getEntity().Bounds, Color.White);
+            spriteBatch.Draw(assets.getTexture(0).Texture, testMinion.getEntity().Rect(), Color.White);
 
             controller.Draw();
+            spriteBatch.End();
+
+            spriteBatch.Begin(); // Draw off camera objects
 
             lightEngine.Draw();
+
             spriteBatch.End();
             base.Draw(gameTime);
         }

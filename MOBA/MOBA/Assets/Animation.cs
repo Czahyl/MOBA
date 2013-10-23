@@ -19,8 +19,6 @@ namespace MOBA.Assets
         int DELAY;
         bool PAUSED = false;
 
-        Main m;
-
         public List<Image> buffer;
 
         int index = 0;

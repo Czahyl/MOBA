@@ -28,8 +28,6 @@ namespace MOBA.Characters.Classes
         public override void Update(GameTime gameTime)
         {
 
-                //autoAttack.Remove(autoAttack[i].Shoot(gameTime));
-
             base.Update(gameTime);
         }
 
