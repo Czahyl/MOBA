@@ -9,14 +9,14 @@ namespace MOBA.Math
 {
     public class Timer
     {
-        private int time, delay;
+        private float time;
+        private float delay;
         public bool Tick { get; private set; }
         bool stopped = false;
 
-        public Timer(int Seconds)
+        public Timer(float Seconds)
         {
             delay = Seconds * 60;
-            time = delay;
             stopped = false;
         }
 

@@ -13,7 +13,7 @@ namespace MOBA.Characters.Controller
     /*Handles input and 'controls' the local player*/
     public class PlayerController : Controller
     {
-        protected Vector2 targetPos;
+        public Vector2 targetPos;
 
         public PlayerController(Main main) : base(main)
         {
@@ -44,7 +44,7 @@ namespace MOBA.Characters.Controller
 
         public override void Update(GameTime gameTime)
         {
-            if (InputHandler.EventButton == MouseButton.Right)
+            if (InputHandler.mouseHeld(MouseButton.Right))
             {
                 targetPos.X = (int)InputHandler.EventX;
                 targetPos.Y = (int)InputHandler.EventY;

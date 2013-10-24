@@ -28,6 +28,7 @@ namespace MOBA
         public MinionController testMinion;
 
         public Map map;
+        public static Camera cam;
         public LightEngine lightEngine;
 
         public static int WIDTH, HEIGHT;
@@ -51,6 +52,9 @@ namespace MOBA
         {
             assets = new AssetManager();
             map = new Map(this);
+
+            cam = new Camera(new Viewport(0, 0, Main.WIDTH, Main.HEIGHT));
+
             lightEngine = new LightEngine(this);
             controller = new PlayerController(this);
             testMinion = new MinionController(this);
@@ -86,6 +90,7 @@ namespace MOBA
             InputHandler.Listen();
 
             map.Update();
+            cam.Update();
 
             controller.Update(gameTime);
             testMinion.Update(gameTime);
@@ -98,16 +103,16 @@ namespace MOBA
 
         protected override void Draw(GameTime gameTime)
         {
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullNone, null, map.cam.Transform);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, cam.Transform);
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            GraphicsDevice.Viewport = map.cam.viewport;
+            GraphicsDevice.Viewport = cam.viewport;
 
             map.Draw();
 
             //if (lightEngine.inLight(controller.getPlayer().Rect(), controller.getPlayer().invisibilityLayer))
             spriteBatch.Draw(assets.getTexture(0).Texture, controller.getPlayer().Rect(), Color.White);
 
-            spriteBatch.DrawString(font, "VX - "+graphics.GraphicsDevice.Viewport.X+"\nVY - "+graphics.GraphicsDevice.Viewport.Y+"\nCamX - "+Camera.X+"\nCamY - "+Camera.Y, new Vector2(0, 0), Color.White);
+            spriteBatch.DrawString(font, "X - " + InputHandler.worldPosition.X + "\nY - " + InputHandler.worldPosition.Y + "\nDifX - " + (float)(controller.getPlayer().Position.X - controller.targetPos.X) + "\nDifY - " + (float)(controller.getPlayer().Position.Y - controller.targetPos.Y), new Vector2(0, 0), Color.White);
 
             spriteBatch.Draw(assets.getTexture(0).Texture, testMinion.getEntity().Rect(), Color.White);
 

@@ -17,7 +17,7 @@ namespace MOBA.Characters.Prototype
         public const int WIDTH = 32;
         public const int HEIGHT = 64;
 
-        private List<Projectile> autoAttack = new List<Projectile>();
+        public List<Projectile> autoAttack { get; private set; }
         private Timer attackDelay;
 
         public int Level
@@ -34,6 +34,8 @@ namespace MOBA.Characters.Prototype
             invisibilityLayer = 0;
             Bounds = new Rectangle(0, 0, 32, 64);
             light = new LightEmitter();
+
+            autoAttack = new List<Projectile>();
 
             moveSpeed = 1;
 
@@ -65,7 +67,7 @@ namespace MOBA.Characters.Prototype
                 attackDelay.Run();
 
                 if(attackDelay.Tick)
-                    autoAttack.Add(new Projectile(new Vector2(Position.X, Position.Y)));
+                    autoAttack.Add(new Projectile(new Vector2(Position.X, Position.Y), this));
             }
 
             for (int i = 0; i < autoAttack.Count; i++)
@@ -93,35 +95,32 @@ namespace MOBA.Characters.Prototype
             xSpeed = 0;
             ySpeed = 0;
 
-            if(difX != 0) // TODO: Move the isPositive's to their own if statement
+            if(difX != 0)
             {
-                if(difY != 0)
+                if (isPositiveX)
                 {
-                    if (isPositiveX && isPositiveY)
-                    {
-                        xSpeed = -1;
-                        ySpeed = -1;
-                    }
-                    else if (isPositiveX && !isPositiveY)
-                    {
-                        xSpeed = -1;
-                        ySpeed = 1;
-                    }
-                    else if (!isPositiveX && isPositiveY)
-                    {
-                        xSpeed = 1;
-                        ySpeed = -1;
-                    }
-                    else if (!isPositiveX && !isPositiveY)
-                    {
-                        xSpeed = 1;
-                        ySpeed = 1;
-                    }
+                    xSpeed = -1;
                 }
-            }
+                else if (!isPositiveX)
+                {
+                    xSpeed = 1;
+                }
 
-            Position.X += moveSpeed * xSpeed;
-            Position.Y += moveSpeed * ySpeed;
+                Position.X += moveSpeed * xSpeed;
+            }
+            if (difY != 0)
+            {
+                if (isPositiveY)
+                {
+                    ySpeed = -1;
+                }
+                else if (!isPositiveY)
+                {
+                    ySpeed = 1;
+                }
+
+                Position.Y += moveSpeed * ySpeed;
+            }
         }
     }
 }

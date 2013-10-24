@@ -52,7 +52,7 @@ namespace MOBA
             if (Keyboard.GetState().IsKeyDown(Keys.D))
                 Translate(-2, 0);
 
-            Transform = Matrix.CreateTranslation(X, Y, 0);
+            Transform = Matrix.CreateTranslation(new Vector3(X, Y, 0));
         }
 
         public void Pause()
@@ -71,20 +71,16 @@ namespace MOBA
         const int width = 2048;
         const int height = 1280;
 
-        public Camera cam;
-
         Main m;
 
         public Map(Main main)
         {
             m = main;
-
-            cam = new Camera(new Viewport(0, 0, Main.WIDTH, Main.HEIGHT));
         }
 
         public void Update()
         {
-            cam.Update();
+            
         }
 
         public void Draw()

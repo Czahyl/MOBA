@@ -29,3 +29,4 @@ C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\MOBA.exe
 C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\MOBA.pdb
 C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\obj\x86\Debug\MOBA.pdb
 C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Misc\WizAuto.xnb
+C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Misc\WizAuto.xnb

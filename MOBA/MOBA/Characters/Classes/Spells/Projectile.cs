@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using MOBA.Input;
 using MOBA.Assets;
 using MOBA.Math;
+using MOBA.Characters.Prototype;
 
 namespace MOBA.Characters.Classes.Spells
 {
@@ -21,16 +22,19 @@ namespace MOBA.Characters.Classes.Spells
         Vector2 Start, End, Direction;
         private float speed = 10f;
 
+        private Player plr;
+
         private Image image;
         private Timer timer;
 
-        public Projectile(Vector2 startPos)
+        public Projectile(Vector2 startPos, Player player)
         {
             Start = startPos;
+            plr = player;
             image = Main.assets.getTexture(3);
             End = new Vector2((float)InputHandler.EventX, (float)InputHandler.EventY);
 
-            timer = new Timer(5);
+            timer = new Timer(0.5f); // * player attack speed
 
             Direction = End - Start;
 
@@ -43,15 +47,20 @@ namespace MOBA.Characters.Classes.Spells
 
         }
 
+        public void Destroy()
+        {
+            plr.autoAttack.Remove(this);
+        }
+
         public void Shoot(GameTime gameTime)
         {
             timer.Run();
 
-            if (!timer.Tick)
-            {
-                Start.X += (Direction.X * speed);
-                Start.Y += (Direction.Y * speed);
-            }
+            if (timer.Tick)
+                Destroy();
+
+            Start.X += (Direction.X * speed);
+            Start.Y += (Direction.Y * speed);
         }
 
         public void Draw(SpriteBatch spriteBatch)

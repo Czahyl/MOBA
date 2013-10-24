@@ -14,6 +14,9 @@ namespace MOBA.Input
         private static KeyboardState keystate;
         private static MouseState mouse;
 
+        public static Vector2 worldPosition
+        { get; private set; }
+
         public static  MouseButton? EventButton
         { get; set; }
 
@@ -36,6 +39,8 @@ namespace MOBA.Input
             EventX = null;
             EventY = null;
 
+            worldPosition = Vector2.Transform(new Vector2(mouse.X, mouse.Y), Matrix.Invert(Main.cam.Transform));
+
             foreach (Keys key in Enum.GetValues(typeof(Keys)))
             {
                 if (keystate.IsKeyDown(key) && oldstate.IsKeyUp(key))
@@ -47,15 +52,15 @@ namespace MOBA.Input
             if (mouse.LeftButton == ButtonState.Pressed && oldmouse.LeftButton == ButtonState.Released)
             {
                 EventButton = MouseButton.Left;
-                EventX = mouse.X;
-                EventY = mouse.Y;
+                EventX = (int)worldPosition.X;
+                EventY = (int)worldPosition.Y;
             }
 
             if (mouse.RightButton == ButtonState.Pressed && oldmouse.RightButton == ButtonState.Released)
             {
                 EventButton = MouseButton.Right;
-                EventX = mouse.X;
-                EventY = mouse.Y;
+                EventX = (int)worldPosition.X;
+                EventY = (int)worldPosition.Y;
             }
         }
 
@@ -68,17 +73,17 @@ namespace MOBA.Input
         {
             if (button == MouseButton.Left)
             {
-                EventX = mouse.X;
-                EventY = mouse.Y;
+                EventX = (int)worldPosition.X;
+                EventY = (int)worldPosition.Y;
 
                 return mouse.LeftButton == ButtonState.Pressed && oldmouse.LeftButton == ButtonState.Pressed;
             }
             else if (button == MouseButton.Right)
             {
-                EventX = mouse.X;
-                EventY = mouse.Y;
+                EventX = (int)worldPosition.X;
+                EventY = (int)worldPosition.Y;
 
-                return mouse.LeftButton == ButtonState.Pressed && oldmouse.LeftButton == ButtonState.Pressed;
+                return mouse.RightButton == ButtonState.Pressed && oldmouse.RightButton == ButtonState.Pressed;
             }
 
             return false;
