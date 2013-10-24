@@ -13,14 +13,14 @@ namespace MOBA.Characters.Prototype
     {
         public Rectangle Bounds { get; protected set; }
         public Vector2 Position;
-        public Image Image {get; protected set;}
+        public Image Image { get; protected set; }
         public LightEmitter light { get; set; }
-        protected int maxHealth;
+        public Animation ani { get; set; }
         public int Health { get; protected set; }
         public int moveSpeed { get; protected set; }
         public int invisibilityLayer { get; protected set; }
 
-        public Animation ani;
+        protected int maxHealth;
 
         protected bool locked = false;
 
@@ -28,9 +28,6 @@ namespace MOBA.Characters.Prototype
         {
             Bounds = Rectangle.Empty;
             Position = Vector2.Zero;
-
-            //Position.X = Position.X + Image.Texture.Width / 2;
-            //Position.Y = Position.Y - Image.Texture.Height / 2;
 
             light = new LightEmitter();
         }

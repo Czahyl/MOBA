@@ -34,7 +34,7 @@ namespace MOBA.Characters.Classes.Spells
             image = Main.assets.getTexture(3);
             End = new Vector2((float)InputHandler.EventX, (float)InputHandler.EventY);
 
-            timer = new Timer(0.5f); // * player attack speed
+            timer = new Timer(Player.AttRange);
 
             Direction = End - Start;
 
@@ -45,6 +45,16 @@ namespace MOBA.Characters.Classes.Spells
         public Projectile()
         {
 
+        }
+
+        public bool Hit(Rectangle rect)
+        {
+            if(!Rect.Intersects(plr.Bounds))
+            {
+                return Rect.Intersects(rect);
+            }
+
+            return false;
         }
 
         public void Destroy()

@@ -13,7 +13,7 @@ namespace MOBA.Characters.Controller
     /*Handles input and 'controls' the local player*/
     public class PlayerController : Controller
     {
-        public Vector2 targetPos;
+        private Vector2 targetPos;
 
         public PlayerController(Main main) : base(main)
         {

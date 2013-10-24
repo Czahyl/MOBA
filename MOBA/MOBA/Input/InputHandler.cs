@@ -23,11 +23,9 @@ namespace MOBA.Input
         public static Keys? EventKey
         { get; set; }
 
-        public static int? EventX
-        { get; set; }
+        public static int EventX;
 
-        public static int? EventY
-        { get; set; }
+        public static int EventY;
 
         public static void Listen()
         {
@@ -35,11 +33,12 @@ namespace MOBA.Input
             mouse = Mouse.GetState();
 
             EventButton = MouseButton.None;
-            EventKey = null;
-            EventX = null;
-            EventY = null;
 
             worldPosition = Vector2.Transform(new Vector2(mouse.X, mouse.Y), Matrix.Invert(Main.cam.Transform));
+
+            EventX = (int)worldPosition.X;
+            EventY = (int)worldPosition.Y;
+
 
             foreach (Keys key in Enum.GetValues(typeof(Keys)))
             {

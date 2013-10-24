@@ -16,15 +16,24 @@ namespace MOBA.Characters.Prototype
     {
         public const int WIDTH = 32;
         public const int HEIGHT = 64;
+        public const float AttRange = 0.25f;
 
         public List<Projectile> autoAttack { get; private set; }
         private Timer attackDelay;
 
+        public int Mana
+        { get; protected set; }
         public int Level
         { get; protected set; }
         public int Exp 
         { get; protected set; }
         public string Name
+        { get; protected set; }
+        public float AttackSpeed
+        { get; protected set; }
+        public int Attack
+        { get; protected set; }
+        public int SpellPower
         { get; protected set; }
 
         public Player()
@@ -32,14 +41,15 @@ namespace MOBA.Characters.Prototype
             Level = 1;
             Exp = 0;
             invisibilityLayer = 0;
-            Bounds = new Rectangle(0, 0, 32, 64);
+            Bounds = new Rectangle((int)Position.X, (int)Position.Y, 32, 64);
             light = new LightEmitter();
 
             autoAttack = new List<Projectile>();
 
             moveSpeed = 1;
+            AttackSpeed = 0.5f;
 
-            attackDelay = new Timer(1);
+            attackDelay = new Timer(AttackSpeed);
         }
 
         public virtual void Load(AssetManager assMan)

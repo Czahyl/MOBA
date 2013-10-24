@@ -56,10 +56,6 @@ namespace MOBA
             cam = new Camera(new Viewport(0, 0, Main.WIDTH, Main.HEIGHT));
 
             lightEngine = new LightEngine(this);
-            controller = new PlayerController(this);
-            testMinion = new MinionController(this);
-            controller.plugEntity(new Wizard());
-            testMinion.plugEntity(new Minion());
 
             //lightEngine.plugEmitter(new LightEmitter(lightEngine, WIDTH / 2, HEIGHT / 2, 100, true, 0));
 
@@ -70,11 +66,16 @@ namespace MOBA
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
-            assets.storeTexture(Content.Load<Texture2D>("Misc/Rect"), new Rectangle(0, 0, 1, 1));    // ID 0
-            assets.storeTexture(Content.Load<Texture2D>("Enviroment/Grass"), new Rectangle(0, 0, 64, 64)); // ID 1
-            assets.storeTexture(Content.Load<Texture2D>("Enviroment/Tree"), new Rectangle(0, 0, 96, 192)); // ID 2
-            assets.storeTexture(Content.Load<Texture2D>("Misc/WizAuto"), new Rectangle(0, 0, 27, 14)); // ID 3 
+            assets.storeImage(Content.Load<Texture2D>("Misc/Rect"), new Rectangle(0, 0, 1, 1));    // ID 0
+            assets.storeImage(Content.Load<Texture2D>("Enviroment/Grass"), new Rectangle(0, 0, 64, 64)); // ID 1
+            assets.storeImage(Content.Load<Texture2D>("Enviroment/Tree"), new Rectangle(0, 0, 96, 192)); // ID 2
+            assets.storeImage(Content.Load<Texture2D>("Misc/WizAuto"), new Rectangle(0, 0, 27, 14)); // ID 3 
             font = Content.Load<SpriteFont>("Font/Arial");
+
+            controller = new PlayerController(this);
+            testMinion = new MinionController(this);
+            controller.plugEntity(new Wizard());
+            testMinion.plugEntity(new Minion());
         }
 
         protected override void UnloadContent()
@@ -112,7 +113,7 @@ namespace MOBA
             //if (lightEngine.inLight(controller.getPlayer().Rect(), controller.getPlayer().invisibilityLayer))
             spriteBatch.Draw(assets.getTexture(0).Texture, controller.getPlayer().Rect(), Color.White);
 
-            spriteBatch.DrawString(font, "X - " + InputHandler.worldPosition.X + "\nY - " + InputHandler.worldPosition.Y + "\nDifX - " + (float)(controller.getPlayer().Position.X - controller.targetPos.X) + "\nDifY - " + (float)(controller.getPlayer().Position.Y - controller.targetPos.Y), new Vector2(0, 0), Color.White);
+            spriteBatch.DrawString(font, "X - " + InputHandler.worldPosition.X + "\nY - " + InputHandler.worldPosition.Y, new Vector2(0, 0), Color.White);
 
             spriteBatch.Draw(assets.getTexture(0).Texture, testMinion.getEntity().Rect(), Color.White);
 

@@ -111,6 +111,8 @@
     <Compile Include="Assets\Animation.cs" />
     <Compile Include="Assets\AssetManager.cs" />
     <Compile Include="Assets\Image.cs" />
+    <Compile Include="Characters\Classes\Spells\Ability.cs" />
+    <Compile Include="Characters\Classes\Spells\Fireball.cs" />
     <Compile Include="Characters\Classes\Spells\Projectile.cs" />
     <Compile Include="Characters\Controller\Controller.cs" />
     <Compile Include="Characters\Controller\MinionController.cs" />

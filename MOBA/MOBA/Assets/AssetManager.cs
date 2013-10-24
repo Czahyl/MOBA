@@ -15,15 +15,15 @@ namespace MOBA.Assets
 {
     public class AssetManager
     {
-        public List<Image> textureList = new List<Image>();
+        public List<Image> imageList = new List<Image>();
         List<Song> soundList = new List<Song>();
         List<SpriteFont> fontList = new List<SpriteFont>();
 
-        public void storeTexture(Texture2D texture, Rectangle source)
+        public void storeImage(Texture2D texture, Rectangle source)
         {
             try
             {
-                textureList.Add(new Image(texture, source));
+                imageList.Add(new Image(texture, source));
             }
             catch(Exception e)
             {
@@ -39,7 +39,7 @@ namespace MOBA.Assets
                 {
                     for (int y = 0; y < picHeight; y += sprHeight)
                     {
-                        textureList.Add(new Image(texture, new Rectangle(x, y, sprHeight, sprWidth)));
+                        imageList.Add(new Image(texture, new Rectangle(x, y, sprHeight, sprWidth)));
                     }
                 }
             }
@@ -52,7 +52,7 @@ namespace MOBA.Assets
 
         public Image getTexture(int id)
         {
-            return textureList[id];
+            return imageList[id];
         }
     }
 }
