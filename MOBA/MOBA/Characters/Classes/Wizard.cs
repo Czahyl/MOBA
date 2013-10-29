@@ -22,34 +22,34 @@ namespace MOBA.Characters.Classes
     {
         private bool cast = false;
 
-        Ability currentAbility;
+        //Ability currentAbility;
 
         public Wizard() : base()
         {
             Attack = 5;
             SpellPower = 15;
 
-            currentAbility = new Ability(this);
+            //currentAbility = new Ability(this);
         }
 
         public override void Update(GameTime gameTime)
         {
             if (InputHandler.keyPressed(Keys.D1))
             {
-                currentAbility = new Fireball(this);
-                currentAbility.Alive = true;
+                //currentAbility = new Fireball(this);
+                //currentAbility.Alive = true;
             }
 
-            if (currentAbility.Alive)
-                currentAbility.Cast(gameTime);
+            //if (currentAbility.Alive)
+                //currentAbility.Cast(gameTime);
 
             base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if(currentAbility.Alive)
-                currentAbility.Draw(spriteBatch);
+            //if(currentAbility.Alive)
+                //currentAbility.Draw(spriteBatch);
 
             base.Draw(spriteBatch);
         }

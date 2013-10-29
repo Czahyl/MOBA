@@ -16,7 +16,7 @@ namespace MOBA.Characters.Prototype
     {
         public const int WIDTH = 32;
         public const int HEIGHT = 64;
-        public const float AttRange = 0.25f;
+        public const float AttRange = 0.5f;
 
         public List<Projectile> autoAttack { get; private set; }
         private Timer attackDelay;

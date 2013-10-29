@@ -12,6 +12,8 @@ using MOBA.Input;
 using MOBA.Assets;
 using MOBA.Math;
 using MOBA.Characters.Prototype;
+using MOBA.Characters.Controller;
+using MOBA.World;
 
 namespace MOBA.Characters.Classes.Spells
 {
@@ -24,6 +26,8 @@ namespace MOBA.Characters.Classes.Spells
 
         private Player plr;
 
+        LightEmitter emitter;
+
         private Image image;
         private Timer timer;
 
@@ -34,7 +38,7 @@ namespace MOBA.Characters.Classes.Spells
             image = Main.assets.getTexture(3);
             End = new Vector2((float)InputHandler.EventX, (float)InputHandler.EventY);
 
-            timer = new Timer(Player.AttRange);
+            timer = new Timer(Player.AttRange); // Create the live time of the projectile
 
             Direction = End - Start;
 
@@ -49,12 +53,12 @@ namespace MOBA.Characters.Classes.Spells
 
         public bool Hit(Rectangle rect)
         {
-            if(!Rect.Intersects(plr.Bounds))
+            if (!Rect.Intersects(plr.Bounds))
             {
                 return Rect.Intersects(rect);
             }
 
-            return false;
+            return Rect.Intersects(rect);
         }
 
         public void Destroy()
@@ -71,6 +75,24 @@ namespace MOBA.Characters.Classes.Spells
 
             Start.X += (Direction.X * speed);
             Start.Y += (Direction.Y * speed);
+
+            foreach(PlayerController player in Main.Players)
+            {
+                if (Hit(player.getPlayer().Rect()))
+                {
+                    player.getPlayer().Damage(plr.Attack);
+                    Destroy();
+                }
+            }
+
+            foreach(MinionController minion in Main.Minions)
+            {
+                if (Hit(minion.getEntity().Rect()))
+                {
+                    minion.getEntity().Damage(plr.Attack);
+                    Destroy();
+                }
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)

@@ -20,13 +20,13 @@ namespace MOBA.World
 
         int timer;
 
-        public LightEngine(Main main)
+        public LightEngine(Main main, int width, int height)
         {
             m = main;
 
-            for (int x = 0; x < Main.graphics.GraphicsDevice.Viewport.Width; x += 8)
+            for (int x = 0; x < width; x += 8)
             {
-                for (int y = 0; y < Main.graphics.GraphicsDevice.Viewport.Height; y += 8)
+                for (int y = 0; y < height; y += 8)
                 {
                     shades.Add(new Shade(x, y));
                 }
@@ -85,7 +85,9 @@ namespace MOBA.World
     public class Shade
     {
         int x, y;
-        public int alpha { get; private set; }
+
+        public int alpha 
+        { get; private set; }
 
         public Shade(int X, int Y)
         {

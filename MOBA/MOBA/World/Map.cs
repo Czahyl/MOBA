@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.Diagnostics;
 using System.IO;
+using MOBA.Input;
 
 namespace MOBA
 {
@@ -38,6 +39,8 @@ namespace MOBA
             {
                 X += x;
                 Y += y;
+
+                Transform = Matrix.CreateTranslation(new Vector3(X, Y, 0));
             }
         }
 
@@ -52,7 +55,14 @@ namespace MOBA
             if (Keyboard.GetState().IsKeyDown(Keys.D))
                 Translate(-2, 0);
 
-            Transform = Matrix.CreateTranslation(new Vector3(X, Y, 0));
+            if (InputHandler.mouseX <= 10)
+                Translate(2, 0);
+            if (InputHandler.mouseX >= Main.WIDTH - 10)
+                Translate(-2, 0);
+            if (InputHandler.mouseY <= 10)
+                Translate(0, 2);
+            if (InputHandler.mouseY >= Main.HEIGHT - 10)
+                Translate(0, -2);
         }
 
         public void Pause()

@@ -19,17 +19,18 @@ namespace MOBA
 {
     public class Main : Microsoft.Xna.Framework.Game
     {
+        public static PlayerController controller; // Local player
+        public static List<Controller> Players = new List<Controller>(); // Connected players
+        public static List<MinionController> Minions = new List<MinionController>();
+       
         public static GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
 
         public static AssetManager assets;
 
-        public PlayerController controller;
-        public MinionController testMinion;
-
         public Map map;
         public static Camera cam;
-        public LightEngine lightEngine;
+        public static LightEngine lightEngine;
 
         public static int WIDTH, HEIGHT;
 
@@ -42,7 +43,7 @@ namespace MOBA
             IsMouseVisible = true;
 
             graphics.PreferredBackBufferWidth = 1024;
-            graphics.PreferredBackBufferHeight = 768;
+            graphics.PreferredBackBufferHeight = 600;
 
             WIDTH = graphics.PreferredBackBufferWidth;
             HEIGHT = graphics.PreferredBackBufferHeight;
@@ -53,11 +54,9 @@ namespace MOBA
             assets = new AssetManager();
             map = new Map(this);
 
-            cam = new Camera(new Viewport(0, 0, Main.WIDTH, Main.HEIGHT));
+            cam = new Camera(new Viewport(0, 0, WIDTH, HEIGHT));
 
-            lightEngine = new LightEngine(this);
-
-            //lightEngine.plugEmitter(new LightEmitter(lightEngine, WIDTH / 2, HEIGHT / 2, 100, true, 0));
+            lightEngine = new LightEngine(this, WIDTH, HEIGHT);
 
             base.Initialize();
         }
@@ -73,9 +72,12 @@ namespace MOBA
             font = Content.Load<SpriteFont>("Font/Arial");
 
             controller = new PlayerController(this);
-            testMinion = new MinionController(this);
+            Minions.Add(new MinionController(this));
+
             controller.plugEntity(new Wizard());
-            testMinion.plugEntity(new Minion());
+
+            for (int i = 0; i < Minions.Count; i++)
+                Minions[i].plugEntity(new Minion());
         }
 
         protected override void UnloadContent()
@@ -94,7 +96,9 @@ namespace MOBA
             cam.Update();
 
             controller.Update(gameTime);
-            testMinion.Update(gameTime);
+
+            for (int i = 0; i < Minions.Count; i++)
+                Minions[i].Update(gameTime);
 
             lightEngine.Update();
 
@@ -114,13 +118,15 @@ namespace MOBA
             spriteBatch.Draw(assets.getTexture(0).Texture, controller.getPlayer().Rect(), Color.White);
 
             spriteBatch.DrawString(font, "X - " + InputHandler.worldPosition.X + "\nY - " + InputHandler.worldPosition.Y, new Vector2(0, 0), Color.White);
+            //spriteBatch.DrawString(font, 0 + Minions[0].getEntity().Health.ToString(), new Vector2(0, 50), Color.White);
 
-            spriteBatch.Draw(assets.getTexture(0).Texture, testMinion.getEntity().Rect(), Color.White);
+            for (int i = 0; i < Minions.Count; i++)
+                Minions[i].getEntity().Draw(spriteBatch);
 
             controller.Draw();
             spriteBatch.End();
 
-            spriteBatch.Begin(); // Draw off camera objects
+            spriteBatch.Begin(); // Draw off-camera objects
 
             lightEngine.Draw();
 

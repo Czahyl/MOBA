@@ -24,8 +24,10 @@ namespace MOBA.Input
         { get; set; }
 
         public static int EventX;
-
         public static int EventY;
+
+        public static int mouseX;
+        public static int mouseY;
 
         public static void Listen()
         {
@@ -38,6 +40,9 @@ namespace MOBA.Input
 
             EventX = (int)worldPosition.X;
             EventY = (int)worldPosition.Y;
+
+            mouseX = mouse.X;
+            mouseY = mouse.Y;
 
 
             foreach (Keys key in Enum.GetValues(typeof(Keys)))

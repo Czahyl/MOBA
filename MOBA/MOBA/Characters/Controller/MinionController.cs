@@ -28,14 +28,17 @@ namespace MOBA.Characters.Controller
         {
             minion = entity;
 
-            minion.light = new LightEmitter(m.lightEngine, entity.Position, 75, 0);
+            minion.light = new LightEmitter(Main.lightEngine, entity.Position, 75, 0);
 
-            m.lightEngine.plugEmitter(minion.light);
+            Main.lightEngine.plugEmitter(minion.light);
         }
 
         public void Update(GameTime gameTime)
         {
             minion.Update(gameTime);
+
+            if (minion.Health <= 0)
+                Main.Minions.Remove(this);
         }
 
         public void Draw()
