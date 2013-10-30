@@ -24,9 +24,9 @@ namespace MOBA.Characters.Classes
 
         //Ability currentAbility;
 
-        public Wizard() : base()
+        public Wizard(string Username, int TeamID) : base(Username, TeamID)
         {
-            Attack = 5;
+            Attack = 20;
             SpellPower = 15;
 
             //currentAbility = new Ability(this);

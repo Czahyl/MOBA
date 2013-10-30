@@ -53,7 +53,6 @@ namespace MOBA.Characters.Controller
             player.Pathfind((int)targetPos.X, (int)targetPos.Y);
 
             player.Update(gameTime);
-            player.light.Update(player.Position);
             base.Update(gameTime);
         }
 

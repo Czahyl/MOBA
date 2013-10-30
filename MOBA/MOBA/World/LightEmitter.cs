@@ -16,8 +16,10 @@ namespace MOBA.World
     {
         private LightEngine e;
         Vector2 pos;
-        float r;
-        public int layer { get; private set; } 
+        public int layer 
+        { get; private set; }
+        public float r
+        { get; private set; }
 
         public LightEmitter(LightEngine engine, Vector2 position, float radius, int lightLayer)
         {
@@ -41,6 +43,11 @@ namespace MOBA.World
         public void Destroy()
         {
             e.destroyEmitter(this);
+        }
+
+        public void Fade()
+        {
+            r -= 4;
         }
 
         public bool inCircle(Rectangle rect)

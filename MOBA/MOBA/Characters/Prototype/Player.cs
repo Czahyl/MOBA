@@ -21,6 +21,8 @@ namespace MOBA.Characters.Prototype
         public List<Projectile> autoAttack { get; private set; }
         private Timer attackDelay;
 
+        public int Team
+        { get; private set; }
         public int Mana
         { get; protected set; }
         public int Level
@@ -36,8 +38,10 @@ namespace MOBA.Characters.Prototype
         public int SpellPower
         { get; protected set; }
 
-        public Player()
+        public Player(string Username, int TeamID)
         {
+            Name = Username;
+            Team = TeamID;
             Level = 1;
             Exp = 0;
             invisibilityLayer = 0;
@@ -49,7 +53,7 @@ namespace MOBA.Characters.Prototype
             moveSpeed = 1;
             AttackSpeed = 0.5f;
 
-            attackDelay = new Timer(AttackSpeed);
+            attackDelay = new Timer(AttackSpeed, false);
         }
 
         public virtual void Load(AssetManager assMan)
@@ -82,6 +86,8 @@ namespace MOBA.Characters.Prototype
 
             for (int i = 0; i < autoAttack.Count; i++)
                 autoAttack[i].Shoot(gameTime);
+
+            light.Update(Position);
 
             base.Update(gameTime);
         }

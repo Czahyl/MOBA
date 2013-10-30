@@ -14,9 +14,13 @@ namespace MOBA.Math
         public bool Tick { get; private set; }
         bool stopped = false;
 
-        public Timer(float Seconds)
+        public Timer(float Time, bool Millisecond)
         {
-            delay = Seconds * 60;
+            if (Millisecond)
+                delay = Time;
+            else
+                delay = Time * 60;
+
             stopped = false;
         }
 

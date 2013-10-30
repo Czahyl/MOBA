@@ -14,8 +14,12 @@ namespace MOBA.Characters.Prototype
         public const int HEIGHT = 32;
         public const int WORTH = 10;
 
-        public Minion()
+        public int Team
+        { get; private set; }
+
+        public Minion(int TeamID)
         {
+            Team = TeamID;
             //Add preset animation to ani buffer
             //Maxhealth = Base amount * Towers dead
             maxHealth = 100;
@@ -32,7 +36,10 @@ namespace MOBA.Characters.Prototype
 
             if (Health <= 0)
                 light.Destroy();
-            //base.Update(gameTime);
+
+            light.Update(Position);
+
+            base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

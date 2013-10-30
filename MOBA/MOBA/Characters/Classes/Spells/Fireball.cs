@@ -26,7 +26,7 @@ namespace MOBA.Characters.Classes.Spells
 
             Damage = pClass.SpellPower + (10 * pClass.Level);
 
-            drawTime = new Timer(0.5f);
+            drawTime = new Timer(0.5f, true);
 
             Position = pClass.Position;
 

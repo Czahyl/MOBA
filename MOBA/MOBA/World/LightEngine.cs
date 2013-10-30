@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.Diagnostics;
+using MOBA.Math;
 
 namespace MOBA.World
 {
@@ -17,8 +18,9 @@ namespace MOBA.World
         protected Main m;
         public List<Shade> shades = new List<Shade>();
         private List<LightEmitter> emitters = new List<LightEmitter>();
+        private List<LightEmitter> fadeEmitter = new List<LightEmitter>();
 
-        int timer;
+        private Timer lag;
 
         public LightEngine(Main main, int width, int height)
         {
@@ -31,6 +33,8 @@ namespace MOBA.World
                     shades.Add(new Shade(x, y));
                 }
             }
+
+            lag = new Timer(5, true);
         }
 
         public void plugEmitter(LightEmitter e)
@@ -40,7 +44,7 @@ namespace MOBA.World
 
         public void destroyEmitter(LightEmitter e)
         {
-            emitters.Remove(e);
+            fadeEmitter.Add(e);
         }
 
         public bool inLight(Rectangle rect, int lightLayer)
@@ -55,21 +59,31 @@ namespace MOBA.World
 
         public void Update()
         {
-            timer++;
+            lag.Run();
 
-            if (timer >= 5)
+            if (lag.Tick)
             {
                 for (int j = 0; j < emitters.Count; j++)
                 {
                     for (int i = 0; i < shades.Count; i++)
                     {
-                        if (emitters[j].inCircle(shades[i].rect()))
+                        if (emitters[j].inCircle(shades[i].Rect()))
                             shades[i].Light(true);
                         else
-                            shades[i].Light(inLight(shades[i].rect(), emitters[j].layer));
+                            shades[i].Light(inLight(shades[i].Rect(), emitters[j].layer));
                     }
                 }
-                timer = 0;
+            }
+
+            for (int i = 0; i < fadeEmitter.Count; i++)
+            {
+                if (fadeEmitter[i].r <= 0)
+                {
+                    emitters.Remove(fadeEmitter[i]);
+                    fadeEmitter.RemoveAt(i);
+                }
+                else
+                    fadeEmitter[i].Fade();
             }
         }
 
@@ -77,7 +91,7 @@ namespace MOBA.World
         {
             for(int i = 0; i < shades.Count; i++)
             {
-                m.spriteBatch.Draw(Main.assets.getTexture(0).Texture, shades[i].rect(), new Color(50, 50, 50, shades[i].alpha));
+                m.spriteBatch.Draw(Main.assets.getTexture(0).Texture, shades[i].Rect(), new Color(50, 50, 50, shades[i].alpha));
             }
         }
     }
@@ -86,8 +100,7 @@ namespace MOBA.World
     {
         int x, y;
 
-        public int alpha 
-        { get; private set; }
+        public int alpha;
 
         public Shade(int X, int Y)
         {
@@ -104,7 +117,7 @@ namespace MOBA.World
                 alpha = 175;
         }
 
-        public Rectangle rect()
+        public Rectangle Rect()
         {
             return new Rectangle(x, y, 8, 8);
         }

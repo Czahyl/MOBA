@@ -38,7 +38,9 @@ namespace MOBA.Characters.Controller
             minion.Update(gameTime);
 
             if (minion.Health <= 0)
+            {
                 Main.Minions.Remove(this);
+            }
         }
 
         public void Draw()

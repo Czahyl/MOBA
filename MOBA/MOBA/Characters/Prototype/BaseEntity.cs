@@ -52,7 +52,6 @@ namespace MOBA.Characters.Prototype
             if (Health < 0)
             {
                 Health = 0;
-                light.Destroy();
             }
         }
 

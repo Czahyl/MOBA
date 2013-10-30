@@ -38,7 +38,7 @@ namespace MOBA.Characters.Classes.Spells
             image = Main.assets.getTexture(3);
             End = new Vector2((float)InputHandler.EventX, (float)InputHandler.EventY);
 
-            timer = new Timer(Player.AttRange); // Create the live time of the projectile
+            timer = new Timer(Player.AttRange, false); // Create the live time of the projectile
 
             Direction = End - Start;
 
