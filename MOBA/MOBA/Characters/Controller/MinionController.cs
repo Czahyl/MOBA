@@ -30,7 +30,8 @@ namespace MOBA.Characters.Controller
 
             minion.light = new LightEmitter(Main.lightEngine, entity.Position, 75, 0);
 
-            Main.lightEngine.plugEmitter(minion.light);
+            if(minion.Friendly)
+                Main.lightEngine.plugEmitter(minion.light);
         }
 
         public void Update(GameTime gameTime)

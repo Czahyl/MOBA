@@ -55,14 +55,14 @@ namespace MOBA
             if (Keyboard.GetState().IsKeyDown(Keys.D))
                 Translate(-2, 0);
 
-            if (InputHandler.mouseX <= 10)
-                Translate(2, 0);
-            if (InputHandler.mouseX >= Main.WIDTH - 10)
-                Translate(-2, 0);
-            if (InputHandler.mouseY <= 10)
-                Translate(0, 2);
-            if (InputHandler.mouseY >= Main.HEIGHT - 10)
-                Translate(0, -2);
+            //if (InputHandler.mouseX <= 10)
+            //    Translate(2, 0);
+            //if (InputHandler.mouseX >= Main.WIDTH - 10)
+            //    Translate(-2, 0);
+            //if (InputHandler.mouseY <= 10)
+            //    Translate(0, 2);
+            //if (InputHandler.mouseY >= Main.HEIGHT - 10)
+            //    Translate(0, -2);
         }
 
         public void Pause()
@@ -99,7 +99,7 @@ namespace MOBA
             {
                 for (int y = 0; y < height; y += 64)
                 {
-                    m.spriteBatch.Draw(Main.assets.getTexture(1).Texture, new Rectangle(x, y, 64, 64), Color.White);
+                    m.spriteBatch.Draw(Main.Assets.getTexture(1).Texture, new Rectangle(x, y, 64, 64), Color.White);
                 }
             }
         }

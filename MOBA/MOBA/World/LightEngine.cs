@@ -47,11 +47,25 @@ namespace MOBA.World
             fadeEmitter.Add(e);
         }
 
-        public bool inLight(Rectangle rect, int lightLayer)
+        public bool isVisible(Rectangle rect, int lightLayer)
+        {
+            Vector2 rectPos = new Vector2(rect.X, rect.Y);
+
+            rectPos = Vector2.Transform(rectPos, Main.Cam.Transform);
+
+            for (int i = 0; i < emitters.Count; i++)
+            {
+                if (emitters[i].inCircle(rectPos) && emitters[i].layer <= lightLayer)
+                    return true;
+            }
+            return false;
+        }
+
+        public bool shadeInLight(Rectangle rect, int lightLayer)
         {
             for (int i = 0; i < emitters.Count; i++)
             {
-                if (emitters[i].inCircle(rect) && emitters[i].layer >= lightLayer)
+                if (emitters[i].inCircle(new Vector2(rect.X, rect.Y)) && emitters[i].layer <= lightLayer)
                     return true;
             }
             return false;
@@ -67,10 +81,7 @@ namespace MOBA.World
                 {
                     for (int i = 0; i < shades.Count; i++)
                     {
-                        if (emitters[j].inCircle(shades[i].Rect()))
-                            shades[i].Light(true);
-                        else
-                            shades[i].Light(inLight(shades[i].Rect(), emitters[j].layer));
+                        shades[i].Light(shadeInLight(shades[i].Rect(), emitters[j].layer));
                     }
                 }
             }
@@ -91,7 +102,7 @@ namespace MOBA.World
         {
             for(int i = 0; i < shades.Count; i++)
             {
-                m.spriteBatch.Draw(Main.assets.getTexture(0).Texture, shades[i].Rect(), new Color(50, 50, 50, shades[i].alpha));
+                m.spriteBatch.Draw(Main.Assets.getTexture(0).Texture, shades[i].Rect(), new Color(50, 50, 50, shades[i].alpha));
             }
         }
     }

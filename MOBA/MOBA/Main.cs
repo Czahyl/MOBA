@@ -26,10 +26,11 @@ namespace MOBA
         public static GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
 
-        public static AssetManager assets;
+        public static AssetManager Assets;
+        public static Math.Trig Trig;
 
         public Map map;
-        public static Camera cam;
+        public static Camera Cam;
         public static LightEngine lightEngine;
 
         public static int WIDTH, HEIGHT;
@@ -51,10 +52,11 @@ namespace MOBA
 
         protected override void Initialize()
         {
-            assets = new AssetManager();
+            Assets = new AssetManager();
+            Trig = new Math.Trig();
             map = new Map(this);
 
-            cam = new Camera(new Viewport(0, 0, WIDTH, HEIGHT));
+            Cam = new Camera(new Viewport(0, 0, WIDTH, HEIGHT));
 
             lightEngine = new LightEngine(this, WIDTH, HEIGHT);
 
@@ -65,10 +67,10 @@ namespace MOBA
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
-            assets.storeImage(Content.Load<Texture2D>("Misc/Rect"), new Rectangle(0, 0, 1, 1));    // ID 0
-            assets.storeImage(Content.Load<Texture2D>("Enviroment/Grass"), new Rectangle(0, 0, 64, 64)); // ID 1
-            assets.storeImage(Content.Load<Texture2D>("Enviroment/Tree"), new Rectangle(0, 0, 96, 192)); // ID 2
-            assets.storeImage(Content.Load<Texture2D>("Misc/WizAuto"), new Rectangle(0, 0, 27, 14)); // ID 3 
+            Assets.storeImage(Content.Load<Texture2D>("Misc/Rect"), new Rectangle(0, 0, 1, 1));    // ID 0
+            Assets.storeImage(Content.Load<Texture2D>("Enviroment/Grass"), new Rectangle(0, 0, 64, 64)); // ID 1
+            Assets.storeImage(Content.Load<Texture2D>("Enviroment/Tree"), new Rectangle(0, 0, 96, 192)); // ID 2
+            Assets.storeImage(Content.Load<Texture2D>("Misc/WizAuto"), new Rectangle(0, 0, 27, 14)); // ID 3 
             font = Content.Load<SpriteFont>("Font/Arial");
 
             controller = new PlayerController(this);
@@ -93,7 +95,7 @@ namespace MOBA
             InputHandler.Listen();
 
             map.Update();
-            cam.Update();
+            Cam.Update();
 
             controller.Update(gameTime);
 
@@ -108,23 +110,25 @@ namespace MOBA
 
         protected override void Draw(GameTime gameTime)
         {
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, cam.Transform);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, Cam.Transform);
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            GraphicsDevice.Viewport = cam.viewport;
+            GraphicsDevice.Viewport = Cam.viewport;
 
             map.Draw();
 
-            //if (lightEngine.inLight(controller.getPlayer().Rect(), controller.getPlayer().invisibilityLayer))
-            spriteBatch.Draw(assets.getTexture(0).Texture, controller.getPlayer().Rect(), Color.White);
+            spriteBatch.Draw(Assets.getTexture(0).Texture, controller.getPlayer().Rect(), Color.White);
 
             spriteBatch.DrawString(font, "X - " + InputHandler.worldPosition.X + "\nY - " + InputHandler.worldPosition.Y, new Vector2(0, 0), Color.White);
             //spriteBatch.DrawString(font, 0 + Minions[0].getEntity().Health.ToString(), new Vector2(0, 50), Color.White);
 
             for (int i = 0; i < Minions.Count; i++)
             {
-                if (lightEngine.inLight(Minions[i].getEntity().Rect(), Minions[i].getEntity().invisibilityLayer))
-                    Minions[i].getEntity().Draw(spriteBatch);
+                if (lightEngine.isVisible(Minions[i].getEntity().Bounds, Minions[i].getEntity().invisibilityLayer))
+                    Minions[i].Draw();
             }
+
+            //spriteBatch.DrawString(font, "MX - " + Minions[0].getEntity().Position.X + "\nMY - " + Minions[0].getEntity().Position.Y + "\n" + lightEngine.isVisible(Minions[0].getEntity().Rect(), Minions[0].getEntity().invisibilityLayer).ToString(), new Vector2(0, 150), Color.White);
+            spriteBatch.DrawString(font, "MLX - " + Minions[0].getEntity().light.pos.X + "\nMLY - " + Minions[0].getEntity().light.pos.Y, new Vector2(0, 200), Color.White);
 
             controller.Draw();
             spriteBatch.End();

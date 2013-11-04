@@ -36,7 +36,7 @@ namespace MOBA.Input
 
             EventButton = MouseButton.None;
 
-            worldPosition = Vector2.Transform(new Vector2(mouse.X, mouse.Y), Matrix.Invert(Main.cam.Transform));
+            worldPosition = Vector2.Transform(new Vector2(mouse.X, mouse.Y), Matrix.Invert(Main.Cam.Transform));
 
             EventX = (int)worldPosition.X;
             EventY = (int)worldPosition.Y;

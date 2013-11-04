@@ -15,7 +15,8 @@ namespace MOBA.World
     public class LightEmitter
     {
         private LightEngine e;
-        Vector2 pos;
+        public Vector2 pos
+        { get; private set; }
         public int layer 
         { get; private set; }
         public float r
@@ -38,6 +39,7 @@ namespace MOBA.World
         public void Update(Vector2 position)
         {
             pos = position;
+            pos = Vector2.Transform(pos, Main.Cam.Transform);
         }
 
         public void Destroy()
@@ -50,9 +52,9 @@ namespace MOBA.World
             r -= 4;
         }
 
-        public bool inCircle(Rectangle rect)
+        public bool inCircle(Vector2 point)
         {
-            return Math.Trig.inRadius((int)pos.X + Camera.X, (int)pos.Y + Camera.Y, (int)r, rect.X, rect.Y);
+            return Main.Trig.inRadius((int)pos.X, (int)pos.Y, (int)r, (int)point.X, (int)point.Y);
         }
     }
 }

@@ -13,6 +13,8 @@ namespace MOBA.Characters.Controller
     /*Handles input and 'controls' the local player*/
     public class PlayerController : Controller
     {
+        public int Team
+        { get; private set; }
         private Vector2 targetPos;
 
         public PlayerController(Main main) : base(main)
@@ -33,8 +35,9 @@ namespace MOBA.Characters.Controller
         public override void plugEntity(Player entity)
         {
             player = entity;
+            Team = entity.Team;
 
-            entity.setPosition(200, 200);
+            entity.setPosition(300, 200);
             entity.light = new LightEmitter(Main.lightEngine, entity.Position, 100, 0);
             Main.lightEngine.plugEmitter(entity.light);
             targetPos = player.Position;

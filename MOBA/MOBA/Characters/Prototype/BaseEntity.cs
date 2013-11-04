@@ -53,6 +53,8 @@ namespace MOBA.Characters.Prototype
             {
                 Health = 0;
             }
+
+            Bounds = new Rectangle((int)Position.X, (int)Position.Y, 32, 64);
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
@@ -74,7 +76,7 @@ namespace MOBA.Characters.Prototype
 
         public Rectangle Rect()
         {
-            return new Rectangle((int)Position.X, (int)Position.Y, 32, 64);
+            return Bounds;
         }
 
         public virtual void Damage(int amount)

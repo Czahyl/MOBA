@@ -22,7 +22,7 @@ namespace MOBA.Characters.Classes.Spells
         {
             pClass = player;
 
-            image = Main.assets.getTexture(3);
+            image = Main.Assets.getTexture(3);
 
             Damage = pClass.SpellPower + (10 * pClass.Level);
 
