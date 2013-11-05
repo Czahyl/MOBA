@@ -46,6 +46,15 @@
       <Output>C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Font\Arial.xnb</Output>
       <Time>2013-10-21T12:46:45.2666183-04:00</Time>
     </Item>
+    <Item>
+      <Source>Font\Nameplate.spritefont</Source>
+      <Name>Font\Nameplate</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Font\Nameplate.xnb</Output>
+      <Time>2013-11-05T13:17:23.185144-05:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

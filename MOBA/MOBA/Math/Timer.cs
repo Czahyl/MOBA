@@ -12,6 +12,7 @@ namespace MOBA.Math
         private float time;
         private float delay;
         public bool Tick { get; private set; }
+        public int tickCount { get; private set; }
         bool stopped = false;
 
         public Timer(float Time, bool Millisecond)
@@ -32,6 +33,7 @@ namespace MOBA.Math
             if (time >= delay)
             {
                 Tick = true;
+                tickCount++;
                 time = 0;
             }
             else

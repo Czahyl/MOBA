@@ -66,6 +66,8 @@ namespace MOBA
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+
+            Assets.storeFont(Content.Load<SpriteFont>("Font/Nameplate"));
             
             Assets.storeImage(Content.Load<Texture2D>("Misc/Rect"), new Rectangle(0, 0, 1, 1));    // ID 0
             Assets.storeImage(Content.Load<Texture2D>("Enviroment/Grass"), new Rectangle(0, 0, 64, 64)); // ID 1
@@ -116,19 +118,19 @@ namespace MOBA
 
             map.Draw();
 
-            spriteBatch.Draw(Assets.getTexture(0).Texture, controller.getPlayer().Rect(), Color.White);
+            spriteBatch.Draw(Assets.getTexture(0).Texture, controller.entity.Bounds, Color.White);
 
             spriteBatch.DrawString(font, "X - " + InputHandler.worldPosition.X + "\nY - " + InputHandler.worldPosition.Y, new Vector2(0, 0), Color.White);
             //spriteBatch.DrawString(font, 0 + Minions[0].getEntity().Health.ToString(), new Vector2(0, 50), Color.White);
 
             for (int i = 0; i < Minions.Count; i++)
             {
-                if (lightEngine.isVisible(Minions[i].getEntity().Bounds, Minions[i].getEntity().invisibilityLayer))
+                if (lightEngine.isVisible(Minions[i].entity))
                     Minions[i].Draw();
             }
 
             //spriteBatch.DrawString(font, "MX - " + Minions[0].getEntity().Position.X + "\nMY - " + Minions[0].getEntity().Position.Y + "\n" + lightEngine.isVisible(Minions[0].getEntity().Rect(), Minions[0].getEntity().invisibilityLayer).ToString(), new Vector2(0, 150), Color.White);
-            spriteBatch.DrawString(font, "MLX - " + Minions[0].getEntity().light.pos.X + "\nMLY - " + Minions[0].getEntity().light.pos.Y, new Vector2(0, 200), Color.White);
+            //spriteBatch.DrawString(font, "MLX - " + Minions[0].getEntity().light.pos.X + "\nMLY - " + Minions[0].getEntity().light.pos.Y, new Vector2(0, 200), Color.White);
 
             controller.Draw();
             spriteBatch.End();

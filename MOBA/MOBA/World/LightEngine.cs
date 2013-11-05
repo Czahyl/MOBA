@@ -10,6 +10,8 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.Diagnostics;
 using MOBA.Math;
+using MOBA.Characters.Prototype;
+using MOBA.Characters.Controller;
 
 namespace MOBA.World
 {
@@ -47,15 +49,18 @@ namespace MOBA.World
             fadeEmitter.Add(e);
         }
 
-        public bool isVisible(Rectangle rect, int lightLayer)
+        public bool isVisible(BaseEntity e) // We have to revert the position from world coords to the camera offset
         {
-            Vector2 rectPos = new Vector2(rect.X, rect.Y);
+            Vector2 rectPos = new Vector2(e.Bounds.X, e.Bounds.Y);
 
             rectPos = Vector2.Transform(rectPos, Main.Cam.Transform);
 
             for (int i = 0; i < emitters.Count; i++)
             {
-                if (emitters[i].inCircle(rectPos) && emitters[i].layer <= lightLayer)
+                if (e == emitters[i].entity)
+                    return true;
+
+                if (emitters[i].inCircle(rectPos) && emitters[i].layer >= e.visionLayer)
                     return true;
             }
             return false;

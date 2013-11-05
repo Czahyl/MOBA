@@ -26,8 +26,6 @@ namespace MOBA.Characters.Classes.Spells
 
         private Player plr;
 
-        LightEmitter emitter;
-
         private Image image;
         private Timer timer;
 
@@ -78,20 +76,22 @@ namespace MOBA.Characters.Classes.Spells
 
             foreach(PlayerController player in Main.Players)
             {
-                if (Hit(player.getPlayer().Rect()))
+                if (Hit(player.entity.Bounds) && player.entity.Team != plr.Team)
                 {
-                    player.getPlayer().Damage(plr.Attack);
+                    player.entity.Damage(plr.Attack);
                     Destroy();
                 }
             }
 
             foreach(MinionController minion in Main.Minions)
             {
-                if (Hit(minion.getEntity().Rect()))
+                if (Hit(minion.entity.Bounds) && minion.entity.Team != plr.Team)
                 {
-                    minion.getEntity().Damage(plr.Attack);
+                    minion.entity.Damage(plr.Attack);
                     Destroy();
                 }
+                else if (Hit(minion.entity.Bounds) && minion.entity.Team == plr.Team)
+                    Destroy();
             }
         }
 

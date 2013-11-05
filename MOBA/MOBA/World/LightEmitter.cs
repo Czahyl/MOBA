@@ -9,12 +9,14 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.Diagnostics;
+using MOBA.Characters.Prototype;
 
 namespace MOBA.World
 {
     public class LightEmitter
     {
         private LightEngine e;
+        public BaseEntity entity;
         public Vector2 pos
         { get; private set; }
         public int layer 
@@ -22,11 +24,12 @@ namespace MOBA.World
         public float r
         { get; private set; }
 
-        public LightEmitter(LightEngine engine, Vector2 position, float radius, int lightLayer)
+        public LightEmitter(LightEngine engine, BaseEntity boundEntity, float radius, int lightLayer)
         {
             e = engine;
+            entity = boundEntity;
 
-            pos = position;
+            pos = entity.Position;
             r = radius;
             layer = lightLayer;
         }
@@ -36,9 +39,9 @@ namespace MOBA.World
 
         }
 
-        public void Update(Vector2 position)
+        public void Update()
         {
-            pos = position;
+            pos = entity.Position;
             pos = Vector2.Transform(pos, Main.Cam.Transform);
         }
 

@@ -20,7 +20,6 @@ namespace MOBA.Characters.Classes
 {
     public class Wizard : Player
     {
-        private bool cast = false;
 
         //Ability currentAbility;
 

@@ -23,7 +23,7 @@ namespace MOBA.Characters.Prototype
         {
             Team = TeamID;
 
-            Friendly = (Team - Main.controller.Team) == 0;
+            Friendly = (Team - Main.controller.entity.Team) == 0;
 
             //Add preset animation to ani buffer
             //Maxhealth = Base amount * Towers dead
@@ -33,7 +33,7 @@ namespace MOBA.Characters.Prototype
             Bounds = new Rectangle((int)Position.X, (int)Position.Y, WIDTH, HEIGHT);
 
             if(Friendly)
-                invisibilityLayer = 0; // The minion can be seen by all light emissions
+                visionLayer = 0; // The minion can be seen by all light emissions
             //else set it to the original layer (ie invis or w/e)
 
             light = new LightEmitter();
@@ -46,14 +46,14 @@ namespace MOBA.Characters.Prototype
             if (Health <= 0)
                 light.Destroy();
 
-                light.Update(Position);
+            light.Update();
 
             base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Main.Assets.getTexture(0).Texture, Rect(), Color.White);
+            spriteBatch.Draw(Main.Assets.getTexture(0).Texture, Bounds, Color.White);
             spriteBatch.Draw(Main.Assets.getTexture(0).Texture, new Rectangle((int)Position.X, (int)Position.Y - 10, Health / 2, 5), Color.Red);
             //base.Draw(spriteBatch);
         }

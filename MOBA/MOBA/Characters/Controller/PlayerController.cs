@@ -13,18 +13,11 @@ namespace MOBA.Characters.Controller
     /*Handles input and 'controls' the local player*/
     public class PlayerController : Controller
     {
-        public int Team
-        { get; private set; }
+        public Player entity;
         private Vector2 targetPos;
 
         public PlayerController(Main main) : base(main)
         {
-
-        }
-
-        public Player getPlayer()
-        {
-            return player;
         }
 
         public string info()
@@ -32,15 +25,14 @@ namespace MOBA.Characters.Controller
             return player.Bounds.ToString();
         }
 
-        public override void plugEntity(Player entity)
+        public override void plugEntity(Player e)
         {
-            player = entity;
-            Team = entity.Team;
+            entity = e;
 
             entity.setPosition(300, 200);
-            entity.light = new LightEmitter(Main.lightEngine, entity.Position, 100, 0);
+            entity.light = new LightEmitter(Main.lightEngine, entity, 100, 0);
             Main.lightEngine.plugEmitter(entity.light);
-            targetPos = player.Position;
+            targetPos = entity.Position;
 
             base.plugEntity(entity);
         }

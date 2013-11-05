@@ -49,10 +49,19 @@ namespace MOBA.Assets
             }
         }
  
-
         public Image getTexture(int id)
         {
             return imageList[id];
+        }
+
+        public void storeFont(SpriteFont font)
+        {
+            fontList.Add(font);
+        }
+
+        public SpriteFont getFont(int id)
+        {
+            return fontList[id];
         }
     }
 }

@@ -1,4 +1,10 @@
-MOBA
+MOBA (To be named)
 ====
 
-XNA Moba/Framework
+2d Multiplayer Online Battle Arena (MOBA)
+Programmed in C# XNA
+
+Developers
+====
+tcoy
+Czahyl

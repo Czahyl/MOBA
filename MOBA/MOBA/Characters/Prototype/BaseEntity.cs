@@ -18,7 +18,8 @@ namespace MOBA.Characters.Prototype
         public Animation ani { get; set; }
         public int Health { get; protected set; }
         public int moveSpeed { get; protected set; }
-        public int invisibilityLayer { get; protected set; }
+        public int visionLayer { get; protected set; }
+        public int defaultLayer { get; protected set; }
 
         protected int maxHealth;
 
@@ -72,11 +73,6 @@ namespace MOBA.Characters.Prototype
         {
             if (locked) return;
             Position = new Vector2(x, y);
-        }
-
-        public Rectangle Rect()
-        {
-            return Bounds;
         }
 
         public virtual void Damage(int amount)

@@ -127,12 +127,14 @@
     <Compile Include="Math\Trig.cs" />
     <Compile Include="Net\ClientSocket.cs" />
     <Compile Include="Net\Packet.cs" />
+    <Compile Include="World\Enviroment\Bush.cs" />
     <Compile Include="World\LightEmitter.cs" />
     <Compile Include="World\LightEngine.cs" />
     <Compile Include="World\Map.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="World\WorldObject.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

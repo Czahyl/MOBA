@@ -40,11 +40,23 @@ namespace MOBA.Characters.Prototype
 
         public Player(string Username, int TeamID)
         {
-            Name = Username;
+            if (Username.Length > 8 /* or allowed length */) // TODO: Make a checkname() method in server class
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    Name += Username[i]; //Cap the username at 8 characters
+                }
+            }
+            else
+            {
+                Name = Username;
+            }
+
             Team = TeamID;
             Level = 1;
             Exp = 0;
-            invisibilityLayer = 0;
+            visionLayer = 0;
+            defaultLayer = visionLayer;
             Bounds = new Rectangle((int)Position.X, (int)Position.Y, 32, 64);
             light = new LightEmitter();
 
@@ -59,12 +71,6 @@ namespace MOBA.Characters.Prototype
         public virtual void Load(AssetManager assMan)
         {
             
-        }
-
-        public void Username(string name)
-        {
-            //TODO: Name checks for unusable characters & length
-            Name = name;
         }
 
         public void giveXp(int exp)
@@ -87,7 +93,7 @@ namespace MOBA.Characters.Prototype
             for (int i = 0; i < autoAttack.Count; i++)
                 autoAttack[i].Shoot(gameTime);
 
-            light.Update(Position);
+            light.Update();
 
             base.Update(gameTime);
         }
@@ -97,7 +103,20 @@ namespace MOBA.Characters.Prototype
             for (int i = 0; i < autoAttack.Count; i++)
                 autoAttack[i].Draw(spriteBatch);
 
+            if(Main.lightEngine.isVisible(this))
+                spriteBatch.DrawString(Main.Assets.getFont(0), Name, new Vector2((int)Position.X, (int)Position.Y - 15), Color.White);
+
             base.Draw(spriteBatch);
+        }
+
+        public void changeVisibility(int x)
+        {
+            if (x <= visionLayer)
+                visionLayer = visionLayer;
+            else if (x == -1)
+                visionLayer = defaultLayer;
+            else
+                visionLayer = x;
         }
 
         public void Pathfind(int x, int y)

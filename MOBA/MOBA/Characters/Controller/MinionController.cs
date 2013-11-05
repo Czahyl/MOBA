@@ -12,33 +12,28 @@ namespace MOBA.Characters.Controller
     public class MinionController
     {
         private Main m;
-        protected Minion minion;
+        public Minion entity;
 
         public MinionController(Main main)
         {
             m = main;
         }
 
-        public Minion getEntity()
+        public void plugEntity(Minion m)
         {
-            return minion;
-        }
+            entity = m;
 
-        public void plugEntity(Minion entity)
-        {
-            minion = entity;
+            entity.light = new LightEmitter(Main.lightEngine, entity, 75, 0);
 
-            minion.light = new LightEmitter(Main.lightEngine, entity.Position, 75, 0);
-
-            if(minion.Friendly)
-                Main.lightEngine.plugEmitter(minion.light);
+            if(entity.Friendly)
+                Main.lightEngine.plugEmitter(entity.light);
         }
 
         public void Update(GameTime gameTime)
         {
-            minion.Update(gameTime);
+            entity.Update(gameTime);
 
-            if (minion.Health <= 0)
+            if (entity.Health <= 0)
             {
                 Main.Minions.Remove(this);
             }
@@ -46,7 +41,7 @@ namespace MOBA.Characters.Controller
 
         public void Draw()
         {
-            minion.Draw(m.spriteBatch);
+            entity.Draw(m.spriteBatch);
         }
     }
 }
