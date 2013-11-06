@@ -81,7 +81,7 @@ namespace MOBA
             controller.plugEntity(new Wizard("Admin", 0));
 
             for (int i = 0; i < Minions.Count; i++) // TODO: Make "Spawner" class
-                Minions[i].plugEntity(new Minion(0));
+                Minions[i].plugEntity(new Minion(1));
         }
 
         protected override void UnloadContent()

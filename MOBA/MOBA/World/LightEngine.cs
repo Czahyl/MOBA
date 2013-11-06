@@ -122,7 +122,7 @@ namespace MOBA.World
         {
             x = X;
             y = Y;
-            alpha = 175;
+            alpha = 100;
         }
 
         public void Light(bool isLight)
@@ -130,7 +130,7 @@ namespace MOBA.World
             if (isLight)
                 alpha = 0;
             else
-                alpha = 175;
+                alpha = 100;
         }
 
         public Rectangle Rect()

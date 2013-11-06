@@ -30,7 +30,7 @@ namespace MOBA.Characters.Controller
             entity = e;
 
             entity.setPosition(300, 200);
-            entity.light = new LightEmitter(Main.lightEngine, entity, 100, 0);
+            entity.light = new LightEmitter(Main.lightEngine, entity, 150, 0);
             Main.lightEngine.plugEmitter(entity.light);
             targetPos = entity.Position;
 

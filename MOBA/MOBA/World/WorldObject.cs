@@ -23,10 +23,12 @@ namespace MOBA.World
 
         public Rectangle Rect
         { get; protected set; }
+        public float Alpha
+        { get; protected set; }
 
         public WorldObject()
         {
-
+            Alpha = 255;
         }
 
         public virtual void Update()
@@ -34,7 +36,7 @@ namespace MOBA.World
 
         }
 
-        public virtual void Draw()
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
 
         }

@@ -11,6 +11,8 @@ using Microsoft.Xna.Framework.Media;
 using System.Diagnostics;
 using System.IO;
 using MOBA.Input;
+using MOBA.World;
+using MOBA.World.Enviroment;
 
 namespace MOBA
 {
@@ -81,6 +83,8 @@ namespace MOBA
         const int width = 2048;
         const int height = 1280;
 
+        List<WorldObject> worldObjects = new List<WorldObject>();
+
         Main m;
 
         public Map(Main main)
@@ -90,7 +94,8 @@ namespace MOBA
 
         public void Update()
         {
-            
+            for (int i = 0; i < worldObjects.Count; i++)
+                worldObjects[i].Update();
         }
 
         public void Draw()
@@ -100,8 +105,16 @@ namespace MOBA
                 for (int y = 0; y < height; y += 64)
                 {
                     m.spriteBatch.Draw(Main.Assets.getTexture(1).Texture, new Rectangle(x, y, 64, 64), Color.White);
+
+                    if (x == 512 && y == 256)
+                    {
+                        worldObjects.Add(new Bush(new Vector2(x, y)));
+                    }
                 }
             }
+
+            for (int i = 0; i < worldObjects.Count; i++)
+                worldObjects[i].Draw(m.spriteBatch);
         }
     }
 }

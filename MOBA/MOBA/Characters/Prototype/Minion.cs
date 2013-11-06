@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
+using System.Diagnostics;
+using System.IO;
 using MOBA.World;
 
 namespace MOBA.Characters.Prototype
@@ -32,8 +38,9 @@ namespace MOBA.Characters.Prototype
             Position = new Vector2(150, 150);
             Bounds = new Rectangle((int)Position.X, (int)Position.Y, WIDTH, HEIGHT);
 
-            if(Friendly)
-                visionLayer = 0; // The minion can be seen by all light emissions
+            visionLayer = 0; // The minion can be seen by all light emissions
+            defaultLayer = 0;
+
             //else set it to the original layer (ie invis or w/e)
 
             light = new LightEmitter();
@@ -48,14 +55,31 @@ namespace MOBA.Characters.Prototype
 
             light.Update();
 
+            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+                Position.Y -= 2;
+            if (Keyboard.GetState().IsKeyDown(Keys.Down))
+                Position.Y += 2;
+            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                Position.X -= 2;
+            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                Position.X += 2;
+
             base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Main.Assets.getTexture(0).Texture, Bounds, Color.White);
+            spriteBatch.Draw(Main.Assets.getTexture(0).Texture, Bounds, Color.FromNonPremultiplied(255, 255, 255, (int)Alpha));
             spriteBatch.Draw(Main.Assets.getTexture(0).Texture, new Rectangle((int)Position.X, (int)Position.Y - 10, Health / 2, 5), Color.Red);
             //base.Draw(spriteBatch);
+        }
+
+        public void changeVisibility(int x)
+        {
+            visionLayer = x;
+
+            if (x == -1)
+                visionLayer = defaultLayer;
         }
     }
 }

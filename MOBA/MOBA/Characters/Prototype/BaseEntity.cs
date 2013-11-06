@@ -12,8 +12,10 @@ namespace MOBA.Characters.Prototype
     public class BaseEntity
     {
         public Rectangle Bounds { get; protected set; }
+        public Point Center { get; protected set; }
         public Vector2 Position;
         public Image Image { get; protected set; }
+        public float Alpha { get; protected set; }
         public LightEmitter light { get; set; }
         public Animation ani { get; set; }
         public int Health { get; protected set; }
@@ -28,6 +30,7 @@ namespace MOBA.Characters.Prototype
         public BaseEntity()
         {
             Bounds = Rectangle.Empty;
+            Center = Point.Zero;
             Position = Vector2.Zero;
 
             light = new LightEmitter();
@@ -56,6 +59,7 @@ namespace MOBA.Characters.Prototype
             }
 
             Bounds = new Rectangle((int)Position.X, (int)Position.Y, 32, 64);
+            Center = new Point(Bounds.Center.X, Bounds.Center.Y);
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
@@ -73,6 +77,11 @@ namespace MOBA.Characters.Prototype
         {
             if (locked) return;
             Position = new Vector2(x, y);
+        }
+
+        public void setAlpha(float x)
+        {
+            Alpha = x;
         }
 
         public virtual void Damage(int amount)

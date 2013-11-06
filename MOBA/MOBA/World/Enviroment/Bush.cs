@@ -19,14 +19,14 @@ namespace MOBA.World.Enviroment
 {
     public class Bush : WorldObject
     {
-        public Bush(Vector2 pos)
+        public Bush(Vector2 pos) : base()
         {
             Position = pos;
         }
 
         public override void Update()
         {
-            Rect = new Rectangle((int)Position.X, (int)Position.Y, 64, 32);
+            Rect = new Rectangle((int)Position.X, (int)Position.Y, 64, 64);
 
             foreach (PlayerController entity in Main.Players)
             {
@@ -42,12 +42,33 @@ namespace MOBA.World.Enviroment
                 }
             }
 
+            foreach (MinionController entity in Main.Minions)
+            {
+                Minion current = entity.entity;
+
+                if (Rect.Contains(current.Center))
+                {
+                    if (current.Friendly) // If friendly to the local player
+                        current.setAlpha(100);
+                    else
+                        current.changeVisibility(1);
+                }
+                else
+                {
+                    current.setAlpha(255);
+
+                    if(!current.Friendly)
+                        current.changeVisibility(0);
+                }
+            }
+
             base.Update();
         }
 
-        public override void Draw()
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            base.Draw();
+            spriteBatch.Draw(Main.Assets.getTexture(0).Texture, Rect, Color.Green);
+            base.Draw(spriteBatch);
         }
     }
 }
