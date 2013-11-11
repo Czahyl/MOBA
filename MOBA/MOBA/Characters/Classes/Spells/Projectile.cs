@@ -9,97 +9,66 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MOBA.Input;
-using MOBA.Assets;
 using MOBA.Math;
-using MOBA.Characters.Prototype;
-using MOBA.Characters.Controller;
 using MOBA.World;
 
 namespace MOBA.Characters.Classes.Spells
 {
     public class Projectile
     {
-        public Rectangle Rect { get; private set; }
-        public int dmg = 10;
-        Vector2 Start, End, Direction;
-        private float speed = 10f;
+        private Vector2 Start, End, Direction;
+        private Ability spell;
+        private Timer liveTime;
+        private LightEmitter emitter;
+        private float angle;
+        private bool activeEmitter;
 
-        private Player plr;
-
-        private Image image;
-        private Timer timer;
-
-        public Projectile(Vector2 startPos, Player player)
+        public Projectile(Ability ability)
         {
-            Start = startPos;
-            plr = player;
-            image = Main.Assets.getTexture(3);
-            End = new Vector2((float)InputHandler.EventX, (float)InputHandler.EventY);
+            spell = ability;
 
-            timer = new Timer(Player.AttRange, false); // Create the live time of the projectile
+            activeEmitter = spell.Emitter != null;
 
+            Start = spell.pClass.Position;
+            End = new Vector2(InputHandler.EventX, InputHandler.EventY);
             Direction = End - Start;
+
+            angle = (float)System.Math.Atan2(End.Y, End.X);
 
             if (Direction != Vector2.Zero)
                 Direction.Normalize();
-        }
 
-        public Projectile()
-        {
+            liveTime = new Timer(spell.SpellRange, false);
 
-        }
-
-        public bool Hit(Rectangle rect)
-        {
-            if (!Rect.Intersects(plr.Bounds))
+            if (activeEmitter)
             {
-                return Rect.Intersects(rect);
+                emitter = new LightEmitter(Main.lightEngine, Start, spell.LightRadius, 0);
+                Main.lightEngine.plugEmitter(emitter);
+            }
+        }
+
+        public void Update()
+        {
+            liveTime.Run();
+
+            if(activeEmitter)
+                emitter.Update(Start);
+
+            if (liveTime.Tick)
+            {
+                if(activeEmitter)
+                    emitter.Destroy();
+
+                spell.projectileList.Remove(this);
             }
 
-            return Rect.Intersects(rect);
-        }
+            Start += Direction * 10f;
 
-        public void Destroy()
-        {
-            plr.autoAttack.Remove(this);
-        }
-
-        public void Shoot(GameTime gameTime)
-        {
-            timer.Run();
-
-            if (timer.Tick)
-                Destroy();
-
-            Start.X += (Direction.X * speed);
-            Start.Y += (Direction.Y * speed);
-
-            foreach(PlayerController player in Main.Players)
-            {
-                if (Hit(player.entity.Bounds) && player.entity.Team != plr.Team)
-                {
-                    player.entity.Damage(plr.Attack);
-                    Destroy();
-                }
-            }
-
-            foreach(MinionController minion in Main.Minions)
-            {
-                if (Hit(minion.entity.Bounds) && minion.entity.Team != plr.Team)
-                {
-                    minion.entity.Damage(plr.Attack);
-                    Destroy();
-                }
-                else if (Hit(minion.entity.Bounds) && minion.entity.Team == plr.Team)
-                    Destroy();
-            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            Rect = new Rectangle((int)Start.X, (int)Start.Y, 10, 10);
-            float angle = (float)System.Math.Atan2(Direction.Y, Direction.X);
-            spriteBatch.Draw(image.Texture, new Rectangle((int)Start.X, (int)Start.Y, image.Texture.Width, image.Texture.Height), image.sRect, Color.White, angle, new Vector2(0, 0), SpriteEffects.None, 0f);
+            spriteBatch.Draw(spell.image.Texture, new Rectangle((int)Start.X - spell.image.Texture.Width / 2, (int)Start.Y - spell.image.Texture.Height / 2, 40, 40), spell.image.sRect, Color.White, angle, new Vector2(0, 0), SpriteEffects.None, 0f);
         }
     }
 }

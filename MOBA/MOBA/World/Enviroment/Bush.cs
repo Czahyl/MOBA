@@ -28,6 +28,11 @@ namespace MOBA.World.Enviroment
         {
             Rect = new Rectangle((int)Position.X, (int)Position.Y, 64, 64);
 
+            if (Rect.Contains(Main.controller.entity.Center))
+                Main.controller.entity.setAlpha(100);
+            else
+                Main.controller.entity.setAlpha(255);
+
             foreach (PlayerController entity in Main.Players)
             {
                 Player current = entity.entity;

@@ -18,7 +18,7 @@ namespace MOBA.Characters.Prototype
         public const int HEIGHT = 64;
         public const float AttRange = 0.5f;
 
-        public List<Projectile> autoAttack { get; private set; }
+        public List<Autoattack> autoAttack { get; private set; }
         private Timer attackDelay;
 
         public int Team
@@ -60,7 +60,7 @@ namespace MOBA.Characters.Prototype
             Bounds = new Rectangle((int)Position.X, (int)Position.Y, 32, 64);
             light = new LightEmitter();
 
-            autoAttack = new List<Projectile>();
+            autoAttack = new List<Autoattack>();
 
             moveSpeed = 1;
             AttackSpeed = 0.5f;
@@ -86,13 +86,13 @@ namespace MOBA.Characters.Prototype
             if (InputHandler.mouseHeld(MouseButton.Left))
             {
                 if(attackDelay.Tick)
-                    autoAttack.Add(new Projectile(new Vector2(Position.X, Position.Y), this));
+                    autoAttack.Add(new Autoattack(new Vector2(Position.X, Position.Y), this));
             }
 
             for (int i = 0; i < autoAttack.Count; i++)
                 autoAttack[i].Shoot(gameTime);
 
-            light.Update();
+            light.Update(Position);
 
             base.Update(gameTime);
         }
@@ -102,7 +102,7 @@ namespace MOBA.Characters.Prototype
             for (int i = 0; i < autoAttack.Count; i++)
                 autoAttack[i].Draw(spriteBatch);
 
-            spriteBatch.Draw(Main.Assets.getTexture(0).Texture, Bounds, new Color(255, 255, 255, Alpha));
+            spriteBatch.Draw(Main.Assets.getTexture(0).Texture, Bounds, Color.FromNonPremultiplied(255, 255, 255, (int)Alpha));
             spriteBatch.DrawString(Main.Assets.getFont(0), Name, new Vector2(Bounds.X, Bounds.Y - 15), Color.White);
 
             base.Draw(spriteBatch);

@@ -113,7 +113,9 @@
     <Compile Include="Assets\Image.cs" />
     <Compile Include="Characters\Classes\Spells\Ability.cs" />
     <Compile Include="Characters\Classes\Spells\Fireball.cs" />
+    <Compile Include="Characters\Classes\Spells\Autoattack.cs" />
     <Compile Include="Characters\Classes\Spells\Projectile.cs" />
+    <Compile Include="Characters\Classes\Spells\SpellHandle.cs" />
     <Compile Include="Characters\Controller\Controller.cs" />
     <Compile Include="Characters\Controller\MinionController.cs" />
     <Compile Include="Characters\Controller\PlayerController.cs" />

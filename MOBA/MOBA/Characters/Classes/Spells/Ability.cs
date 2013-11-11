@@ -24,13 +24,16 @@ namespace MOBA.Characters.Classes.Spells
 
         public static Ability None;
 
+        public List<Projectile> projectileList
+        { get; protected set; }
+
         public Image image
         { get; protected set; }
 
         public int Damage
         { get; protected set; }
 
-        public Vector2 Direction
+        public float Speed
         { get; protected set; }
 
         public Rectangle Rect
@@ -39,16 +42,36 @@ namespace MOBA.Characters.Classes.Spells
         public Rectangle hitRect
         { get; protected set; }
 
+        public float SpellRange
+        { get; protected set; }
+
+        public LightEmitter Emitter
+        { get; protected set; }
+
+        public float LightRadius
+        { get; protected set; }
+
         public bool Alive = false;
 
         public Vector2 Position;
 
-        public Timer drawTime;
-        public Timer cooldown;
+        protected Timer cooldown;
+        protected bool onCooldown = false;
 
         public Ability(Player player)
         {
             pClass = player;
+
+            projectileList = new List<Projectile>();
+        }
+
+        public virtual void Update()
+        {
+            if (onCooldown)
+                cooldown.Run();
+
+            if (cooldown.Tick)
+                onCooldown = false;
         }
 
         public virtual void Cast(GameTime gameTime)

@@ -20,35 +20,31 @@ namespace MOBA.Characters.Classes
 {
     public class Wizard : Player
     {
-
-        //Ability currentAbility;
+        Ability fireball;
 
         public Wizard(string Username, int TeamID) : base(Username, TeamID)
         {
             Attack = 20;
             SpellPower = 15;
 
-            //currentAbility = new Ability(this);
+            fireball = new Fireball(this);
         }
 
         public override void Update(GameTime gameTime)
         {
             if (InputHandler.keyPressed(Keys.D1))
             {
-                //currentAbility = new Fireball(this);
-                //currentAbility.Alive = true;
+                fireball.Cast(gameTime);
             }
 
-            //if (currentAbility.Alive)
-                //currentAbility.Cast(gameTime);
+            fireball.Update();
 
             base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            //if(currentAbility.Alive)
-                //currentAbility.Draw(spriteBatch);
+            fireball.Draw(spriteBatch);
 
             base.Draw(spriteBatch);
         }

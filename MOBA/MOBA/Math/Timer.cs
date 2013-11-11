@@ -44,5 +44,10 @@ namespace MOBA.Math
         {
             stopped = true;
         }
+
+        public void Resume()
+        {
+            stopped = false;
+        }
     }
 }

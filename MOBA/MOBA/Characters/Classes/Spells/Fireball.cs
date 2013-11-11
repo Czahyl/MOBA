@@ -22,36 +22,49 @@ namespace MOBA.Characters.Classes.Spells
         {
             pClass = player;
 
+            Emitter = new LightEmitter();
+            LightRadius = 25f;
+
             image = Main.Assets.getTexture(3);
 
             Damage = pClass.SpellPower + (10 * pClass.Level);
 
-            drawTime = new Timer(0.5f, true);
+            Speed = 10f;
 
-            Position = pClass.Position;
+            SpellRange = 1f;
+            cooldown = new Timer(60, false);
+        }
 
-            Direction = new Vector2((int)InputHandler.EventX, (int)InputHandler.EventY) - Position;
+        public override void Update()
+        {
+            for (int i = 0; i < projectileList.Count; i++)
+            {
+                projectileList[i].Update();
+            }
 
-            Rect = new Rectangle((int)Position.X, (int)Position.Y, 100, 100);
+            base.Update();
+        }
+
+        public void Select()
+        {
+
         }
 
         public override void Cast(GameTime gameTime)
         {
-            drawTime.Run();
-
-            hitRect = new Rectangle((int)Position.X, (int)Position.Y, 50, 50);
-
-            if(Alive)
-                Position += Direction * 5f;
-
-            if (drawTime.Tick)
-                Alive = false;
-
+            if (!onCooldown)
+            {
+                projectileList.Add(new Projectile(this));
+                cooldown = new Timer(60, false);
+                onCooldown = true;
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(image.Texture, new Rectangle((int)Position.X, (int)Position.Y, Rect.Width, Rect.Height), image.sRect, Color.White);
+            for (int i = 0; i < projectileList.Count; i++)
+                projectileList[i].Draw(spriteBatch);
+
             base.Draw(spriteBatch);
         }
     }

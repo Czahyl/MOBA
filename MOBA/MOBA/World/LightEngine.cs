@@ -57,9 +57,6 @@ namespace MOBA.World
 
             for (int i = 0; i < emitters.Count; i++)
             {
-                if (e == emitters[i].entity)
-                    return true;
-
                 if (emitters[i].inCircle(rectPos) && emitters[i].layer >= e.visionLayer)
                     return true;
             }

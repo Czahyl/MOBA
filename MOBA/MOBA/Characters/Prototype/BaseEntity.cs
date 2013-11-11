@@ -89,5 +89,10 @@ namespace MOBA.Characters.Prototype
         {
             Health -= amount;
         }
+
+        public int PercentHP()
+        {
+            return Health / maxHealth;
+        }
     }
 }

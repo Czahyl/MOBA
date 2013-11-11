@@ -53,7 +53,7 @@ namespace MOBA.Characters.Prototype
             if (Health <= 0)
                 light.Destroy();
 
-            light.Update();
+            light.Update(Position);
 
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
                 Position.Y -= 2;
@@ -70,7 +70,7 @@ namespace MOBA.Characters.Prototype
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Main.Assets.getTexture(0).Texture, Bounds, Color.FromNonPremultiplied(255, 255, 255, (int)Alpha));
-            spriteBatch.Draw(Main.Assets.getTexture(0).Texture, new Rectangle(Bounds.X, Bounds.Y - 10, Health / 2, 5), Color.Red);
+            spriteBatch.Draw(Main.Assets.getTexture(0).Texture, new Rectangle(Bounds.X, Bounds.Y - 10, Health, 5), Color.Red);
             //base.Draw(spriteBatch);
         }
 

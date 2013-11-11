@@ -23,7 +23,7 @@ namespace MOBA.Characters.Controller
         {
             entity = m;
 
-            entity.light = new LightEmitter(Main.lightEngine, entity, 75, 0);
+            entity.light = new LightEmitter(Main.lightEngine, entity.Position, 75, 0);
 
             if(entity.Friendly)
                 Main.lightEngine.plugEmitter(entity.light);
