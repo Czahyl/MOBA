@@ -80,12 +80,11 @@ namespace MOBA.Characters.Prototype
 
         public override void Update(GameTime gameTime)
         {
+            attackDelay.Run();
             setPosition((int)Position.X, (int)Position.Y);
 
             if (InputHandler.mouseHeld(MouseButton.Left))
             {
-                attackDelay.Run();
-
                 if(attackDelay.Tick)
                     autoAttack.Add(new Projectile(new Vector2(Position.X, Position.Y), this));
             }
@@ -103,8 +102,8 @@ namespace MOBA.Characters.Prototype
             for (int i = 0; i < autoAttack.Count; i++)
                 autoAttack[i].Draw(spriteBatch);
 
-            if(Main.lightEngine.isVisible(this))
-                spriteBatch.DrawString(Main.Assets.getFont(0), Name, new Vector2((int)Position.X, (int)Position.Y - 15), Color.White);
+            spriteBatch.Draw(Main.Assets.getTexture(0).Texture, Bounds, new Color(255, 255, 255, Alpha));
+            spriteBatch.DrawString(Main.Assets.getFont(0), Name, new Vector2(Bounds.X, Bounds.Y - 15), Color.White);
 
             base.Draw(spriteBatch);
         }

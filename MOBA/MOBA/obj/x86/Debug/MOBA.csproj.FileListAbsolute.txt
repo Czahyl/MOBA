@@ -33,3 +33,4 @@ C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Misc\WizAu
 C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Font\Nameplate.xnb
 C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Misc\WizAuto.xnb
 C:\Users\Lucas\Source\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Font\Nameplate.xnb
+C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Font\Nameplate.xnb

@@ -32,13 +32,19 @@ namespace MOBA.World.Enviroment
             {
                 Player current = entity.entity;
 
-                if (current.Bounds.Intersects(Rect))
+                if (Rect.Contains(current.Center))
                 {
-                    current.changeVisibility(1);
+                    if (current.Team - Main.controller.entity.Team == 0) // If friendly to the local player
+                        current.setAlpha(100);
+                    else
+                        current.changeVisibility(1);
                 }
                 else
                 {
-                    current.changeVisibility(-1); // -1 changes the visibility to default
+                    current.setAlpha(255);
+
+                    if (current.Team - Main.controller.entity.Team != 0)
+                        current.changeVisibility(0);
                 }
             }
 

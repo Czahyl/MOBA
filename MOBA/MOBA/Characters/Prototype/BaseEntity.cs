@@ -34,6 +34,7 @@ namespace MOBA.Characters.Prototype
             Position = Vector2.Zero;
 
             light = new LightEmitter();
+            Alpha = 255;
         }
 
         public void Lock()
@@ -58,7 +59,7 @@ namespace MOBA.Characters.Prototype
                 Health = 0;
             }
 
-            Bounds = new Rectangle((int)Position.X, (int)Position.Y, 32, 64);
+            Bounds = new Rectangle((int)Position.X - Bounds.Width / 2, (int)Position.Y - Bounds.Height / 2, 32, 64);
             Center = new Point(Bounds.Center.X, Bounds.Center.Y);
         }
 

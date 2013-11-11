@@ -81,7 +81,7 @@ namespace MOBA
             controller.plugEntity(new Wizard("Admin", 0));
 
             for (int i = 0; i < Minions.Count; i++) // TODO: Make "Spawner" class
-                Minions[i].plugEntity(new Minion(1));
+                Minions[i].plugEntity(new Minion(0));
         }
 
         protected override void UnloadContent()
@@ -118,7 +118,7 @@ namespace MOBA
 
             map.Draw();
 
-            spriteBatch.Draw(Assets.getTexture(0).Texture, controller.entity.Bounds, Color.White);
+            //spriteBatch.Draw(Assets.getTexture(0).Texture, controller.entity.Bounds, Color.White);
 
             spriteBatch.DrawString(font, "X - " + InputHandler.worldPosition.X + "\nY - " + InputHandler.worldPosition.Y, new Vector2(0, 0), Color.White);
             //spriteBatch.DrawString(font, 0 + Minions[0].getEntity().Health.ToString(), new Vector2(0, 50), Color.White);
