@@ -16,8 +16,6 @@ namespace MOBA.Characters.Prototype
 {
     public class Minion : BaseEntity
     {
-        public const int WIDTH = 32;
-        public const int HEIGHT = 32;
         public const int WORTH = 10;
 
         public int Team
@@ -27,12 +25,15 @@ namespace MOBA.Characters.Prototype
         {
             Team = TeamID;
 
+            Width = 32;
+            Height = 45;
+
             //Add preset animation to ani buffer
             //Maxhealth = Base amount * Towers dead
             maxHealth = 100;
             Health = 100;
             Position = new Vector2(150, 150);
-            Bounds = new Rectangle((int)Position.X, (int)Position.Y, WIDTH, HEIGHT);
+            Bounds = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
 
             visionLayer = 0; // The minion can be seen by all light emissions
             defaultLayer = 0;

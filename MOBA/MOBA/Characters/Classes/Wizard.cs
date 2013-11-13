@@ -15,6 +15,7 @@ using MOBA.Characters.Classes.Spells;
 using MOBA.Input;
 using MOBA.Assets;
 using MOBA.Math;
+using MOBA.Interface;
 
 namespace MOBA.Characters.Classes
 {
@@ -25,6 +26,7 @@ namespace MOBA.Characters.Classes
 
         public Wizard(string Username, int TeamID) : base(Username, TeamID)
         {
+            nameplate = new Nameplate(this);
             Animations.Add("Idle", new Animation(5));
             Animations.Add("Attack", new Animation(5));
 

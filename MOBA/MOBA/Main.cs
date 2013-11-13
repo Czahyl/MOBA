@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Diagnostics;
 using MOBA.Assets;
 using MOBA.Characters.Controller;
 using MOBA.Characters.Classes;
@@ -31,6 +32,7 @@ namespace MOBA
 
         public Map map;
         public static Camera Cam;
+        public static Viewport defaultViewport;
         public static LightEngine lightEngine;
 
         public static int WIDTH, HEIGHT;
@@ -48,6 +50,8 @@ namespace MOBA
 
             WIDTH = graphics.PreferredBackBufferWidth;
             HEIGHT = graphics.PreferredBackBufferHeight;
+
+            defaultViewport = new Viewport(0, 0, WIDTH, HEIGHT);
         }
 
         protected override void Initialize()
@@ -74,8 +78,9 @@ namespace MOBA
             Assets.storeImage(Content.Load<Texture2D>("Enviroment/Tree"), new Rectangle(0, 0, 96, 192)); // ID 2
             Assets.storeImage(Content.Load<Texture2D>("Misc/WizAuto"), new Rectangle(0, 0, 27, 14)); // ID 3 
             Assets.storeImage(Content.Load<Texture2D>("Misc/testrect"), new Rectangle(0, 0, 1, 1));    // ID 4
-            Assets.storeImage(Content.Load<Texture2D>("Wizard/Idle"), new Rectangle(0, 0, 48, 60));
-            Assets.storeImage(Content.Load<Texture2D>("Wizard/Attack"), new Rectangle(0, 0, 48, 60));
+            Assets.storeImage(Content.Load<Texture2D>("Wizard/Idle"), new Rectangle(0, 0, 48, 60)); // ID 5
+            Assets.storeImage(Content.Load<Texture2D>("Wizard/Attack"), new Rectangle(0, 0, 48, 60)); // ID 6
+            Assets.storeImage(Content.Load<Texture2D>("Interface/Nameplate"), new Rectangle(0, 0, 80, 20)); // ID 7
 
             font = Content.Load<SpriteFont>("Font/Arial");
 
@@ -136,13 +141,13 @@ namespace MOBA
 
             for (int i = 0; i < Minions.Count; i++)
             {
-                if (lightEngine.isVisible(Minions[i].entity))
+                if (lightEngine.isVisible(Minions[i].entity) && inScreen(Minions[i].entity))
                     Minions[i].Draw();
             }
 
             for (int i = 0; i < Players.Count; i++)
             {
-                if (lightEngine.isVisible(Players[i].player))
+                if (lightEngine.isVisible(Players[i].player) && inScreen(Players[i].player))
                     Players[i].Draw();
             }
 
@@ -158,6 +163,14 @@ namespace MOBA
 
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        public bool inScreen(BaseEntity e)
+        {
+            if (defaultViewport.Bounds.Contains(new Point((int)e.Position.X, (int)e.Position.Y)))
+                return true;
+
+            return false;
         }
     }
 }

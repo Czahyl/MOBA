@@ -125,6 +125,7 @@
     <Compile Include="Characters\Classes\Wizard.cs" />
     <Compile Include="Input\InputHandler.cs" />
     <Compile Include="Interface\HUD.cs" />
+    <Compile Include="Interface\Nameplate.cs" />
     <Compile Include="Math\Angle.cs" />
     <Compile Include="Math\Timer.cs" />
     <Compile Include="Math\Trig.cs" />

@@ -83,7 +83,7 @@ namespace MOBA.Characters.Classes.Spells
                     current.Damage(damage);
                     spell.projectileList.Remove(this);
                     emitter.Destroy();
-                }
+                } 
             }
         }
 

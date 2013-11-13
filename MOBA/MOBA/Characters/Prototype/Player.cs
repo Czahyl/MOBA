@@ -9,24 +9,20 @@ using MOBA.Characters.Classes.Spells;
 using MOBA.World;
 using MOBA.Input;
 using MOBA.Math;
+using MOBA.Interface;
 
 namespace MOBA.Characters.Prototype
 {
     public class Player : BaseEntity
     {
-        public const int WIDTH = 32;
-        public const int HEIGHT = 64;
         public const float AttRange = 0.5f;
 
         public List<Autoattack> autoAttack { get; private set; }
         public bool canAttack = true;
         public Timer attackDelay;
 
-        public Dictionary<string, Animation> Animations
+        public Nameplate nameplate
         { get; protected set; }
-
-        public Animation currentAni
-        { get; set; }
         public int Team
         { get; private set; }
         public int Mana
@@ -60,6 +56,9 @@ namespace MOBA.Characters.Prototype
                 Name = Username;
             }
 
+            Width = 60;
+            Height = 100;
+
             Animations = new Dictionary<string, Animation>();
 
             currentAni = new Animation(5);
@@ -69,10 +68,14 @@ namespace MOBA.Characters.Prototype
             Team = TeamID;
             Level = 1;
             Exp = 0;
+            Health = 100;
+            maxHealth = 100;
             visionLayer = 0;
             defaultLayer = visionLayer;
-            Bounds = new Rectangle((int)Position.X, (int)Position.Y, 32, 64);
+            Bounds = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
             light = new LightEmitter();
+
+            nameplate = new Nameplate(this);
 
             autoAttack = new List<Autoattack>();
 
@@ -111,7 +114,7 @@ namespace MOBA.Characters.Prototype
                 autoAttack[i].Draw(spriteBatch);
 
             spriteBatch.Draw(currentAni.Frame(), Bounds, Color.FromNonPremultiplied(255, 255, 255, (int)Alpha)); //TODO Add image support to draw
-            spriteBatch.DrawString(Main.Assets.getFont(0), Name, new Vector2(Bounds.X, Bounds.Y - 15), Color.White);
+            nameplate.Draw(spriteBatch);
 
             base.Draw(spriteBatch);
         }

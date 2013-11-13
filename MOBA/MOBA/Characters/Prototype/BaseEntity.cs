@@ -14,17 +14,19 @@ namespace MOBA.Characters.Prototype
         public Rectangle Bounds { get; protected set; }
         public Point Center { get; protected set; }
         public Vector2 Position;
-        public Image Image { get; protected set; }
+        public int Width { get; protected set; }
+        public int Height { get; protected set; }
         public float Alpha { get; protected set; }
         public LightEmitter light { get; set; }
-        public Animation ani { get; set; }
+        public Dictionary<string, Animation> Animations { get; protected set; }
+        public Animation currentAni { get; set; }
         public Texture2D stance { get; protected set; }
         public int Health { get; protected set; }
         public int moveSpeed { get; protected set; }
         public int visionLayer { get; protected set; }
         public int defaultLayer { get; protected set; }
 
-        protected int maxHealth;
+        public int maxHealth;
 
         protected bool locked = false;
 
@@ -60,7 +62,7 @@ namespace MOBA.Characters.Prototype
                 Health = 0;
             }
 
-            Bounds = new Rectangle((int)Position.X - Bounds.Width / 2, (int)Position.Y - Bounds.Height / 2, 32, 64);
+            Bounds = new Rectangle((int)Position.X - Bounds.Width / 2, (int)Position.Y - Bounds.Height / 2, Width, Height);
             Center = new Point(Bounds.Center.X, Bounds.Center.Y);
         }
 

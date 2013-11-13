@@ -67,7 +67,7 @@ namespace MOBA.World
         {
             for (int i = 0; i < emitters.Count; i++)
             {
-                if (emitters[i].inCircle(new Vector2(rect.X, rect.Y)) && emitters[i].layer >= lightLayer)
+                if (emitters[i].inCircle(new Vector2(rect.X, rect.Y)))
                     return true;
             }
             return false;
