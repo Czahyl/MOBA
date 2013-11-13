@@ -18,6 +18,7 @@ namespace MOBA.Characters.Prototype
         public float Alpha { get; protected set; }
         public LightEmitter light { get; set; }
         public Animation ani { get; set; }
+        public Texture2D stance { get; protected set; }
         public int Health { get; protected set; }
         public int moveSpeed { get; protected set; }
         public int visionLayer { get; protected set; }

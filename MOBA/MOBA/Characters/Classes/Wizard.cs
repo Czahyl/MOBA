@@ -20,10 +20,25 @@ namespace MOBA.Characters.Classes
 {
     public class Wizard : Player
     {
+        Animation idle, attack;
         Ability fireball;
 
         public Wizard(string Username, int TeamID) : base(Username, TeamID)
         {
+            Animations.Add("Idle", new Animation(5));
+            Animations.Add("Attack", new Animation(5));
+
+            idle = Animations["Idle"];
+            attack = Animations["Attack"];
+
+            currentAni = new Animation(5);
+
+            idle.buffer.Add(Main.Assets.getTexture(5));
+            attack.buffer.Add(Main.Assets.getTexture(6));
+
+            currentAni = idle;
+
+            stance = Main.Assets.getTexture(5).Texture;
             Attack = 20;
             SpellPower = 15;
 
@@ -32,12 +47,12 @@ namespace MOBA.Characters.Classes
 
         public override void Update(GameTime gameTime)
         {
-            if (InputHandler.keyPressed(Keys.D1))
+            if (InputHandler.keyPressed(Keys.D1) && !fireball.onCooldown)
             {
-                fireball.Cast(gameTime);
+                fireball.Select();
             }
 
-            fireball.Update();
+            fireball.Update(gameTime);
 
             base.Update(gameTime);
         }

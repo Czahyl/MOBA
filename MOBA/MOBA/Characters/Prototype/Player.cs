@@ -19,8 +19,14 @@ namespace MOBA.Characters.Prototype
         public const float AttRange = 0.5f;
 
         public List<Autoattack> autoAttack { get; private set; }
-        private Timer attackDelay;
+        public bool canAttack = true;
+        public Timer attackDelay;
 
+        public Dictionary<string, Animation> Animations
+        { get; protected set; }
+
+        public Animation currentAni
+        { get; set; }
         public int Team
         { get; private set; }
         public int Mana
@@ -37,6 +43,8 @@ namespace MOBA.Characters.Prototype
         { get; protected set; }
         public int SpellPower
         { get; protected set; }
+        public bool Friendly
+        { get; protected set; }
 
         public Player(string Username, int TeamID)
         {
@@ -51,6 +59,12 @@ namespace MOBA.Characters.Prototype
             {
                 Name = Username;
             }
+
+            Animations = new Dictionary<string, Animation>();
+
+            currentAni = new Animation(5);
+
+            currentAni.buffer.Add(Main.Assets.getTexture(0));
 
             Team = TeamID;
             Level = 1;
@@ -83,12 +97,6 @@ namespace MOBA.Characters.Prototype
             attackDelay.Run();
             setPosition((int)Position.X, (int)Position.Y);
 
-            if (InputHandler.mouseHeld(MouseButton.Left))
-            {
-                if(attackDelay.Tick)
-                    autoAttack.Add(new Autoattack(new Vector2(Position.X, Position.Y), this));
-            }
-
             for (int i = 0; i < autoAttack.Count; i++)
                 autoAttack[i].Shoot(gameTime);
 
@@ -102,13 +110,18 @@ namespace MOBA.Characters.Prototype
             for (int i = 0; i < autoAttack.Count; i++)
                 autoAttack[i].Draw(spriteBatch);
 
-            spriteBatch.Draw(Main.Assets.getTexture(0).Texture, Bounds, Color.FromNonPremultiplied(255, 255, 255, (int)Alpha));
+            spriteBatch.Draw(currentAni.Frame(), Bounds, Color.FromNonPremultiplied(255, 255, 255, (int)Alpha)); //TODO Add image support to draw
             spriteBatch.DrawString(Main.Assets.getFont(0), Name, new Vector2(Bounds.X, Bounds.Y - 15), Color.White);
 
             base.Draw(spriteBatch);
         }
 
-        public void changeVisibility(int x)
+        public bool isFriendly()
+        {
+            return (Team - Main.controller.player.Team) == 0;
+        }
+
+        public void changeInvisibility(int x)
         {
             if (x <= visionLayer)
                 visionLayer = visionLayer;

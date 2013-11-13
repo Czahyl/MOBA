@@ -29,6 +29,8 @@ namespace MOBA.Characters.Classes.Spells
         private Image image;
         private Timer timer;
 
+        private float angle;
+
         public Autoattack(Vector2 startPos, Player player)
         {
             Start = startPos;
@@ -40,6 +42,8 @@ namespace MOBA.Characters.Classes.Spells
 
             Direction = End - Start;
 
+            angle = (float)System.Math.Atan2(Direction.Y, Direction.X);
+
             if (Direction != Vector2.Zero)
                 Direction.Normalize();
         }
@@ -47,7 +51,7 @@ namespace MOBA.Characters.Classes.Spells
         public Autoattack()
         {
 
-        }
+        } 
 
         public bool Hit(Rectangle rect)
         {
@@ -73,23 +77,25 @@ namespace MOBA.Characters.Classes.Spells
 
             Start += (Direction * speed);
 
-            foreach(PlayerController player in Main.Players)
+            foreach(MultiplayerController player in Main.Players)
             {
-                if (Hit(player.entity.Bounds) && player.entity.Team != plr.Team)
+                Player plr = player.player;
+                if (Hit(plr.Bounds) && !plr.isFriendly())
                 {
-                    player.entity.Damage(plr.Attack);
+                    plr.Damage(plr.Attack);
                     Destroy();
                 }
             }
 
             foreach(MinionController minion in Main.Minions)
             {
-                if (Hit(minion.entity.Bounds) && minion.entity.Team != plr.Team)
+                Minion entity = minion.entity;
+                if (Hit(entity.Bounds) && !entity.isFriendly())
                 {
                     minion.entity.Damage(plr.Attack);
                     Destroy();
                 }
-                else if (Hit(minion.entity.Bounds) && minion.entity.Team == plr.Team)
+                else if (Hit(entity.Bounds) && entity.isFriendly())
                     Destroy();
             }
         }

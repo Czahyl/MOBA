@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Graphics;
 using MOBA.Characters.Prototype;
-using MOBA.Input;
 using MOBA.World;
+using MOBA.Input;
+using MOBA.Characters.Classes.Spells;
 
 namespace MOBA.Characters.Controller
 {
     /*Handles input and 'controls' the local player*/
     public class PlayerController : Controller
     {
-        public Player entity;
         private Vector2 targetPos;
 
         public PlayerController(Main main) : base(main)
@@ -27,14 +27,12 @@ namespace MOBA.Characters.Controller
 
         public override void plugEntity(Player e)
         {
-            entity = e;
+            player = e;
 
-            entity.setPosition(300, 200);
-            entity.light = new LightEmitter(Main.lightEngine, entity.Position, 150, 0);
-            Main.lightEngine.plugEmitter(entity.light);
-            targetPos = entity.Position;
-
-            base.plugEntity(entity);
+            player.setPosition(300, 200);
+            player.light = new LightEmitter(Main.lightEngine, player.Position, 150, 0);
+            Main.lightEngine.plugEmitter(player.light);
+            targetPos = player.Position;
         }
 
         public override void Update(GameTime gameTime)
@@ -45,15 +43,24 @@ namespace MOBA.Characters.Controller
                 targetPos.Y = (int)InputHandler.EventY;
             }
 
-            player.Pathfind((int)targetPos.X, (int)targetPos.Y);
+            if (InputHandler.mouseHeld(MouseButton.Left) && player.canAttack)
+            {
+                if (player.attackDelay.Tick)
+                {
+                    player.currentAni = player.Animations["Attack"];
+                    player.autoAttack.Add(new Autoattack(player.Position, player));
+                }
+            }
+            else
+                player.currentAni = player.Animations["Idle"];
 
-            player.Update(gameTime);
+            player.Pathfind((int)targetPos.X, (int)targetPos.Y);
             base.Update(gameTime);
         }
 
-        public void Draw()
+        public override void Draw()
         {
-            player.Draw(main.spriteBatch);
+            player.Draw(m.spriteBatch);
         }
 
     }

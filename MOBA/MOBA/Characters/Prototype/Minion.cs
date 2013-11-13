@@ -23,13 +23,9 @@ namespace MOBA.Characters.Prototype
         public int Team
         { get; private set; }
 
-        public bool Friendly;
-
         public Minion(int TeamID)
         {
             Team = TeamID;
-
-            Friendly = (Team - Main.controller.entity.Team) == 0;
 
             //Add preset animation to ani buffer
             //Maxhealth = Base amount * Towers dead
@@ -72,6 +68,11 @@ namespace MOBA.Characters.Prototype
             spriteBatch.Draw(Main.Assets.getTexture(0).Texture, Bounds, Color.FromNonPremultiplied(255, 255, 255, (int)Alpha));
             spriteBatch.Draw(Main.Assets.getTexture(0).Texture, new Rectangle(Bounds.X, Bounds.Y - 10, Health, 5), Color.Red);
             //base.Draw(spriteBatch);
+        }
+
+        public bool isFriendly()
+        {
+            return (Team - Main.controller.player.Team) == 0;
         }
 
         public void changeVisibility(int x)

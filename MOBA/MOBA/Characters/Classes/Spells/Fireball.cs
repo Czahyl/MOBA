@@ -13,6 +13,7 @@ using MOBA.Characters.Prototype;
 using MOBA.Input;
 using MOBA.World;
 using MOBA.Math;
+using MOBA.Assets;
 
 namespace MOBA.Characters.Classes.Spells
 {
@@ -23,7 +24,7 @@ namespace MOBA.Characters.Classes.Spells
             pClass = player;
 
             Emitter = new LightEmitter();
-            LightRadius = 25f;
+            LightRadius = 35f;
 
             image = Main.Assets.getTexture(3);
 
@@ -35,19 +36,20 @@ namespace MOBA.Characters.Classes.Spells
             cooldown = new Timer(60, false);
         }
 
-        public override void Update()
+        public override void Update(GameTime gameTime)
         {
             for (int i = 0; i < projectileList.Count; i++)
             {
                 projectileList[i].Update();
             }
 
-            base.Update();
-        }
+            if (Selecting)
+            {
+                if (InputHandler.EventButton == MouseButton.Left)
+                    Cast(gameTime);
+            }
 
-        public void Select()
-        {
-
+            base.Update(gameTime);
         }
 
         public override void Cast(GameTime gameTime)
@@ -55,15 +57,23 @@ namespace MOBA.Characters.Classes.Spells
             if (!onCooldown)
             {
                 projectileList.Add(new Projectile(this));
-                cooldown = new Timer(60, false);
-                onCooldown = true;
+                base.Cast(gameTime);
             }
+        }
+
+        public void drawSelection(SpriteBatch spriteBatch)
+        {
+            Image image = Main.Assets.getTexture(4);
+            spriteBatch.Draw(image.Texture, new Rectangle((int)pClass.Position.X, (int)pClass.Position.Y, 140, 40), null, Color.RoyalBlue, (float)System.Math.Atan2(InputHandler.EventY - pClass.Position.Y, InputHandler.EventX - pClass.Position.X), new Vector2(0, image.Texture.Height / 2), SpriteEffects.None, 0f);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             for (int i = 0; i < projectileList.Count; i++)
                 projectileList[i].Draw(spriteBatch);
+
+            if(Selecting)
+                drawSelection(spriteBatch);
 
             base.Draw(spriteBatch);
         }

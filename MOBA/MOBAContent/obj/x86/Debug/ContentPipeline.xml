@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Enviroment\Tree.xnb</Output>
-      <Time>2013-10-21T12:46:45.2646182-04:00</Time>
+      <Output>C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Enviroment\Tree.xnb</Output>
+      <Time>2013-10-23T21:28:39.2291612-04:00</Time>
     </Item>
     <Item>
       <Source>Enviroment\Grass.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Enviroment\Grass.xnb</Output>
-      <Time>2013-10-21T12:46:45.2636181-04:00</Time>
+      <Output>C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Enviroment\Grass.xnb</Output>
+      <Time>2013-10-23T21:28:39.2281611-04:00</Time>
     </Item>
     <Item>
       <Source>Misc\rect.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Misc\rect.xnb</Output>
-      <Time>2013-10-21T12:46:45.2716186-04:00</Time>
+      <Output>C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Misc\rect.xnb</Output>
+      <Time>2013-10-23T21:28:39.2711636-04:00</Time>
     </Item>
     <Item>
       <Source>Misc\WizAuto.png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Misc\WizAuto.xnb</Output>
-      <Time>2013-10-22T13:44:34.7026596-04:00</Time>
+      <Output>C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Misc\WizAuto.xnb</Output>
+      <Time>2013-10-23T21:28:39.2701635-04:00</Time>
     </Item>
     <Item>
       <Source>Font\Arial.spritefont</Source>
@@ -43,8 +43,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Font\Arial.xnb</Output>
-      <Time>2013-10-21T12:46:45.2666183-04:00</Time>
+      <Output>C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Font\Arial.xnb</Output>
+      <Time>2013-10-23T21:28:39.2321614-04:00</Time>
     </Item>
     <Item>
       <Source>Font\Nameplate.spritefont</Source>
@@ -52,8 +52,35 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Font\Nameplate.xnb</Output>
-      <Time>2013-11-05T13:17:23.185144-05:00</Time>
+      <Output>C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Font\Nameplate.xnb</Output>
+      <Time>2013-11-10T23:22:13.4299055-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Misc\testrect.png</Source>
+      <Name>Misc\testrect</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Misc\testrect.xnb</Output>
+      <Time>2013-11-12T10:38:01.4074776-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Wizard\Attack.png</Source>
+      <Name>Wizard\Attack</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Wizard\Attack.xnb</Output>
+      <Time>2013-11-12T21:53:12.2911025-05:00</Time>
+    </Item>
+    <Item>
+      <Source>Wizard\Idle.png</Source>
+      <Name>Wizard\Idle</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\Wizard\Idle.xnb</Output>
+      <Time>2013-11-12T21:49:30.0683921-05:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -61,10 +88,10 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Users\Trevor\Repos\MOBA\MOBA\MOBAContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Users\Trevor\Repos\MOBA\MOBA\MOBAContent\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Users\Trevor\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBAContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBAContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Trevor Coykendall\Repos\MOBA\MOBA\MOBA\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
@@ -93,7 +120,7 @@
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2012-01-30T13:21:29.2558323-05:00</Value>
+        <Value>2012-01-25T11:07:21.7072359-05:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

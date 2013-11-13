@@ -23,6 +23,8 @@ namespace MOBA.World
         public float r
         { get; private set; }
 
+        private int defaultLayer = 0;
+
         public LightEmitter(LightEngine engine, Vector2 boundPosition, float radius, int lightLayer)
         {
             e = engine;
@@ -45,6 +47,14 @@ namespace MOBA.World
         public void Destroy()
         {
             e.destroyEmitter(this);
+        }
+
+        public void changeVisibility(int x)
+        {
+            layer = x;
+
+            if (x == -1)
+                layer = defaultLayer;
         }
 
         public void Fade()

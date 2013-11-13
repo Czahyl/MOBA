@@ -51,12 +51,16 @@ namespace MOBA.Characters.Classes.Spells
         public float LightRadius
         { get; protected set; }
 
+        public bool Selecting = false;
+
         public bool Alive = false;
 
         public Vector2 Position;
 
         protected Timer cooldown;
-        protected bool onCooldown = false;
+
+        public bool onCooldown
+        { get; protected set; }
 
         public Ability(Player player)
         {
@@ -65,7 +69,7 @@ namespace MOBA.Characters.Classes.Spells
             projectileList = new List<Projectile>();
         }
 
-        public virtual void Update()
+        public virtual void Update(GameTime gameTime)
         {
             if (onCooldown)
                 cooldown.Run();
@@ -74,9 +78,21 @@ namespace MOBA.Characters.Classes.Spells
                 onCooldown = false;
         }
 
+        public virtual void Select()
+        {
+            Selecting = !Selecting;
+            pClass.canAttack = !pClass.canAttack;
+        }
+
         public virtual void Cast(GameTime gameTime)
         {
-
+            if (!onCooldown)
+            {
+                cooldown = new Timer(60, false);
+                onCooldown = true;
+                Selecting = false;
+                pClass.canAttack = true;
+            }
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)

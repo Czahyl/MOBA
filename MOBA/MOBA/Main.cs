@@ -20,7 +20,7 @@ namespace MOBA
     public class Main : Microsoft.Xna.Framework.Game
     {
         public static PlayerController controller; // Local player
-        public static List<Controller> Players = new List<Controller>(); // Connected players
+        public static List<MultiplayerController> Players = new List<MultiplayerController>(); // Connected players
         public static List<MinionController> Minions = new List<MinionController>();
        
         public static GraphicsDeviceManager graphics;
@@ -68,20 +68,28 @@ namespace MOBA
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             Assets.storeFont(Content.Load<SpriteFont>("Font/Nameplate"));
-            
+
             Assets.storeImage(Content.Load<Texture2D>("Misc/Rect"), new Rectangle(0, 0, 1, 1));    // ID 0
             Assets.storeImage(Content.Load<Texture2D>("Enviroment/Grass"), new Rectangle(0, 0, 64, 64)); // ID 1
             Assets.storeImage(Content.Load<Texture2D>("Enviroment/Tree"), new Rectangle(0, 0, 96, 192)); // ID 2
             Assets.storeImage(Content.Load<Texture2D>("Misc/WizAuto"), new Rectangle(0, 0, 27, 14)); // ID 3 
+            Assets.storeImage(Content.Load<Texture2D>("Misc/testrect"), new Rectangle(0, 0, 1, 1));    // ID 4
+            Assets.storeImage(Content.Load<Texture2D>("Wizard/Idle"), new Rectangle(0, 0, 48, 60));
+            Assets.storeImage(Content.Load<Texture2D>("Wizard/Attack"), new Rectangle(0, 0, 48, 60));
+
             font = Content.Load<SpriteFont>("Font/Arial");
 
             controller = new PlayerController(this);
+            Players.Add(new MultiplayerController(this));
             Minions.Add(new MinionController(this));
 
             controller.plugEntity(new Wizard("Admin", 0));
 
             for (int i = 0; i < Minions.Count; i++) // TODO: Make "Spawner" class
                 Minions[i].plugEntity(new Minion(1));
+
+            for (int i = 0; i < Players.Count; i++)
+                Players[i].plugEntity(new Player("Player " + (i + 1), 0));
         }
 
         protected override void UnloadContent()
@@ -103,6 +111,9 @@ namespace MOBA
 
             for (int i = 0; i < Minions.Count; i++)
                 Minions[i].Update(gameTime);
+
+            for (int i = 0; i < Players.Count; i++)
+                Players[i].Update(gameTime);
 
             lightEngine.Update();
 
@@ -127,6 +138,12 @@ namespace MOBA
             {
                 if (lightEngine.isVisible(Minions[i].entity))
                     Minions[i].Draw();
+            }
+
+            for (int i = 0; i < Players.Count; i++)
+            {
+                if (lightEngine.isVisible(Players[i].player))
+                    Players[i].Draw();
             }
 
             //spriteBatch.DrawString(font, "MX - " + Minions[0].getEntity().Position.X + "\nMY - " + Minions[0].getEntity().Position.Y + "\n" + lightEngine.isVisible(Minions[0].getEntity().Rect(), Minions[0].getEntity().invisibilityLayer).ToString(), new Vector2(0, 150), Color.White);

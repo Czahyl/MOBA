@@ -11,6 +11,9 @@ using Microsoft.Xna.Framework.Media;
 using MOBA.Input;
 using MOBA.Math;
 using MOBA.World;
+using MOBA.Characters.Controller;
+using MOBA.Characters.Prototype;
+using MOBA.Assets;
 
 namespace MOBA.Characters.Classes.Spells
 {
@@ -20,8 +23,11 @@ namespace MOBA.Characters.Classes.Spells
         private Ability spell;
         private Timer liveTime;
         private LightEmitter emitter;
+        private Image image;
+        private Rectangle rect;
         private float angle;
         private bool activeEmitter;
+        private int damage;
 
         public Projectile(Ability ability)
         {
@@ -33,7 +39,7 @@ namespace MOBA.Characters.Classes.Spells
             End = new Vector2(InputHandler.EventX, InputHandler.EventY);
             Direction = End - Start;
 
-            angle = (float)System.Math.Atan2(End.Y, End.X);
+            damage = ability.Damage;
 
             if (Direction != Vector2.Zero)
                 Direction.Normalize();
@@ -42,14 +48,18 @@ namespace MOBA.Characters.Classes.Spells
 
             if (activeEmitter)
             {
-                emitter = new LightEmitter(Main.lightEngine, Start, spell.LightRadius, 0);
+                emitter = new LightEmitter(Main.lightEngine, Start, spell.LightRadius, 1);
                 Main.lightEngine.plugEmitter(emitter);
             }
+
+            angle = (float)System.Math.Atan2(Direction.Y, Direction.X);
         }
 
         public void Update()
         {
             liveTime.Run();
+
+            rect = new Rectangle((int)Start.X, (int)Start.Y, 60, 40); // change to image later
 
             if(activeEmitter)
                 emitter.Update(Start);
@@ -64,11 +74,23 @@ namespace MOBA.Characters.Classes.Spells
 
             Start += Direction * 10f;
 
+            foreach (MultiplayerController entity in Main.Players)
+            {
+                Player current = entity.player;
+
+                if (rect.Intersects(current.Bounds))
+                {
+                    current.Damage(damage);
+                    spell.projectileList.Remove(this);
+                    emitter.Destroy();
+                }
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(spell.image.Texture, new Rectangle((int)Start.X - spell.image.Texture.Width / 2, (int)Start.Y - spell.image.Texture.Height / 2, 40, 40), spell.image.sRect, Color.White, angle, new Vector2(0, 0), SpriteEffects.None, 0f);
+            //TODO fill out rect & image
+            spriteBatch.Draw(spell.image.Texture, new Rectangle((int)Start.X, (int)Start.Y, 60, 40), spell.image.sRect, Color.White, angle, new Vector2(0, 7), SpriteEffects.None, 0f);
         }
     }
 }

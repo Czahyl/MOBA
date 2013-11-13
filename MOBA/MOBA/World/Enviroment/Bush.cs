@@ -28,28 +28,35 @@ namespace MOBA.World.Enviroment
         {
             Rect = new Rectangle((int)Position.X, (int)Position.Y, 64, 64);
 
-            if (Rect.Contains(Main.controller.entity.Center))
-                Main.controller.entity.setAlpha(100);
-            else
-                Main.controller.entity.setAlpha(255);
-
-            foreach (PlayerController entity in Main.Players)
+            if (Rect.Contains(Main.controller.player.Center))
             {
-                Player current = entity.entity;
+                Main.controller.player.setAlpha(100);
+                Main.controller.player.light.changeVisibility(1);
+            }
+            else
+            {
+                Main.controller.player.setAlpha(255);
+                Main.controller.player.light.changeVisibility(-1);
+            }
+
+            foreach (MultiplayerController entity in Main.Players)
+            {
+                Player current = entity.player;
 
                 if (Rect.Contains(current.Center))
                 {
-                    if (current.Team - Main.controller.entity.Team == 0) // If friendly to the local player
+                    if (current.isFriendly()) // If friendly to the local player
+                    {
                         current.setAlpha(100);
+                        current.light.changeVisibility(1);
+                    }
                     else
-                        current.changeVisibility(1);
+                        current.changeInvisibility(1);
                 }
                 else
                 {
                     current.setAlpha(255);
-
-                    if (current.Team - Main.controller.entity.Team != 0)
-                        current.changeVisibility(0);
+                    current.light.changeVisibility(-1);
                 }
             }
 
@@ -59,17 +66,22 @@ namespace MOBA.World.Enviroment
 
                 if (Rect.Contains(current.Center))
                 {
-                    if (current.Friendly) // If friendly to the local player
+                    if (current.isFriendly()) // If friendly to the local player
+                    {
                         current.setAlpha(100);
+                        current.light.changeVisibility(1);
+                    }
                     else
+                    {
+                        current.setAlpha(100);
                         current.changeVisibility(1);
+                    }
                 }
                 else
                 {
                     current.setAlpha(255);
 
-                    if(!current.Friendly)
-                        current.changeVisibility(0);
+                    current.changeVisibility(-1);
                 }
             }
 

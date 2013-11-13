@@ -31,30 +31,25 @@ namespace MOBA.Assets
             buffer = new List<Image>();
         }
 
-        public void Run()
+        public Texture2D Frame()
         {
             if (!PAUSED)
             {
                 i += INCREMENT * SPEED;
-                Debug.WriteLine(i);
             }
 
             if (i >= DELAY)
             {
-                if (index < buffer.Count())
+                if (index < buffer.Count() - 1)
                     index++;
                 else
                     index = 0;
 
                 i = 0;
             }
-        }
 
-        public Texture2D Frame()
-        {
             return buffer[index].Texture;
         }
-
         public Rectangle srcRect()
         {
             return buffer[index].sRect;
