@@ -70,6 +70,8 @@ namespace MOBA.Characters.Prototype
             Exp = 0;
             Health = 100;
             maxHealth = 100;
+            Mana = 100;
+            maxMana = 100;
             visionLayer = 0;
             defaultLayer = visionLayer;
             Bounds = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
@@ -110,10 +112,12 @@ namespace MOBA.Characters.Prototype
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            currentFrame = currentAni.Frame();
+
             for (int i = 0; i < autoAttack.Count; i++)
                 autoAttack[i].Draw(spriteBatch);
 
-            spriteBatch.Draw(currentAni.Frame(), Bounds, Color.FromNonPremultiplied(255, 255, 255, (int)Alpha)); //TODO Add image support to draw
+            spriteBatch.Draw(currentFrame, Bounds, Color.FromNonPremultiplied(255, 255, 255, (int)Alpha)); //TODO Add image support to draw
             nameplate.Draw(spriteBatch);
 
             base.Draw(spriteBatch);
@@ -122,6 +126,11 @@ namespace MOBA.Characters.Prototype
         public bool isFriendly()
         {
             return (Team - Main.controller.player.Team) == 0;
+        }
+
+        public void removeProjectile(Autoattack a)
+        {
+            autoAttack.Remove(a);
         }
 
         public void changeInvisibility(int x)

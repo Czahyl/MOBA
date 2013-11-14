@@ -55,9 +55,12 @@ namespace MOBA.Characters.Classes.Spells
             angle = (float)System.Math.Atan2(Direction.Y, Direction.X);
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             liveTime.Run();
+
+            if (End == spell.pClass.Position)
+                spell.projectileList.Remove(this);
 
             rect = new Rectangle((int)Start.X, (int)Start.Y, 60, 40); // change to image later
 
@@ -74,23 +77,23 @@ namespace MOBA.Characters.Classes.Spells
 
             Start += Direction * 10f;
 
-            foreach (MultiplayerController entity in Main.Players)
+            for (int i = 0; i < Main.Players.Count; i++)
             {
-                Player current = entity.player;
+                Player current = Main.Players[i].player;
 
                 if (rect.Intersects(current.Bounds))
                 {
                     current.Damage(damage);
-                    spell.projectileList.Remove(this);
                     emitter.Destroy();
+                    spell.removeProjectile(this);
                 } 
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            //TODO fill out rect & image
-            spriteBatch.Draw(spell.image.Texture, new Rectangle((int)Start.X, (int)Start.Y, 60, 40), spell.image.sRect, Color.White, angle, new Vector2(0, 7), SpriteEffects.None, 0f);
+            //TODO fill out rect & imag
+            spriteBatch.Draw(spell.image.Texture, rect, spell.image.sRect, Color.White, angle, new Vector2(0, 7), SpriteEffects.None, 0f);
         }
     }
 }

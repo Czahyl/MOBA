@@ -26,6 +26,12 @@ namespace MOBA.Characters.Classes
 
         public Wizard(string Username, int TeamID) : base(Username, TeamID)
         {
+            Health = 75;
+            maxHealth = 75;
+
+            Mana = 120;
+            maxMana = 120;
+
             nameplate = new Nameplate(this);
             Animations.Add("Idle", new Animation(5));
             Animations.Add("Attack", new Animation(5));
@@ -40,7 +46,6 @@ namespace MOBA.Characters.Classes
 
             currentAni = idle;
 
-            stance = Main.Assets.getTexture(5).Texture;
             Attack = 20;
             SpellPower = 15;
 

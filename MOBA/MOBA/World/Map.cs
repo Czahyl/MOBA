@@ -90,6 +90,17 @@ namespace MOBA
         public Map(Main main)
         {
             m = main;
+
+            for (int x = 0 - width / 2; x < width / 2; x += 64)
+            {
+                for (int y = 0; y < height; y += 64)
+                {
+                    if (x == 512 && y == 256)
+                    {
+                        worldObjects.Add(new Bush(new Vector2(x, y)));
+                    }
+                }
+            }
         }
 
         public void Update()
@@ -105,11 +116,6 @@ namespace MOBA
                 for (int y = 0; y < height; y += 64)
                 {
                     m.spriteBatch.Draw(Main.Assets.getTexture(1).Texture, new Rectangle(x, y, 64, 64), Color.White);
-
-                    if (x == 512 && y == 256)
-                    {
-                        worldObjects.Add(new Bush(new Vector2(x, y)));
-                    }
                 }
             }
 

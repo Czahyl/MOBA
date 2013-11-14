@@ -20,13 +20,14 @@ namespace MOBA.Characters.Prototype
         public LightEmitter light { get; set; }
         public Dictionary<string, Animation> Animations { get; protected set; }
         public Animation currentAni { get; set; }
-        public Texture2D stance { get; protected set; }
+        protected Texture2D currentFrame;
         public int Health { get; protected set; }
+        public int maxHealth { get; protected set; }
+        public int Mana { get; protected set; }
+        public int maxMana { get; protected set; }
         public int moveSpeed { get; protected set; }
         public int visionLayer { get; protected set; }
         public int defaultLayer { get; protected set; }
-
-        public int maxHealth;
 
         protected bool locked = false;
 

@@ -84,6 +84,11 @@ namespace MOBA.Characters.Classes.Spells
             pClass.canAttack = !pClass.canAttack;
         }
 
+        public void removeProjectile(Projectile p)
+        {
+            projectileList.Remove(p);
+        }
+
         public virtual void Cast(GameTime gameTime)
         {
             if (!onCooldown)

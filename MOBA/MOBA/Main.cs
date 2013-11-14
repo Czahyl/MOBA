@@ -51,6 +51,8 @@ namespace MOBA
             WIDTH = graphics.PreferredBackBufferWidth;
             HEIGHT = graphics.PreferredBackBufferHeight;
 
+            Mouse.WindowHandle = Window.Handle;
+
             defaultViewport = new Viewport(0, 0, WIDTH, HEIGHT);
         }
 
@@ -99,7 +101,8 @@ namespace MOBA
 
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            Assets.Dispose();
+            Dispose();
         }
 
         protected override void Update(GameTime gameTime)
@@ -134,25 +137,19 @@ namespace MOBA
 
             map.Draw();
 
-            //spriteBatch.Draw(Assets.getTexture(0).Texture, controller.entity.Bounds, Color.White);
-
             spriteBatch.DrawString(font, "X - " + InputHandler.worldPosition.X + "\nY - " + InputHandler.worldPosition.Y, new Vector2(0, 0), Color.White);
-            //spriteBatch.DrawString(font, 0 + Minions[0].getEntity().Health.ToString(), new Vector2(0, 50), Color.White);
 
             for (int i = 0; i < Minions.Count; i++)
             {
-                if (lightEngine.isVisible(Minions[i].entity) && inScreen(Minions[i].entity))
+                if (lightEngine.isVisible(Minions[i].entity))
                     Minions[i].Draw();
             }
 
             for (int i = 0; i < Players.Count; i++)
             {
-                if (lightEngine.isVisible(Players[i].player) && inScreen(Players[i].player))
+                if (lightEngine.isVisible(Players[i].player))
                     Players[i].Draw();
             }
-
-            //spriteBatch.DrawString(font, "MX - " + Minions[0].getEntity().Position.X + "\nMY - " + Minions[0].getEntity().Position.Y + "\n" + lightEngine.isVisible(Minions[0].getEntity().Rect(), Minions[0].getEntity().invisibilityLayer).ToString(), new Vector2(0, 150), Color.White);
-            //spriteBatch.DrawString(font, "MLX - " + Minions[0].getEntity().light.pos.X + "\nMLY - " + Minions[0].getEntity().light.pos.Y, new Vector2(0, 200), Color.White);
 
             controller.Draw();
             spriteBatch.End();
@@ -160,6 +157,8 @@ namespace MOBA
             spriteBatch.Begin(); // Draw off-camera objects
 
             lightEngine.Draw();
+
+            spriteBatch.DrawString(Assets.getFont(0), gameTime.ElapsedGameTime.TotalSeconds.ToString(), new Vector2(100, 400), Color.White);
 
             spriteBatch.End();
             base.Draw(gameTime);
@@ -171,6 +170,28 @@ namespace MOBA
                 return true;
 
             return false;
+        }
+
+        public static Player hitPlayer(Rectangle rect)
+        {
+            for (int i = 0; i < Players.Count; i++)
+            {
+                if (Players[i].player.Bounds.Intersects(rect))
+                    return Players[i].player;
+            }
+
+            return null;
+        }
+
+        public static Minion hitMinion(Rectangle rect)
+        {
+            for (int i = 0; i < Minions.Count; i++)
+            {
+                if (Minions[i].entity.Bounds.Intersects(rect))
+                    return Minions[i].entity;
+            }
+
+            return null;
         }
     }
 }

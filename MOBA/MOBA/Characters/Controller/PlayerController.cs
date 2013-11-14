@@ -55,6 +55,7 @@ namespace MOBA.Characters.Controller
                 player.currentAni = player.Animations["Idle"];
 
             player.Pathfind((int)targetPos.X, (int)targetPos.Y);
+
             base.Update(gameTime);
         }
 

@@ -22,7 +22,7 @@ namespace MOBA.Characters.Classes.Spells
         public Rectangle Rect { get; private set; }
         public int dmg = 10;
         Vector2 Start, End, Direction;
-        private float speed = 10f;
+        private float speed = 200f;
 
         private Player plr;
 
@@ -53,49 +53,39 @@ namespace MOBA.Characters.Classes.Spells
 
         } 
 
-        public bool Hit(Rectangle rect)
-        {
-            if (!Rect.Intersects(plr.Bounds))
-            {
-                return Rect.Intersects(rect);
-            }
-
-            return Rect.Intersects(rect);
-        }
-
         public void Destroy()
         {
-            plr.autoAttack.Remove(this);
+            plr.removeProjectile(this);
         }
 
         public void Shoot(GameTime gameTime)
         {
             timer.Run();
 
-            if (timer.Tick)
+            if (timer.Tick || End == plr.Position)
                 Destroy();
 
-            Start += (Direction * speed);
+            Start += Direction * 10f;
 
-            foreach(MultiplayerController player in Main.Players)
+            if(Main.hitPlayer(Rect) != null)
             {
-                Player plr = player.player;
-                if (Hit(plr.Bounds) && !plr.isFriendly())
+                Player player = Main.hitPlayer(Rect);
+                if (!player.isFriendly())
                 {
-                    plr.Damage(plr.Attack);
+                    player.Damage(plr.Attack);
                     Destroy();
                 }
             }
 
-            foreach(MinionController minion in Main.Minions)
+            if(Main.hitMinion(Rect) != null)
             {
-                Minion entity = minion.entity;
-                if (Hit(entity.Bounds) && !entity.isFriendly())
+                Minion entity = Main.hitMinion(Rect);
+                if (!entity.isFriendly())
                 {
-                    minion.entity.Damage(plr.Attack);
+                    entity.Damage(plr.Attack);
                     Destroy();
                 }
-                else if (Hit(entity.Bounds) && entity.isFriendly())
+                else if (entity.isFriendly())
                     Destroy();
             }
         }
@@ -103,7 +93,6 @@ namespace MOBA.Characters.Classes.Spells
         public void Draw(SpriteBatch spriteBatch)
         {
             Rect = new Rectangle((int)Start.X, (int)Start.Y, 10, 10);
-            float angle = (float)System.Math.Atan2(Direction.Y, Direction.X);
             spriteBatch.Draw(image.Texture, new Rectangle((int)Start.X, (int)Start.Y, image.Texture.Width, image.Texture.Height), image.sRect, Color.White, angle, new Vector2(0, 0), SpriteEffects.None, 0f);
         }
     }

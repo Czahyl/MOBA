@@ -23,6 +23,8 @@ namespace MOBA.Input
         public static Keys? EventKey
         { get; set; }
 
+        public static bool isActive = true;
+
         public static int EventX;
         public static int EventY;
 
@@ -32,14 +34,23 @@ namespace MOBA.Input
         public static void Listen()
         {
             keystate = Keyboard.GetState();
+
+            if (mouse.X > Main.WIDTH || mouse.X < 0 || mouse.Y > Main.HEIGHT || mouse.Y < 0)
+                isActive = false;
+            else
+                isActive = true;
+
             mouse = Mouse.GetState();
 
             EventButton = MouseButton.None;
 
             worldPosition = Vector2.Transform(new Vector2(mouse.X, mouse.Y), Matrix.Invert(Main.Cam.Transform));
 
-            EventX = (int)worldPosition.X;
-            EventY = (int)worldPosition.Y;
+            if (isActive)
+            {
+                EventX = (int)worldPosition.X;
+                EventY = (int)worldPosition.Y;
+            }
 
             mouseX = mouse.X;
             mouseY = mouse.Y;

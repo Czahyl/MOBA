@@ -38,9 +38,11 @@ namespace MOBA.Characters.Classes.Spells
 
         public override void Update(GameTime gameTime)
         {
+            Rect = new Rectangle((int)Position.X, (int)Position.Y, 40, 60);
+
             for (int i = 0; i < projectileList.Count; i++)
             {
-                projectileList[i].Update();
+                projectileList[i].Update(gameTime);
             }
 
             if (Selecting)

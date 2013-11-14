@@ -105,5 +105,15 @@ namespace MOBA.Assets
         {
             return fontList[id];
         }
+
+        public void Dispose()
+        {
+            for (int i = 0; i < imageList.Count; i++)
+            {
+                imageList[i].Texture.Dispose();
+                imageList.Remove(imageList[i]);
+            }
+        }
+
     }
 }
