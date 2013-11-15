@@ -5,6 +5,6 @@ Content\Misc\WizAuto.xnb
 Content\Misc\testrect.xnb
 Content\Wizard\Attack.xnb
 Content\Wizard\Idle.xnb
+Content\Interface\Nameplate.xnb
 Content\Font\Arial.xnb
 Content\Font\Nameplate.xnb
-Content\Interface\Nameplate.xnb

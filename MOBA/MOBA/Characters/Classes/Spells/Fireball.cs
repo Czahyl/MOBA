@@ -59,6 +59,7 @@ namespace MOBA.Characters.Classes.Spells
             if (!onCooldown)
             {
                 projectileList.Add(new Projectile(this));
+                pClass.Drain(45 * pClass.Level);
                 base.Cast(gameTime);
             }
         }
@@ -66,7 +67,7 @@ namespace MOBA.Characters.Classes.Spells
         public void drawSelection(SpriteBatch spriteBatch)
         {
             Image image = Main.Assets.getTexture(4);
-            spriteBatch.Draw(image.Texture, new Rectangle((int)pClass.Position.X, (int)pClass.Position.Y, 140, 40), null, Color.RoyalBlue, (float)System.Math.Atan2(InputHandler.EventY - pClass.Position.Y, InputHandler.EventX - pClass.Position.X), new Vector2(0, image.Texture.Height / 2), SpriteEffects.None, 0f);
+            spriteBatch.Draw(image.Texture, new Rectangle((int)pClass.Position.X, (int)pClass.Position.Y, 250, 40), null, Color.RoyalBlue, (float)System.Math.Atan2(InputHandler.EventY - pClass.Position.Y, InputHandler.EventX - pClass.Position.X), new Vector2(0, image.Texture.Height / 2), SpriteEffects.None, 0f);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

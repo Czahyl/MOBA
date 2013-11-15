@@ -23,9 +23,20 @@ namespace MOBA.Characters.Prototype
 
         public Nameplate nameplate
         { get; protected set; }
+        private Timer Regen;
         public int Team
         { get; private set; }
+        public int HP5
+        { get; private set; }
+        public int MP5
+        { get; private set; }
         public int Mana
+        { get; protected set; }
+        public int BaseMana 
+        { get; protected set; }
+        public int maxMana 
+        { get; protected set; }
+        public int ManaStat
         { get; protected set; }
         public int Level
         { get; protected set; }
@@ -38,6 +49,8 @@ namespace MOBA.Characters.Prototype
         public int Attack
         { get; protected set; }
         public int SpellPower
+        { get; protected set; }
+        public int HealthStat
         { get; protected set; }
         public bool Friendly
         { get; protected set; }
@@ -59,6 +72,8 @@ namespace MOBA.Characters.Prototype
             Width = 60;
             Height = 100;
 
+            Regen = new Timer(5, false);
+
             Animations = new Dictionary<string, Animation>();
 
             currentAni = new Animation(5);
@@ -69,9 +84,13 @@ namespace MOBA.Characters.Prototype
             Level = 1;
             Exp = 0;
             Health = 100;
-            maxHealth = 100;
+            BaseHealth = 100;
+            maxHealth = (BaseHealth * Level) + HealthStat;
+            HP5 = 3;
             Mana = 100;
-            maxMana = 100;
+            BaseMana = 100;
+            maxMana = (BaseMana * Level) + ManaStat;
+            MP5 = 3;
             visionLayer = 0;
             defaultLayer = visionLayer;
             Bounds = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
@@ -99,6 +118,19 @@ namespace MOBA.Characters.Prototype
 
         public override void Update(GameTime gameTime)
         {
+            Regen.Run();
+
+            if (Regen.Tick)
+            {
+                if(Health < maxHealth)
+                    Health += HP5;
+                if(Mana < maxMana)
+                    Mana += MP5;
+            }
+
+            maxHealth = (BaseHealth * Level) + HealthStat;
+            maxMana = (BaseMana * Level) + ManaStat;
+
             attackDelay.Run();
             setPosition((int)Position.X, (int)Position.Y);
 
@@ -141,6 +173,11 @@ namespace MOBA.Characters.Prototype
                 visionLayer = defaultLayer;
             else
                 visionLayer = x;
+        }
+
+        public void Drain(int manaAmount)
+        {
+            Mana -= manaAmount;
         }
 
         public void Pathfind(int x, int y)

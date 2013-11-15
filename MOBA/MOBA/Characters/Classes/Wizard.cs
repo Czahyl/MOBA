@@ -26,11 +26,13 @@ namespace MOBA.Characters.Classes
 
         public Wizard(string Username, int TeamID) : base(Username, TeamID)
         {
-            Health = 75;
-            maxHealth = 75;
+            BaseHealth = 75;
+            Health = BaseHealth;
+            maxHealth = (BaseHealth * Level) + HealthStat;
 
-            Mana = 120;
-            maxMana = 120;
+            BaseMana = 125;
+            Mana = BaseMana;
+            maxMana = (BaseMana * Level) + ManaStat;
 
             nameplate = new Nameplate(this);
             Animations.Add("Idle", new Animation(5));

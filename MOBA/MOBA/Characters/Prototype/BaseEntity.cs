@@ -23,8 +23,7 @@ namespace MOBA.Characters.Prototype
         protected Texture2D currentFrame;
         public int Health { get; protected set; }
         public int maxHealth { get; protected set; }
-        public int Mana { get; protected set; }
-        public int maxMana { get; protected set; }
+        public int BaseHealth { get; protected set; }
         public int moveSpeed { get; protected set; }
         public int visionLayer { get; protected set; }
         public int defaultLayer { get; protected set; }
