@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using MOBA.Characters.Prototype;
 using MOBA.World;
 using MOBA.Input;
@@ -15,6 +19,7 @@ namespace MOBA.Characters.Controller
     public class PlayerController : Controller
     {
         private Vector2 targetPos;
+        private List<Ability> plrAbilities;
 
         public PlayerController(Main main) : base(main)
         {
@@ -33,10 +38,22 @@ namespace MOBA.Characters.Controller
             player.light = new LightEmitter(Main.lightEngine, player.Position, 150, 0);
             Main.lightEngine.plugEmitter(player.light);
             targetPos = player.Position;
+
+            plrAbilities = player.ability;
         }
 
         public override void Update(GameTime gameTime)
         {
+            if (InputHandler.keyPressed(Keys.D1) && !plrAbilities[0].onCooldown)
+            {
+                plrAbilities[0].Select();
+            }
+
+            if (InputHandler.EventX < player.Position.X)
+                player.spe = SpriteEffects.FlipHorizontally;
+            else if (InputHandler.EventX > player.Position.X)
+                player.spe = SpriteEffects.None;
+
             if (InputHandler.mouseHeld(MouseButton.Right))
             {
                 targetPos.X = (int)InputHandler.EventX;

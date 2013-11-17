@@ -41,7 +41,6 @@ namespace MOBA.Interface
             spriteBatch.Draw(rect, new Rectangle((int)Position.X + 16, (int)Position.Y + 1, (int)hpWidth, 5), Color.Red);
             spriteBatch.Draw(rect, new Rectangle((int)Position.X + 16, (int)Position.Y + 9, 43, 5), new Color(60, 60, 60));
             spriteBatch.Draw(rect, new Rectangle((int)Position.X + 16, (int)Position.Y + 9, (int)manaWidth, 5), Color.Blue);
-            Debug.WriteLine(manaWidth);
             spriteBatch.Draw(nameplate, new Rectangle((int)Position.X, (int)Position.Y, 60, 15), Color.White);
             spriteBatch.DrawString(nameplateFont, entity.Name, new Vector2((int)Position.X + (20 - entity.Name.Length - 1), (int)Position.Y - 12), Color.White); 
 

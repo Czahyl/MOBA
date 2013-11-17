@@ -20,9 +20,8 @@ namespace MOBA.Characters.Classes.Spells
     public class Autoattack
     {
         public Rectangle Rect { get; private set; }
-        public int dmg = 10;
         Vector2 Start, End, Direction;
-        private float speed = 200f;
+        private float speed = 500f;
 
         private Player plr;
 
@@ -65,7 +64,7 @@ namespace MOBA.Characters.Classes.Spells
             if (timer.Tick || End == plr.Position)
                 Destroy();
 
-            Start += Direction * 10f;
+            Start += Direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if(Main.hitPlayer(Rect) != null)
             {

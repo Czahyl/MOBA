@@ -32,6 +32,8 @@ namespace MOBA.Characters.Controller
         public override void Update(GameTime gameTime)
         {
             //movement logic thru server
+            //spell logic
+            //sprite effects
             base.Update(gameTime);
         }
 

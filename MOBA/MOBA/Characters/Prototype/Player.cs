@@ -10,6 +10,8 @@ using MOBA.World;
 using MOBA.Input;
 using MOBA.Math;
 using MOBA.Interface;
+using MOBA.Characters.Classes.StatusEffects;
+using System.Diagnostics;
 
 namespace MOBA.Characters.Prototype
 {
@@ -17,9 +19,15 @@ namespace MOBA.Characters.Prototype
     {
         public const float AttRange = 0.5f;
 
+        public List<Ability> ability { get; protected set; }
         public List<Autoattack> autoAttack { get; private set; }
         public bool canAttack = true;
         public Timer attackDelay;
+
+        public List<Debuff> debuffList
+        { get; protected set; }
+        public List<Buff> buffList
+        { get; protected set; }
 
         public Nameplate nameplate
         { get; protected set; }
@@ -44,9 +52,13 @@ namespace MOBA.Characters.Prototype
         { get; protected set; }
         public string Name
         { get; protected set; }
+        public float MoveSpeed
+        { get; set; }
         public float AttackSpeed
         { get; protected set; }
         public int Attack
+        { get; protected set; }
+        public int AttackPower
         { get; protected set; }
         public int SpellPower
         { get; protected set; }
@@ -54,6 +66,9 @@ namespace MOBA.Characters.Prototype
         { get; protected set; }
         public bool Friendly
         { get; protected set; }
+
+        public Dictionary<string, Animation> Animations = new Dictionary<string, Animation>();
+        public SpriteEffects spe;
 
         public Player(string Username, int TeamID)
         {
@@ -72,9 +87,12 @@ namespace MOBA.Characters.Prototype
             Width = 60;
             Height = 100;
 
-            Regen = new Timer(5, false);
+            ability = new List<Ability>();
 
-            Animations = new Dictionary<string, Animation>();
+            debuffList = new List<Debuff>();
+            buffList = new List<Buff>();
+
+            Regen = new Timer(5, false);
 
             currentAni = new Animation(5);
 
@@ -83,6 +101,7 @@ namespace MOBA.Characters.Prototype
             Team = TeamID;
             Level = 1;
             Exp = 0;
+            MoveSpeed = 1f;
             Health = 100;
             BaseHealth = 100;
             maxHealth = (BaseHealth * Level) + HealthStat;
@@ -100,7 +119,6 @@ namespace MOBA.Characters.Prototype
 
             autoAttack = new List<Autoattack>();
 
-            moveSpeed = 1;
             AttackSpeed = 0.5f;
 
             attackDelay = new Timer(AttackSpeed, false);
@@ -137,6 +155,12 @@ namespace MOBA.Characters.Prototype
             for (int i = 0; i < autoAttack.Count; i++)
                 autoAttack[i].Shoot(gameTime);
 
+            for (int i = 0; i < debuffList.Count; i++)
+                debuffList[i].Update(gameTime);
+
+            for (int i = 0; i < buffList.Count; i++)
+                buffList[i].Update(gameTime);
+
             light.Update(Position);
 
             base.Update(gameTime);
@@ -149,7 +173,13 @@ namespace MOBA.Characters.Prototype
             for (int i = 0; i < autoAttack.Count; i++)
                 autoAttack[i].Draw(spriteBatch);
 
-            spriteBatch.Draw(currentFrame, Bounds, Color.FromNonPremultiplied(255, 255, 255, (int)Alpha)); //TODO Add image support to draw
+            for (int i = 0; i < debuffList.Count; i++)
+                debuffList[i].Draw(spriteBatch);
+
+            for (int i = 0; i < buffList.Count; i++)
+                buffList[i].Draw(spriteBatch);
+
+            spriteBatch.Draw(currentFrame.Texture, Bounds, currentFrame.sRect, Color.FromNonPremultiplied(255, 255, 255, (int)Alpha), 0f, new Vector2(0, 0), spe, 0f); //TODO Add image support to draw
             nameplate.Draw(spriteBatch);
 
             base.Draw(spriteBatch);
@@ -180,6 +210,11 @@ namespace MOBA.Characters.Prototype
             Mana -= manaAmount;
         }
 
+        public void RefundResource(int amount)
+        {
+            Mana += amount;
+        }
+
         public void Pathfind(int x, int y)
         {
             int xSpeed, ySpeed;
@@ -202,7 +237,7 @@ namespace MOBA.Characters.Prototype
                     xSpeed = 1;
                 }
 
-                Position.X += moveSpeed * xSpeed;
+                Position.X += MoveSpeed * xSpeed;
             }
             if (difY != 0)
             {
@@ -215,7 +250,7 @@ namespace MOBA.Characters.Prototype
                     ySpeed = 1;
                 }
 
-                Position.Y += moveSpeed * ySpeed;
+                Position.Y += MoveSpeed * ySpeed;
             }
         }
     }

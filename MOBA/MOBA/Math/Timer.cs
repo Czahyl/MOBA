@@ -25,6 +25,11 @@ namespace MOBA.Math
             stopped = false;
         }
 
+        public Timer()
+        {
+
+        }
+
         public void Run()
         {
             if (!stopped)

@@ -22,7 +22,6 @@ namespace MOBA.Characters.Classes
     public class Wizard : Player
     {
         Animation idle, attack;
-        Ability fireball;
 
         public Wizard(string Username, int TeamID) : base(Username, TeamID)
         {
@@ -35,8 +34,8 @@ namespace MOBA.Characters.Classes
             maxMana = (BaseMana * Level) + ManaStat;
 
             nameplate = new Nameplate(this);
-            Animations.Add("Idle", new Animation(5));
             Animations.Add("Attack", new Animation(5));
+            Animations.Add("Idle", new Animation(5));
 
             idle = Animations["Idle"];
             attack = Animations["Attack"];
@@ -48,27 +47,24 @@ namespace MOBA.Characters.Classes
 
             currentAni = idle;
 
-            Attack = 20;
+            Attack = 10 + AttackPower;
             SpellPower = 15;
 
-            fireball = new Fireball(this);
+            ability.Add(new Fireball(this));
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (InputHandler.keyPressed(Keys.D1) && !fireball.onCooldown)
-            {
-                fireball.Select();
-            }
-
-            fireball.Update(gameTime);
+            for (int i = 0; i < ability.Count; i++)
+                ability[i].Update(gameTime);
 
             base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            fireball.Draw(spriteBatch);
+            for (int i = 0; i < ability.Count; i++)
+                ability[i].Draw(spriteBatch);
 
             base.Draw(spriteBatch);
         }

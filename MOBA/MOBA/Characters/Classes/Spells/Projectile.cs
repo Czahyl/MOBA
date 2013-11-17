@@ -13,6 +13,7 @@ using MOBA.Math;
 using MOBA.World;
 using MOBA.Characters.Controller;
 using MOBA.Characters.Prototype;
+ using MOBA.Characters.Classes.StatusEffects;
 using MOBA.Assets;
 
 namespace MOBA.Characters.Classes.Spells
@@ -25,13 +26,17 @@ namespace MOBA.Characters.Classes.Spells
         private LightEmitter emitter;
         private Image image;
         private Rectangle rect;
+        private Debuff db;
         private float angle;
         private bool activeEmitter;
         private int damage;
+        private float speed = 500f;
 
-        public Projectile(Ability ability)
+        public Projectile(Ability ability, Debuff debuff)
         {
             spell = ability;
+
+            db = debuff;
 
             activeEmitter = spell.Emitter != null;
 
@@ -53,14 +58,19 @@ namespace MOBA.Characters.Classes.Spells
             }
 
             angle = (float)System.Math.Atan2(Direction.Y, Direction.X);
+
+            if (End == spell.pClass.Position)
+            {
+                spell.failedCast();
+                spell.projectileList.Remove(this);
+            }
+
+            spell.pClass.Drain(spell.Cost);
         }
 
         public void Update(GameTime gameTime)
         {
             liveTime.Run();
-
-            if (End == spell.pClass.Position)
-                spell.projectileList.Remove(this);
 
             rect = new Rectangle((int)Start.X, (int)Start.Y, 60, 40); // change to image later
 
@@ -75,15 +85,20 @@ namespace MOBA.Characters.Classes.Spells
                 spell.projectileList.Remove(this);
             }
 
-            Start += Direction * 10f;
+            Start += Direction * speed * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             for (int i = 0; i < Main.Players.Count; i++)
             {
                 Player current = Main.Players[i].player;
 
-                if (rect.Intersects(current.Bounds))
+                if (rect.Intersects(current.Bounds) && current.Friendly)
                 {
                     current.Damage(damage);
+
+                    db.affectedPlr = current; // debuff presets
+                    db.owner = spell.pClass;
+                    current.debuffList.Add(db);
+
                     emitter.Destroy();
                     spell.removeProjectile(this);
                 } 

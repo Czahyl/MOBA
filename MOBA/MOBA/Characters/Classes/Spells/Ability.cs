@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 using MOBA.Assets;
 using MOBA.Characters.Controller;
 using MOBA.Characters.Classes;
+using MOBA.Characters.Classes.StatusEffects;
 using MOBA.Characters.Prototype;
 using MOBA.World;
 using MOBA.Input;
@@ -27,10 +28,19 @@ namespace MOBA.Characters.Classes.Spells
         public List<Projectile> projectileList
         { get; protected set; }
 
+        public int Cost
+        { get; protected set; }
+
         public Image image
         { get; protected set; }
 
         public int Damage
+        { get; protected set; }
+
+        public Debuff debuff
+        { get; protected set; }
+
+        public Buff buff
         { get; protected set; }
 
         public float Speed
@@ -82,6 +92,11 @@ namespace MOBA.Characters.Classes.Spells
         {
             Selecting = !Selecting;
             pClass.canAttack = !pClass.canAttack;
+        }
+
+        public void failedCast()
+        {
+            onCooldown = false;
         }
 
         public void removeProjectile(Projectile p)

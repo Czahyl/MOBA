@@ -111,10 +111,15 @@
     <Compile Include="Assets\Animation.cs" />
     <Compile Include="Assets\AssetManager.cs" />
     <Compile Include="Assets\Image.cs" />
+    <Compile Include="Assets\Particles\Particle.cs" />
+    <Compile Include="Assets\Particles\ParticleEngine.cs" />
     <Compile Include="Characters\Classes\Spells\Ability.cs" />
     <Compile Include="Characters\Classes\Spells\Fireball.cs" />
     <Compile Include="Characters\Classes\Spells\Autoattack.cs" />
     <Compile Include="Characters\Classes\Spells\Projectile.cs" />
+    <Compile Include="Characters\Classes\StatusEffects\Buff.cs" />
+    <Compile Include="Characters\Classes\StatusEffects\Burn.cs" />
+    <Compile Include="Characters\Classes\StatusEffects\Debuff.cs" />
     <Compile Include="Characters\Controller\Controller.cs" />
     <Compile Include="Characters\Controller\MinionController.cs" />
     <Compile Include="Characters\Controller\MultiplayerController.cs" />

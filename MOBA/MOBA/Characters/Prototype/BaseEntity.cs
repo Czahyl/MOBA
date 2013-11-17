@@ -18,13 +18,11 @@ namespace MOBA.Characters.Prototype
         public int Height { get; protected set; }
         public float Alpha { get; protected set; }
         public LightEmitter light { get; set; }
-        public Dictionary<string, Animation> Animations { get; protected set; }
         public Animation currentAni { get; set; }
-        protected Texture2D currentFrame;
+        protected Image currentFrame;
         public int Health { get; protected set; }
         public int maxHealth { get; protected set; }
         public int BaseHealth { get; protected set; }
-        public int moveSpeed { get; protected set; }
         public int visionLayer { get; protected set; }
         public int defaultLayer { get; protected set; }
 

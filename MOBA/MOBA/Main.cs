@@ -15,6 +15,7 @@ using MOBA.Characters.Classes;
 using MOBA.Characters.Prototype;
 using MOBA.World;
 using MOBA.Input;
+using MOBA.Assets.Particles;
 
 namespace MOBA
 {
@@ -27,8 +28,10 @@ namespace MOBA
         public static GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
 
+        public static ParticleEngine particles;
         public static AssetManager Assets;
         public static Math.Trig Trig;
+        public static Random random;
 
         public Map map;
         public static Camera Cam;
@@ -58,13 +61,17 @@ namespace MOBA
 
         protected override void Initialize()
         {
+            particles = new ParticleEngine(this);
             Assets = new AssetManager();
             Trig = new Math.Trig();
+            random = new Random();
             map = new Map(this);
 
             Cam = new Camera(new Viewport(0, 0, WIDTH, HEIGHT));
 
             lightEngine = new LightEngine(this, WIDTH, HEIGHT);
+
+            particles.presets.Add("Fire", new ParticlePreset(10, 3, 4, new Math.Timer(5, true), (float)System.Math.PI * 4));
 
             base.Initialize();
         }
@@ -96,7 +103,7 @@ namespace MOBA
                 Minions[i].plugEntity(new Minion(1));
 
             for (int i = 0; i < Players.Count; i++)
-                Players[i].plugEntity(new Player("Player " + (i + 1), 0));
+                Players[i].plugEntity(new Wizard("Player " + (i + 1), 0));
         }
 
         protected override void UnloadContent()
@@ -110,10 +117,15 @@ namespace MOBA
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+            if (Keyboard.GetState().IsKeyDown(Keys.F1))
+                particles.EmitParticles(new Vector2(500, 500), particles.presets["Fire"]);
+
             InputHandler.Listen();
 
             map.Update();
             Cam.Update();
+
+            particles.Update();
 
             controller.Update(gameTime);
 
@@ -151,14 +163,14 @@ namespace MOBA
                     Players[i].Draw();
             }
 
+            particles.Draw(spriteBatch);
+
             controller.Draw();
             spriteBatch.End();
 
             spriteBatch.Begin(); // Draw off-camera objects
 
             lightEngine.Draw();
-
-            spriteBatch.DrawString(Assets.getFont(0), gameTime.ElapsedGameTime.TotalSeconds.ToString(), new Vector2(100, 400), Color.White);
 
             spriteBatch.End();
             base.Draw(gameTime);
@@ -192,6 +204,11 @@ namespace MOBA
             }
 
             return null;
+        }
+
+        public static float RandomBetween(float min, float max)
+        {
+            return min + (float)random.NextDouble() * (max - min);
         }
     }
 }

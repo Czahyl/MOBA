@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MOBA.Characters.Prototype;
+using MOBA.Characters.Classes.StatusEffects;
 using MOBA.Input;
 using MOBA.World;
 using MOBA.Math;
@@ -25,6 +26,8 @@ namespace MOBA.Characters.Classes.Spells
 
             Emitter = new LightEmitter();
             LightRadius = 35f;
+
+            Cost = 20 * pClass.Level;
 
             image = Main.Assets.getTexture(3);
 
@@ -58,8 +61,7 @@ namespace MOBA.Characters.Classes.Spells
         {
             if (!onCooldown)
             {
-                projectileList.Add(new Projectile(this));
-                pClass.Drain(45 * pClass.Level);
+                projectileList.Add(new Projectile(this, new Burn()));
                 base.Cast(gameTime);
             }
         }

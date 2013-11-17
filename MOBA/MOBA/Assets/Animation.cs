@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.Diagnostics;
+using MOBA.Input;
 
 namespace MOBA.Assets
 {
@@ -31,7 +32,7 @@ namespace MOBA.Assets
             buffer = new List<Image>();
         }
 
-        public Texture2D Frame()
+        public Image Frame()
         {
             if (!PAUSED)
             {
@@ -48,7 +49,7 @@ namespace MOBA.Assets
                 i = 0;
             }
 
-            return buffer[index].Texture;
+            return buffer[index];
         }
         public Rectangle srcRect()
         {

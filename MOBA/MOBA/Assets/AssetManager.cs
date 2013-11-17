@@ -17,7 +17,6 @@ namespace MOBA.Assets
     {
         List<Image> imageList = new List<Image>();
         List<Image> classImageList = new List<Image>();
-        List<Image> animationBuffers = new List<Image>();
         List<Song> soundList = new List<Song>();
         List<SpriteFont> fontList = new List<SpriteFont>();
 
@@ -59,7 +58,7 @@ namespace MOBA.Assets
                 {
                     for (int y = 0; y < picHeight; y += sprHeight)
                     {
-                        classImageList.Add(new Image(texture, new Rectangle(x, y, sprHeight, sprWidth)));
+                        classImageList.Add(new Image(texture, new Rectangle(x, y, sprWidth, sprHeight)));
                     }
                 }
             }
@@ -67,28 +66,6 @@ namespace MOBA.Assets
             {
                 Debug.WriteLine("Failed to store from sheet\n" + e);
             }
-        }
-
-        public List<Image> getAnimationSheet(Texture2D sourceImage, int sprWidth, int sprHeight, int picWidth, int picHeight)
-        {
-            List<Image> buffer = new List<Image>();
-
-            try
-            {
-                for (int x = 0; x < picWidth; x += sprWidth)
-                {
-                    for (int y = 0; y < picHeight; y += sprHeight)
-                    {
-                        buffer.Add(new Image(sourceImage, new Rectangle(x, y, sprHeight, sprWidth)));
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("Failed to store from sheet\n" + e);
-            }
-
-            return buffer;
         }
  
         public Image getTexture(int id)
